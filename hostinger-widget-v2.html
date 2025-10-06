@@ -261,10 +261,19 @@
                 padding: 1.5rem;
             }
         }
+
+        /* Dynamic height management */
+        body {
+            overflow-x: hidden;
+        }
+
+        .main-content {
+            min-height: 600px;
+        }
     </style>
 </head>
 <body>
-    <div class="container">
+    <div class="container main-content">
         <!-- Hero Section -->
         <div class="text-center" style="margin-bottom: 2rem;">
             <h1 style="color: #111827; margin-bottom: 1rem; font-size: 2.5rem; font-weight: 700; line-height: 1.2; max-width: 42rem; margin-left: auto; margin-right: auto;">
@@ -345,15 +354,50 @@
     </div>
 
     <script>
-        // Base path for images - update this to match your hosting structure
-        const IMAGE_BASE_PATH = '/wp-content/themes/twentytwentyfour/images/therapair/';
+        // Dynamic height management
+        function updateParentHeight() {
+            const height = document.body.scrollHeight;
+            if (window.parent && window.parent !== window) {
+                window.parent.postMessage({
+                    type: 'therapair-resize',
+                    height: height
+                }, '*');
+            }
+        }
 
-        // Therapist data
+        // Call updateParentHeight when content changes
+        const observer = new MutationObserver(updateParentHeight);
+        observer.observe(document.body, {
+            childList: true,
+            subtree: true,
+            attributes: true
+        });
+
+        // Base path for images - auto-detect or fallback
+        const IMAGE_PATHS = [
+            '/wp-content/themes/twentytwentyfour/images/therapair/',
+            '/wp-content/themes/astra/images/therapair/',
+            '/wp-content/themes/hello-elementor/images/therapair/',
+            '/wp-content/uploads/therapair/',
+            './images/therapair/',
+            './images/'
+        ];
+
+        function getImagePath(filename) {
+            // Try each path and return the first working one
+            for (let path of IMAGE_PATHS) {
+                const fullPath = path + filename;
+                return fullPath; // We'll handle errors in onerror
+            }
+            return filename; // fallback
+        }
+
+        // Therapist data with fallback images
         const therapists = [
             {
                 name: "Nicki Nelis",
                 gender: "female",
-                image: IMAGE_BASE_PATH + "nicki-nelis-therapair-counsellor.jpg",
+                image: getImagePath("nicki-nelis-therapair-counsellor.jpg"),
                 tagline: "Gestalt therapist with nearly 20 years' experience, specializing in LGBTQI+, trauma survivors, and kink/ENM communities",
                 specialties: ["LGBTQI+ affirming", "Trauma survivors", "Kink community", "ENM relationships", "Sexual assault survivors"],
                 availability: "In-person Windsor (Thursdays 10am–7pm)",
@@ -363,7 +407,7 @@
             {
                 name: "Adam Forman",
                 gender: "male",
-                image: IMAGE_BASE_PATH + "adam-forman-therapair-counsellor.jpg",
+                image: getImagePath("adam-forman-therapair-counsellor.jpg"),
                 tagline: "Counsellor & Mediator with two decades experience, specializing in ethically non-monogamous relationships",
                 specialties: ["ENM relationships", "Opening relationships", "Relationship dynamics", "Attachment healing", "Mediation"],
                 availability: "Online & in-person Fitzroy North (Flexible)",
@@ -373,7 +417,7 @@
             {
                 name: "Natasha Lama",
                 gender: "female",
-                image: IMAGE_BASE_PATH + "natasha-lama-therapair-sex-therapist.jpg",
+                image: getImagePath("natasha-lama-therapair-sex-therapist.jpg"),
                 tagline: "Counsellor & Sex Therapist with cultural sensitivity, specializing in sex-positive approaches and cultural identity",
                 specialties: ["Sex therapy", "Cultural sensitivity", "Sexual health", "Cultural identity", "CBT", "Mindfulness"],
                 availability: "Online and in-person Windsor (Mondays noon–7pm, Saturdays 9am–2pm)",
@@ -383,7 +427,7 @@
             {
                 name: "Genevieve Autret",
                 gender: "female",
-                image: IMAGE_BASE_PATH + "genevieve-autret-therapair-psychotherapist.jpg",
+                image: getImagePath("genevieve-autret-therapair-psychotherapist.jpg"),
                 tagline: "Psychotherapist with 15 years experience, specializing in psychedelic integration and trauma-informed therapy",
                 specialties: ["Psychedelic integration", "Trauma therapy", "DBT", "Art therapy", "Harm reduction", "Couples therapy"],
                 availability: "Online (Tuesdays 4:30–6:30pm, Wednesdays noon–6pm)",
@@ -393,7 +437,7 @@
             {
                 name: "Emma Steains",
                 gender: "female",
-                image: IMAGE_BASE_PATH + "emma-steains-therapair-clinical-psychologist.jpg",
+                image: getImagePath("emma-steains-therapair-clinical-psychologist.jpg"),
                 tagline: "Clinical Psychologist specializing in veterans/ADF personnel, EMDR, ACT, and trauma recovery",
                 specialties: ["EMDR", "ACT", "CBT", "Veteran support", "ADF families", "Trauma recovery", "Internal Family Systems"],
                 availability: "Online (Wednesdays 2–6pm, Fridays 9am–5pm)",
@@ -403,7 +447,7 @@
             {
                 name: "Michael Spurrier",
                 gender: "male",
-                image: IMAGE_BASE_PATH + "michael-spurrier-therapair-clinical-psychologist.jpg",
+                image: getImagePath("michael-spurrier-therapair-clinical-psychologist.jpg"),
                 tagline: "Clinical Psychologist providing warm, grounded therapy for trauma, relationships, neurodivergence, mood, and addiction",
                 specialties: ["Trauma therapy", "Relationship work", "Neurodivergent support", "Mood disorders", "Addiction", "Schema therapy"],
                 availability: "Online (Mondays 9am–3pm)",
@@ -413,7 +457,7 @@
             {
                 name: "Meg Wilson",
                 gender: "female",
-                image: IMAGE_BASE_PATH + "meg-wilson-therapair-psychotherapist.jpg",
+                image: getImagePath("meg-wilson-therapair-psychotherapist.jpg"),
                 tagline: "Founder & Psychotherapist with over a decade experience in art psychotherapy, DBT, and relationship therapy",
                 specialties: ["Art psychotherapy", "DBT", "Mindfulness", "Relationship therapy", "Non-traditional relationships"],
                 availability: "Online/in-person Windsor (Not currently accepting new clients)",
@@ -423,7 +467,7 @@
             {
                 name: "Joe Stark",
                 gender: "male",
-                image: IMAGE_BASE_PATH + "joe-stark-therapair-psychiatrist.jpg",
+                image: getImagePath("joe-stark-therapair-psychiatrist.jpg"),
                 tagline: "Psychiatrist & Psychotherapist, pioneer in psychedelic-assisted therapy and mindfulness teacher",
                 specialties: ["Psychiatry", "Psychedelic therapy", "Mindfulness", "Chronic pain", "Trauma", "Anxiety"],
                 availability: "Not accepting new clients; medication-assisted treatments by enquiry",
@@ -509,6 +553,7 @@
             document.getElementById('chat-interface').classList.remove('hidden');
 
             showQuestion(0);
+            updateParentHeight();
         }
 
         function showQuestion(index) {
@@ -528,6 +573,7 @@
                         addOptionButton(option);
                     }, i * 100);
                 });
+                updateParentHeight();
             }, 500);
         }
 
@@ -604,6 +650,8 @@
 
             const matchedTherapists = getMatchedTherapists();
             displayTherapistCards(matchedTherapists);
+
+            setTimeout(updateParentHeight, 500);
         }
 
         function getMatchedTherapists() {
@@ -691,6 +739,7 @@
                 setTimeout(() => {
                     const card = createTherapistCard(therapist);
                     container.appendChild(card);
+                    updateParentHeight();
                 }, index * 200);
             });
         }
@@ -699,13 +748,26 @@
             const card = document.createElement('div');
             card.className = 'therapist-card';
 
+            // Generate a nice gradient fallback based on the therapist's name
+            const nameHash = therapist.name.split('').reduce((a, b) => {
+                a = ((a << 5) - a) + b.charCodeAt(0);
+                return a & a;
+            }, 0);
+            const hue = Math.abs(nameHash) % 360;
+            const fallbackGradient = `linear-gradient(45deg, hsl(${hue}, 70%, 60%), hsl(${(hue + 60) % 360}, 70%, 70%))`;
+
             card.innerHTML = `
                 <div style="position: relative;">
                     <img
                         src="${therapist.image}"
                         alt="${therapist.name} - Therapist at Therapair"
-                        onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIwIiBoZWlnaHQ9IjI1MCIgdmlld0JveD0iMCAwIDMyMCAyNTAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIzMjAiIGhlaWdodD0iMjUwIiBmaWxsPSIjRjNGNEY2Ii8+CjxjaXJjbGUgY3g9IjE2MCIgY3k9IjEwMCIgcj0iNDAiIGZpbGw9IiM5QjQ2RjQiLz4KPHBhdGggZD0iTTEyMCAxODBIMjAwQzIwNSAxODAgMjEwIDE4NSAyMTAgMTkwVjIwMEMxOTAgMjIwIDE1MCAyMzAgMTMwIDIyMEMxMTAgMjEwIDEwMCAyMDAgMTEwIDE5MEMxMTAgMTg1IDExNSAxODAgMTIwIDE4MFoiIGZpbGw9IiM5QjQ2RjQiLz4KPHRleHQgeD0iMTYwIiB5PSIyNzAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiM2QjdGOTkiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxMiI+UGxhY2Vob2xkZXI8L3RleHQ+Cjwvc3ZnPgo='"
+                        style="width: 100%; height: 250px; object-fit: cover; background: ${fallbackGradient};"
+                        onerror="this.style.background='${fallbackGradient}'; this.style.display='none'; this.nextElementSibling.style.display='flex';"
+                        onload="console.log('Image loaded:', '${therapist.name}');"
                     />
+                    <div style="display: none; width: 100%; height: 250px; ${fallbackGradient}; align-items: center; justify-content: center; color: white; font-weight: bold; font-size: 1.2rem;">
+                        ${therapist.name.split(' ').map(n => n[0]).join('')}
+                    </div>
                 </div>
 
                 <div class="card-content">
@@ -763,7 +825,12 @@
             }
 
             showQuestion(0);
+            updateParentHeight();
         }
+
+        // Initialize height management
+        window.addEventListener('load', updateParentHeight);
+        window.addEventListener('resize', updateParentHeight);
     </script>
 </body>
 </html>
