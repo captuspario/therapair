@@ -1,0 +1,64 @@
+<!--
+ELEMENTOR HTML WIDGET CODE
+Copy this code into an HTML widget in Elementor
+-->
+
+<div id="therapair-iframe-container" style="width: 100%; margin: 2rem 0;">
+    <iframe
+        src="/wp-content/themes/your-theme/therapair-widget.html"
+        width="100%"
+        height="800"
+        frameborder="0"
+        scrolling="auto"
+        style="border-radius: 16px; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08); background: #F8F4FF;"
+        title="Therapair Matching Widget"
+        loading="lazy">
+        <p>Your browser doesn't support iframes. Please <a href="/wp-content/themes/your-theme/therapair-widget.html" target="_blank">click here</a> to access the therapist matching tool.</p>
+    </iframe>
+</div>
+
+<script>
+// Auto-resize iframe based on content height
+function resizeTherapairIframe() {
+    const iframe = document.querySelector('#therapair-iframe-container iframe');
+    if (iframe) {
+        // Try to access iframe content (only works if same domain)
+        try {
+            const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
+            if (iframeDoc) {
+                const height = iframeDoc.body.scrollHeight;
+                iframe.style.height = Math.max(height, 600) + 'px';
+            }
+        } catch (e) {
+            // Cross-origin restriction, use default height
+            iframe.style.height = '800px';
+        }
+    }
+}
+
+// Resize on load and when content changes
+window.addEventListener('load', resizeTherapairIframe);
+window.addEventListener('message', function(event) {
+    if (event.data.type === 'therapair-resize') {
+        const iframe = document.querySelector('#therapair-iframe-container iframe');
+        if (iframe) {
+            iframe.style.height = event.data.height + 'px';
+        }
+    }
+});
+</script>
+
+<style>
+/* Optional: Custom styling for the iframe container */
+#therapair-iframe-container {
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+@media (max-width: 768px) {
+    #therapair-iframe-container iframe {
+        height: 900px !important; /* Mobile needs more height */
+    }
+}
+</style>
