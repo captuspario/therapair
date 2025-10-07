@@ -1,0 +1,82 @@
+<!--
+NEW IFRAME CODE FOR ELEMENTOR
+Copy this code into your Elementor HTML widget
+-->
+
+<div class="therapair-container" style="width: 100%; max-width: 1200px; margin: 0 auto; padding: 1rem;">
+    <iframe
+        src="/therapair-widget.html"
+        width="100%"
+        height="800"
+        frameborder="0"
+        scrolling="auto"
+        loading="lazy"
+        style="
+            border: none;
+            border-radius: 12px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+            background: linear-gradient(135deg, #F8F4FF 0%, #E8E3F3 100%);
+            min-height: 600px;
+        "
+        title="Therapair Matching Widget">
+        <p style="text-align: center; padding: 2rem; color: #666;">
+            Your browser doesn't support iframes.
+            <a href="/therapair-widget.html"
+               style="color: #9B74B7; text-decoration: none;">
+                Click here to access the therapist matching tool →
+            </a>
+        </p>
+    </iframe>
+</div>
+
+<style>
+/* Responsive iframe styling */
+.therapair-container {
+    position: relative;
+}
+
+.therapair-container iframe {
+    transition: all 0.3s ease;
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+    .therapair-container {
+        padding: 0.5rem;
+        margin: 1rem 0;
+    }
+
+    .therapair-container iframe {
+        height: 900px !important;
+        border-radius: 8px !important;
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1) !important;
+    }
+}
+
+@media (max-width: 480px) {
+    .therapair-container {
+        padding: 0.25rem;
+    }
+
+    .therapair-container iframe {
+        height: 1000px !important;
+        border-radius: 6px !important;
+    }
+}
+
+/* No loading animation - removed to prevent spinning icon */
+
+/* Hover effects */
+.therapair-container:hover iframe {
+    box-shadow: 0 12px 48px rgba(0, 0, 0, 0.15);
+    transform: translateY(-2px);
+}
+
+/* Focus accessibility */
+.therapair-container iframe:focus {
+    outline: 2px solid #9B74B7;
+    outline-offset: 4px;
+}
+</style>
+
+<!-- No JavaScript needed - loading animation removed -->
