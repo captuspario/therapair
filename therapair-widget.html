@@ -1041,8 +1041,8 @@
             if (!hasDirectMatches) {
                 // No direct matches - show only fallback section with updated header
                 headerElement.innerHTML = `
-                    <h2 style="color: #111827; margin-bottom: 1rem; font-size: 1.875rem; font-weight: 700;">Therapists closest to your preferences</h2>
-                    <p style="color: #6b7280; font-size: 1.125rem; max-width: 36rem; margin-left: auto; margin-right: auto;">
+                    <h2 style="color: #111827; margin-bottom: 1.5rem; font-size: 1.875rem; font-weight: 700; line-height: 1.2;">Therapists closest to your preferences</h2>
+                    <p style="color: #6b7280; font-size: 1.125rem; max-width: 36rem; margin-left: auto; margin-right: auto; line-height: 1.6;">
                         These therapists may also be a good fit
                     </p>
                 `;
@@ -1064,9 +1064,11 @@
             } else {
                 // We have direct matches - show tiered results
                 headerElement.innerHTML = `
-                    <h2 style="color: #111827; margin-bottom: 1rem; font-size: 1.875rem; font-weight: 700;">Here are your matches</h2>
-                    <p style="color: #6b7280; font-size: 1.125rem; max-width: 36rem; margin-left: auto; margin-right: auto;">
-                        Let's find a therapist who's right for you<br>
+                    <h2 style="color: #111827; margin-bottom: 1.5rem; font-size: 1.875rem; font-weight: 700; line-height: 1.2;">Here are your matches</h2>
+                    <p style="color: #6b7280; font-size: 1.125rem; max-width: 36rem; margin-left: auto; margin-right: auto; line-height: 1.6; margin-bottom: 0.5rem;">
+                        Let's find a therapist who's right for you
+                    </p>
+                    <p style="color: #9CA3AF; font-size: 1rem; max-width: 36rem; margin-left: auto; margin-right: auto; line-height: 1.6;">
                         Answer a few quick questions — we'll guide you to someone who really gets it
                     </p>
                 `;
