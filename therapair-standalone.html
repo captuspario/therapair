@@ -174,10 +174,35 @@
         }
 
         .therapist-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .therapist-cards-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
             gap: 1.5rem;
-            margin: 2rem 0;
+            margin-bottom: 1rem;
+        }
+
+        .results-tier {
+            margin-bottom: 2rem;
+        }
+
+        .results-tier h3 {
+            color: #4F064F;
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .results-tier p {
+            color: #6B7280;
+            text-align: center;
+            margin-bottom: 2rem;
         }
 
         .specialty-tag {
@@ -289,7 +314,7 @@
         }
 
         @media (max-width: 768px) {
-            .therapist-grid {
+            .therapist-cards-grid {
                 grid-template-columns: 1fr;
             }
 
@@ -354,9 +379,12 @@
 
         <!-- Results Section -->
         <div id="results-section" class="hidden">
-            <div class="text-center" style="margin-bottom: 2rem;">
+            <div id="results-header" class="text-center" style="margin-bottom: 2rem;">
                 <h2 style="color: #111827; margin-bottom: 1rem; font-size: 1.875rem; font-weight: 700;">Here are your matches</h2>
-                <p style="color: #6b7280; font-size: 1.125rem;">Based on your responses, we think you'll connect well with:</p>
+                <p style="color: #6b7280; font-size: 1.125rem; max-width: 36rem; margin-left: auto; margin-right: auto;">
+                    Let's find a therapist who's right for you<br>
+                    Answer a few quick questions — we'll guide you to someone who really gets it
+                </p>
             </div>
 
             <div id="therapist-cards" class="therapist-grid">
@@ -583,7 +611,8 @@
                 type: "single",
                 options: [
                     { text: "Online Appointments", value: "online" },
-                    { text: "In-person Appointments", value: "in_person" }
+                    { text: "In-person Appointments", value: "in_person" },
+                    { text: "Either online or in-person", value: "either" }
                 ]
             },
             {
@@ -625,7 +654,8 @@
                     { text: "Wednesday", value: "wednesday" },
                     { text: "Thursday", value: "thursday" },
                     { text: "Friday", value: "friday" },
-                    { text: "Saturday", value: "saturday" }
+                    { text: "Saturday", value: "saturday" },
+                    { text: "I'm flexible with timing", value: "flexible" }
                 ]
             },
             {
@@ -671,16 +701,6 @@
                     { text: "Disability or Chronic illness", value: "disability" },
                     { text: "Veterans/ADF personnel or family", value: "veterans" },
                     { text: "I'm open to any qualified therapist", value: "open" }
-                ]
-            },
-            {
-                id: "gender",
-                text: "Do you have a preference for your therapist's gender?",
-                type: "single",
-                options: [
-                    { text: "Prefer male therapist", value: "male" },
-                    { text: "Prefer female therapist", value: "female" },
-                    { text: "No preference", value: "no_preference" }
                 ]
             }
         ];
@@ -867,20 +887,17 @@
             document.getElementById('chat-interface').classList.add('hidden');
             document.getElementById('results-section').classList.remove('hidden');
 
-            const matchedTherapists = getMatchedTherapists();
-            displayTherapistCards(matchedTherapists);
+            const matchResults = getMatchedTherapists();
+            displayTieredResults(matchResults);
         }
 
         function getMatchedTherapists() {
-            let eligibleTherapists = therapists.filter(t => t.accepting);
+            // Start with all accepting therapists
+            let allTherapists = therapists.filter(t => t.accepting);
+            let bestMatches = [];
+            let eligibleTherapists = [...allTherapists];
 
-            // Apply filters based on responses
-
-            // Gender preference
-            if (responses.gender && responses.gender !== 'no_preference') {
-                eligibleTherapists = eligibleTherapists.filter(t => t.gender === responses.gender);
-            }
-
+            // Apply strict filters for best matches
             // Who they support
             if (responses.who) {
                 eligibleTherapists = eligibleTherapists.filter(t =>
@@ -895,8 +912,8 @@
                 );
             }
 
-            // Location preference
-            if (responses.location) {
+            // Location preference (unless 'either')
+            if (responses.location && responses.location !== 'either') {
                 eligibleTherapists = eligibleTherapists.filter(t =>
                     t.locations.includes(responses.location)
                 );
@@ -909,88 +926,206 @@
                 );
             }
 
-            // Availability days
-            if (responses.availability && responses.availability.length > 0) {
+            // Availability days (unless 'flexible')
+            if (responses.availability && responses.availability.length > 0 && !responses.availability.includes('flexible')) {
                 eligibleTherapists = eligibleTherapists.filter(t =>
                     responses.availability.some(day => t.availability_days.includes(day))
                 );
             }
 
-            // Concerns/specialties matching
-            const matches = [];
+            // Score and match based on specialties
+            const scoredMatches = [];
 
-            if (responses.concerns) {
-                const concernsArray = Array.isArray(responses.concerns) ? responses.concerns : [responses.concerns];
+            eligibleTherapists.forEach(therapist => {
+                let score = 0;
 
-                concernsArray.forEach(concern => {
-                    switch(concern) {
-                        case 'relationship':
-                            matches.push(...eligibleTherapists.filter(t => t.tags.includes('relationship')));
-                            break;
-                        case 'trauma':
-                            matches.push(...eligibleTherapists.filter(t => t.tags.includes('trauma')));
-                            break;
-                        case 'sexual_health':
-                            matches.push(...eligibleTherapists.filter(t => t.tags.includes('sexual_health')));
-                            break;
-                        case 'psychedelic':
-                            matches.push(...eligibleTherapists.filter(t => t.tags.includes('psychedelic')));
-                            break;
-                        case 'addiction':
-                            matches.push(...eligibleTherapists.filter(t => t.tags.includes('addiction')));
-                            break;
-                        case 'identity':
-                            matches.push(...eligibleTherapists.filter(t => t.tags.includes('identity')));
-                            break;
-                        default:
-                            matches.push(...eligibleTherapists);
-                    }
-                });
+                // Score based on concerns/specialties
+                if (responses.concerns) {
+                    const concernsArray = Array.isArray(responses.concerns) ? responses.concerns : [responses.concerns];
+                    concernsArray.forEach(concern => {
+                        switch(concern) {
+                            case 'relationship':
+                                if (therapist.tags.includes('relationship')) score += 3;
+                                break;
+                            case 'trauma':
+                                if (therapist.tags.includes('trauma')) score += 3;
+                                break;
+                            case 'sexual_health':
+                                if (therapist.tags.includes('sexual_health')) score += 3;
+                                break;
+                            case 'psychedelic':
+                                if (therapist.tags.includes('psychedelic')) score += 3;
+                                break;
+                            case 'addiction':
+                                if (therapist.tags.includes('addiction')) score += 3;
+                                break;
+                            case 'identity':
+                                if (therapist.tags.includes('identity')) score += 3;
+                                break;
+                            default:
+                                score += 1; // General support
+                        }
+                    });
+                }
+
+                // Score based on community preferences
+                if (responses.community) {
+                    const communityArray = Array.isArray(responses.community) ? responses.community : [responses.community];
+                    communityArray.forEach(community => {
+                        if (community !== 'open' && therapist.communities.includes(community)) {
+                            score += 2;
+                        }
+                    });
+                }
+
+                // Score based on approach preferences
+                if (responses.approach) {
+                    const approachArray = Array.isArray(responses.approach) ? responses.approach : [responses.approach];
+                    approachArray.forEach(approach => {
+                        if (approach !== 'no_preference' && therapist.approaches.includes(approach)) {
+                            score += 2;
+                        }
+                    });
+                }
+
+                scoredMatches.push({ therapist, score });
+            });
+
+            // Sort by score (highest first)
+            scoredMatches.sort((a, b) => b.score - a.score);
+
+            // Get best matches (score > 0 - actual matches)
+            bestMatches = scoredMatches
+                .filter(match => match.score > 0)
+                .map(match => match.therapist)
+                .slice(0, 3);
+
+            // Create fallback options from remaining eligible therapists
+            let fallbackMatches = scoredMatches
+                .map(match => match.therapist)
+                .filter(therapist => !bestMatches.includes(therapist))
+                .slice(0, 3);
+
+            // If no direct matches (score > 0), treat all as fallbacks
+            if (bestMatches.length === 0) {
+                // Use top scored eligible therapists as fallbacks (not best matches)
+                bestMatches = scoredMatches.slice(0, 3).map(match => match.therapist);
+                fallbackMatches = [];
+
+                // If still no matches, use all accepting therapists
+                if (bestMatches.length === 0) {
+                    bestMatches = allTherapists.slice(0, 3);
+                }
+
+                // Mark these as fallback-only results
+                return {
+                    bestMatches: bestMatches,
+                    fallbackMatches: [],
+                    isDirectMatch: false
+                };
             }
 
-            // Community preferences
-            if (responses.community) {
-                const communityArray = Array.isArray(responses.community) ? responses.community : [responses.community];
-                communityArray.forEach(community => {
-                    if (community !== 'open') {
-                        matches.push(...eligibleTherapists.filter(t => t.communities.includes(community)));
-                    }
-                });
-            }
-
-            // Approach preferences
-            if (responses.approach) {
-                const approachArray = Array.isArray(responses.approach) ? responses.approach : [responses.approach];
-                approachArray.forEach(approach => {
-                    if (approach !== 'no_preference') {
-                        matches.push(...eligibleTherapists.filter(t => t.approaches.includes(approach)));
-                    }
-                });
-            }
-
-            // Remove duplicates and score matches
-            const uniqueMatches = matches.filter((therapist, index, self) =>
-                index === self.findIndex(t => t.name === therapist.name)
-            );
-
-            // If no specific matches, return top eligible therapists
-            if (uniqueMatches.length === 0) {
-                return eligibleTherapists.slice(0, 3);
-            }
-
-            // Return top 3 matches
-            return uniqueMatches.slice(0, 3);
+            return {
+                bestMatches: bestMatches,
+                fallbackMatches: fallbackMatches,
+                isDirectMatch: true
+            };
         }
 
-        function displayTherapistCards(therapists) {
+        function displayTieredResults(matchResults) {
             const container = document.getElementById('therapist-cards');
+            const headerElement = document.getElementById('results-header');
+            container.innerHTML = ''; // Clear existing content
 
-            therapists.forEach((therapist, index) => {
-                setTimeout(() => {
-                    const card = createTherapistCard(therapist);
-                    container.appendChild(card);
-                }, index * 200);
-            });
+            // Check if we have actual direct matches vs fallback only
+            const hasDirectMatches = matchResults.isDirectMatch;
+
+            if (!hasDirectMatches) {
+                // No direct matches - show only fallback section with updated header
+                headerElement.innerHTML = `
+                    <h2 style="color: #111827; margin-bottom: 1rem; font-size: 1.875rem; font-weight: 700;">Therapists closest to your preferences</h2>
+                    <p style="color: #6b7280; font-size: 1.125rem; max-width: 36rem; margin-left: auto; margin-right: auto;">
+                        These therapists may also be a good fit
+                    </p>
+                `;
+
+                const fallbackSection = document.createElement('div');
+                fallbackSection.className = 'results-tier';
+                container.appendChild(fallbackSection);
+
+                const fallbackCardsContainer = document.createElement('div');
+                fallbackCardsContainer.className = 'therapist-cards-grid';
+                fallbackSection.appendChild(fallbackCardsContainer);
+
+                matchResults.bestMatches.forEach((therapist, index) => {
+                    setTimeout(() => {
+                        const card = createTherapistCard(therapist);
+                        fallbackCardsContainer.appendChild(card);
+                    }, index * 200);
+                });
+            } else {
+                // We have direct matches - show tiered results
+                headerElement.innerHTML = `
+                    <h2 style="color: #111827; margin-bottom: 1rem; font-size: 1.875rem; font-weight: 700;">Here are your matches</h2>
+                    <p style="color: #6b7280; font-size: 1.125rem; max-width: 36rem; margin-left: auto; margin-right: auto;">
+                        Let's find a therapist who's right for you<br>
+                        Answer a few quick questions — we'll guide you to someone who really gets it
+                    </p>
+                `;
+
+                // Display best matches section
+                const bestSection = document.createElement('div');
+                bestSection.className = 'results-tier';
+                bestSection.innerHTML = `
+                    <h3 style="color: #4F064F; font-size: 1.5rem; font-weight: 600; margin-bottom: 1rem; text-align: center;">
+                        Most suitable therapist(s)
+                    </h3>
+                    <p style="color: #6B7280; text-align: center; margin-bottom: 2rem;">
+                        Based on your responses, we think you'll connect well with:
+                    </p>
+                `;
+                container.appendChild(bestSection);
+
+                const bestCardsContainer = document.createElement('div');
+                bestCardsContainer.className = 'therapist-cards-grid';
+                bestSection.appendChild(bestCardsContainer);
+
+                matchResults.bestMatches.forEach((therapist, index) => {
+                    setTimeout(() => {
+                        const card = createTherapistCard(therapist);
+                        bestCardsContainer.appendChild(card);
+                    }, index * 200);
+                });
+
+                // Display fallback matches section
+                if (matchResults.fallbackMatches.length > 0) {
+                    setTimeout(() => {
+                        const fallbackSection = document.createElement('div');
+                        fallbackSection.className = 'results-tier';
+                        fallbackSection.style.marginTop = '3rem';
+                        fallbackSection.innerHTML = `
+                            <h3 style="color: #4F064F; font-size: 1.5rem; font-weight: 600; margin-bottom: 1rem; text-align: center;">
+                                Therapists closest to your preferences
+                            </h3>
+                            <p style="color: #6B7280; text-align: center; margin-bottom: 2rem;">
+                                These therapists may also be a good fit:
+                            </p>
+                        `;
+                        container.appendChild(fallbackSection);
+
+                        const fallbackCardsContainer = document.createElement('div');
+                        fallbackCardsContainer.className = 'therapist-cards-grid';
+                        fallbackSection.appendChild(fallbackCardsContainer);
+
+                        matchResults.fallbackMatches.forEach((therapist, index) => {
+                            setTimeout(() => {
+                                const card = createTherapistCard(therapist);
+                                fallbackCardsContainer.appendChild(card);
+                            }, (index + matchResults.bestMatches.length) * 200);
+                        });
+                    }, matchResults.bestMatches.length * 200 + 500);
+                }
+            }
         }
 
         function createTherapistCard(therapist) {
