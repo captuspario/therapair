@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Path Test</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 40px; }
+        .test-section { background: #f5f5f5; padding: 20px; margin: 20px 0; border-radius: 8px; }
+        .image-test { margin: 20px 0; padding: 20px; border: 1px solid #ddd; border-radius: 8px; }
+        .test-image { width: 150px; height: 150px; border: 2px solid #ccc; margin: 10px 0; }
+        .path-info { background: #e8f4fd; padding: 10px; border-radius: 4px; font-family: monospace; }
+        .success { color: #27ae60; font-weight: bold; }
+        .error { color: #e74c3c; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <h1>🔍 Image Path Detection Test</h1>
+
+    <div class="test-section">
+        <h2>Current Environment</h2>
+        <div class="path-info">
+            <div><strong>Domain:</strong> <span id="current-domain"></span></div>
+            <div><strong>Path:</strong> <span id="current-path"></span></div>
+            <div><strong>Protocol:</strong> <span id="current-protocol"></span></div>
+            <div><strong>Full URL:</strong> <span id="current-url"></span></div>
+        </div>
+    </div>
+
+    <div class="test-section">
+        <h2>Simulated Environments</h2>
+
+        <div class="image-test">
+            <h3>Local File Test</h3>
+            <p>Protocol: file://</p>
+            <div id="local-result"></div>
+        </div>
+
+        <div class="image-test">
+            <h3>unisonmentalhealth.com Test</h3>
+            <p>Expected path: https://unisonmentalhealth.com/therapair-widget/images/adam.jpeg</p>
+            <div id="unison-result"></div>
+        </div>
+
+        <div class="image-test">
+            <h3>Generic Hosting Test</h3>
+            <p>Example: https://example.com/therapair-widget/</p>
+            <div id="generic-result"></div>
+        </div>
+    </div>
+
+    <div class="test-section">
+        <h2>Actual Image Loading Test</h2>
+        <div id="actual-test">
+            <img id="test-image" class="test-image" alt="Test image loading">
+            <div id="test-result"></div>
+        </div>
+    </div>
+
+    <script>
+        // Display current environment
+        document.getElementById('current-domain').textContent = window.location.origin;
+        document.getElementById('current-path').textContent = window.location.pathname;
+        document.getElementById('current-protocol').textContent = window.location.protocol;
+        document.getElementById('current-url').textContent = window.location.href;
+
+        // Image loading function (copied from widget)
+        function getImagePaths(filename, testDomain = null, testPath = null) {
+            const currentDomain = testDomain || window.location.origin;
+            const currentPath = testPath || window.location.pathname;
+
+            let imagePaths = [];
+
+            if (currentDomain.includes('unisonmentalhealth.com')) {
+                imagePaths = [
+                    `${currentDomain}/therapair-widget/images/${filename}`,
+                    `${currentDomain}/wp-content/uploads/therapair-widget/images/${filename}`,
+                    `${currentDomain}/images/${filename}`,
+                ];
+            } else {
+                const basePath = currentPath.substring(0, currentPath.lastIndexOf('/'));
+                imagePaths = [
+                    `${currentDomain}${basePath}/images/${filename}`,
+                    `${currentDomain}/therapair-widget/images/${filename}`,
+                    `./images/${filename}`,
+                    `images/${filename}`,
+                    `/images/${filename}`,
+                    `../images/${filename}`,
+                ];
+            }
+
+            return imagePaths;
+        }
+
+        // Test different environments
+        function runTests() {
+            const filename = 'adam.jpeg';
+
+            // Local test
+            if (window.location.protocol === 'file:') {
+                document.getElementById('local-result').innerHTML = '<span class="success">✅ Local file - fallback gradients will be used</span>';
+            } else {
+                document.getElementById('local-result').innerHTML = '<span class="error">Not a local file</span>';
+            }
+
+            // Unison test
+            const unisonPaths = getImagePaths(filename, 'https://unisonmentalhealth.com', '/therapair-widget/');
+            document.getElementById('unison-result').innerHTML = `
+                <div><strong>Generated paths:</strong></div>
+                <ul>${unisonPaths.map(path => `<li>${path}</li>`).join('')}</ul>
+            `;
+
+            // Generic test
+            const genericPaths = getImagePaths(filename, 'https://example.com', '/therapair-widget/');
+            document.getElementById('generic-result').innerHTML = `
+                <div><strong>Generated paths:</strong></div>
+                <ul>${genericPaths.map(path => `<li>${path}</li>`).join('')}</ul>
+            `;
+
+            // Test actual image loading
+            testActualImage();
+        }
+
+        function testActualImage() {
+            const testImg = document.getElementById('test-image');
+            const resultDiv = document.getElementById('test-result');
+
+            resultDiv.innerHTML = '<p>Testing image loading...</p>';
+
+            const paths = getImagePaths('adam.jpeg');
+            let pathIndex = 0;
+
+            function tryNextPath() {
+                if (pathIndex >= paths.length) {
+                    resultDiv.innerHTML = '<span class="error">❌ All paths failed</span>';
+                    testImg.style.background = 'linear-gradient(135deg, #9B74B7, #4F064F)';
+                    testImg.style.display = 'flex';
+                    testImg.style.alignItems = 'center';
+                    testImg.style.justifyContent = 'center';
+                    testImg.style.color = 'white';
+                    testImg.style.fontSize = '24px';
+                    testImg.textContent = 'A';
+                    return;
+                }
+
+                testImg.src = paths[pathIndex];
+                testImg.onerror = () => {
+                    console.log(`Failed: ${paths[pathIndex]}`);
+                    pathIndex++;
+                    tryNextPath();
+                };
+
+                testImg.onload = () => {
+                    resultDiv.innerHTML = `<span class="success">✅ Success: ${paths[pathIndex]}</span>`;
+                };
+            }
+
+            tryNextPath();
+        }
+
+        // Run tests on page load
+        runTests();
+    </script>
+</body>
+</html>
