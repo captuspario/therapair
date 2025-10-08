@@ -1,0 +1,23 @@
+{
+  "name": "therapair-website",
+  "version": "1.0.0",
+  "description": "Intelligent therapist matching widget for Unison Mental Health",
+  "type": "module",
+  "scripts": {
+    "test": "playwright test",
+    "test:headed": "playwright test --headed",
+    "test:ui": "playwright test --ui", 
+    "test:debug": "playwright test --debug",
+    "serve": "python3 -m http.server 8000"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.56.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/captuspario/therapair.git"
+  },
+  "keywords": ["therapist", "matching", "mental-health", "widget"],
+  "author": "",
+  "license": "ISC"
+}

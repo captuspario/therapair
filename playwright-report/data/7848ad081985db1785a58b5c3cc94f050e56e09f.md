@@ -1,0 +1,73 @@
+# Page snapshot
+
+```yaml
+- generic [active] [ref=e1]:
+  - generic [ref=e2]:
+    - generic [ref=e3]:
+      - heading "Let's find a therapist who's right for you" [level=1] [ref=e4]
+      - paragraph [ref=e5]: Answer a few quick questions — we'll guide you to someone who really gets it.
+    - main "Therapist matching results" [ref=e6]:
+      - region "Recommended therapists" [ref=e7]:
+        - generic [ref=e8]:
+          - heading "Best matches" [level=3] [ref=e9]
+          - generic [ref=e10]:
+            - article "Nicki Nelis" [ref=e12]:
+              - img "Profile photo of Nicki Nelis, LGBTQI+ affirming therapist" [ref=e14]
+              - generic [ref=e15]:
+                - generic [ref=e16]:
+                  - heading "Nicki Nelis" [level=3] [ref=e17]
+                  - paragraph [ref=e18]: Gestalt therapist with nearly 20 years' experience, specializing in LGBTQI+, trauma survivors, and kink/ENM communities
+                - generic [ref=e19]:
+                  - paragraph [ref=e20]: "Specializes in:"
+                  - generic "Specializes in:" [ref=e21]:
+                    - generic [ref=e22]:
+                      - generic [ref=e23]: LGBTQI+ affirming
+                      - generic [ref=e24]: Trauma survivors
+                      - generic [ref=e25]: Kink community
+                      - generic [ref=e26]: +4 more specialties
+                - generic [ref=e27]:
+                  - button "View full profile for Nicki Nelis" [ref=e28] [cursor=pointer]: View Profile
+                  - button "Book appointment with Nicki Nelis" [ref=e29] [cursor=pointer]: Book Now
+            - article "Adam Forman" [ref=e31]:
+              - img "Profile photo of Adam Forman, ENM relationships therapist" [ref=e33]
+              - generic [ref=e34]:
+                - generic [ref=e35]:
+                  - heading "Adam Forman" [level=3] [ref=e36]
+                  - paragraph [ref=e37]: Counsellor & Mediator with two decades experience working with young people and adults, specializing in ethically non-monogamous relationships
+                - generic [ref=e38]:
+                  - paragraph [ref=e39]: "Specializes in:"
+                  - generic "Specializes in:" [ref=e40]:
+                    - generic [ref=e41]:
+                      - generic [ref=e42]: ENM relationships
+                      - generic [ref=e43]: Opening relationships
+                      - generic [ref=e44]: Relationship dynamics
+                      - generic [ref=e45]: +2 more specialties
+                - generic [ref=e46]:
+                  - button "View full profile for Adam Forman" [ref=e47] [cursor=pointer]: View Profile
+                  - button "Book appointment with Adam Forman" [ref=e48] [cursor=pointer]: Book Now
+            - article "Natasha Lama" [ref=e50]:
+              - img "Profile photo of Natasha Lama, Sex therapy therapist" [ref=e52]
+              - generic [ref=e53]:
+                - generic [ref=e54]:
+                  - heading "Natasha Lama" [level=3] [ref=e55]
+                  - paragraph [ref=e56]: Counsellor & Sex Therapist with cultural sensitivity, specializing in sex-positive approaches and cultural identity
+                - generic [ref=e57]:
+                  - paragraph [ref=e58]: "Specializes in:"
+                  - generic "Specializes in:" [ref=e59]:
+                    - generic [ref=e60]:
+                      - generic [ref=e61]: Sex therapy
+                      - generic [ref=e62]: Cultural sensitivity
+                      - generic [ref=e63]: Sexual health
+                      - generic [ref=e64]: +3 more specialties
+                - generic [ref=e65]:
+                  - button "View full profile for Natasha Lama" [ref=e66] [cursor=pointer]: View Profile
+                  - button "Book appointment with Natasha Lama" [ref=e67] [cursor=pointer]: Book Now
+      - generic [ref=e68]:
+        - paragraph [ref=e69]: Not quite right?
+        - generic [ref=e70]:
+          - button "Retake quiz" [ref=e71] [cursor=pointer]
+          - button "Explore all therapists" [ref=e72] [cursor=pointer]
+  - generic [ref=e73]:
+    - paragraph [ref=e74]: Powered by Therapair for Unison
+    - paragraph [ref=e75]: Find mental health support that understands you
+```
