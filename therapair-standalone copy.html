@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <title>Therapist Matching Widget</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Therapair Widget - Updated</title>
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         * {
@@ -15,32 +15,13 @@
         body {
             font-family: 'Open Sans', ui-sans-serif, system-ui, sans-serif;
             background-color: #F8F4FF;
-            padding: 0.5rem;
+            padding: 1rem;
             min-height: 100vh;
-            margin: 0;
-        }
-
-        /* Iframe widget optimizations */
-        html, body {
-            width: 100%;
-            height: auto;
-            overflow-x: hidden;
-        }
-
-        /* Widget-specific styles */
-        @media (max-width: 640px) {
-            body {
-                padding: 0.25rem;
-            }
-            .container {
-                padding: 0;
-            }
         }
 
         .container {
             max-width: 72rem;
             margin: 0 auto;
-            width: 100%;
         }
 
         .chat-bubble {
@@ -315,7 +296,7 @@
             flex-direction: column;
             gap: 1rem;
             padding: 0 1.5rem 1.5rem 1.5rem;
-            height: 196px;
+            height: 144px;
             justify-content: flex-end;
         }
 
@@ -440,8 +421,14 @@
 </head>
 <body>
     <div class="container">
-        <!-- Start Section -->
-        <div class="text-center" style="margin-bottom: 1rem;">
+        <!-- Hero Section -->
+        <div class="text-center" style="margin-bottom: 2rem;">
+            <h1 style="color: #111827; margin-bottom: 1rem; font-size: 2.5rem; font-weight: 700; line-height: 1.2; max-width: 42rem; margin-left: auto; margin-right: auto;">
+                Let's find a therapist who's right for you
+            </h1>
+            <p style="color: #6b7280; margin-bottom: 2rem; font-size: 1.125rem; max-width: 36rem; margin-left: auto; margin-right: auto;">
+                Answer a few quick questions — we'll guide you to someone who really gets it.
+            </p>
             <button
                 id="start-btn"
                 onclick="startMatching()"
@@ -504,6 +491,15 @@
             </div>
         </div>
 
+        <!-- Footer -->
+        <div class="text-center" style="margin-top: 4rem; padding-top: 2rem; border-top: 1px solid #e5e7eb;">
+            <p style="font-size: 0.875rem; color: #6b7280; margin-bottom: 0.5rem;">
+                Powered by Therapair for Unison
+            </p>
+            <p style="font-size: 0.75rem; color: #9ca3af;">
+                Find mental health support that understands you
+            </p>
+        </div>
     </div>
 
     <script>
