@@ -1,0 +1,43 @@
+Help us build a better therapist-matching system
+
+Hi {{first_name}},
+
+As practitioners, we know that the right fit between therapist and client can change everything. Therapair is a small, non-profit initiative from Unison Mental Health that's building a new way to match people with the therapists who truly fit them—by values, lived experience, and communication style.
+
+We're currently running a pilot with real practitioners and have created a basic sandbox demo with 100 realistic therapist profiles to show the concept. However, we know the current questions are just a starting point—we need to make them much more sophisticated to create truly personalised connections between therapists and clients.
+
+We need your help to shape the future:
+• Try our sandbox demo (basic version) to see the concept in action
+• Share your insights in a short 5-7 minute research survey about what questions matter most and how many you'd be willing to answer
+• If you'd like to be included when we launch, we're offering a one-year free listing (using your existing public profile)
+
+This research is crucial—we need to understand which questions create the deepest personalisation, how many questions people will actually answer, and what options resonate most with both therapists and clients.
+
+Your perspective as a practitioner is invaluable in shaping a platform that truly serves both therapists and clients.
+
+TRY THE SANDBOX DEMO
+https://therapair.com.au/sandbox-demo.html?utm_source=email&utm_medium=outreach&utm_campaign=therapist_research&utm_content=sandbox_demo
+
+JOIN THE RESEARCH SURVEY
+https://typebot.io/therapair-research?utm_source=email&utm_medium=outreach&utm_campaign=therapist_research&utm_content=survey
+
+LEARN MORE ABOUT THERAPAIR
+https://therapair.com.au/documentation.html?utm_source=email&utm_medium=outreach&utm_campaign=therapist_research&utm_content=learn_more
+
+Participation is optional and non-commercial. All information is used solely for improving therapist-client matching research. Thank you for contributing your perspective to a more inclusive future of care.
+
+Warm regards,
+The Therapair Team
+Unison Mental Health
+
+---
+
+Therapair is a not-for-profit research initiative under Unison Mental Health.
+All information shared remains confidential and used only for product research and ethical development.
+
+Privacy Policy: https://therapair.com.au/legal/privacy-policy.html
+Consent & Removal: https://therapair.com.au/legal/consent-removal.html
+Contact Us: contact@therapair.com.au
+
+You're receiving this email because you're listed as an inclusive practitioner in Victoria.
+Unsubscribe: {{unsubscribe}}

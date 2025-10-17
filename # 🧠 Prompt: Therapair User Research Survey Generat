@@ -1,0 +1,100 @@
+# 🧠 Prompt: Therapair User Research Survey Generator
+
+## 🎯 Objective
+Design a Typebot-based qualitative + quantitative survey for therapists to:
+1. Share insights on therapist-client matching challenges.
+2. Reflect on willingness to share personal traits for better matching.
+3. Indicate how deep onboarding questions can go before being “too much”.
+4. Capture feedback on the Therapair concept and ethical expectations.
+5. Save responses in a database for analysis (include Typebot data structure setup).
+
+---
+
+## ⚙️ Step-by-Step Instructions for Cursor
+
+### 1. Technical Setup
+- Platform: **Typebot**
+- Data storage: Connect Typebot → database (e.g., Supabase, Notion, or local JSON file)
+- Save fields: respondent_id, timestamp, profession, modality, years_practice, key_answers, consent_status
+
+---
+
+### 2. Conversation Flow (to generate)
+
+#### 🩵 Intro
+Warm welcome, short context:
+> “Hi, and thank you for taking a few minutes to support Therapair — a non-profit initiative by Unison Mental Health.  
+> We’re developing a system that helps people find the right therapist through personality, values, and lived experience alignment.”
+
+> “This short 5–7 minute survey explores your views as a therapist — what matters most in a good match, and how deep a profile you’d be comfortable sharing.”
+
+> “Your feedback will help shape a more ethical, inclusive, and human-centred platform.”
+
+Add buttons:
+- `Start survey`
+- `Read about the project` (link to documentation)
+
+---
+
+#### 🧩 Section 1 – About You
+- What’s your profession? (Psychologist, Counsellor, Social Worker, Psychotherapist, Other)
+- How many years have you been practising? (0–2 / 3–5 / 6–10 / 10+)
+- What type of clients do you primarily support? (Adults, Teens, Couples, LGBTQ+, Trauma-focused, Neurodivergent, Other)
+- What therapy modalities do you mainly use? (Text field)
+
+---
+
+#### 💬 Section 2 – Matching Experience
+- “How do clients usually find you?”  
+  (Referrals / Directories / Word of mouth / Online search / Other)
+- “In your view, what makes a *great match* between client and therapist?”  
+  (Multiple choice + open field)
+- “What’s the biggest frustration or gap in existing referral or directory systems?”
+- “Do you currently screen clients for fit before working together?” (Yes/No)
+
+---
+
+#### 🌿 Section 3 – Personality & Fit Profiling
+- “Would you be open to sharing aspects of your *personality, communication style, or lived experience* to help clients find a better fit?”  
+  (Yes / Maybe / No)
+- “Which aspects feel too personal or unnecessary to share?” (Multi-select)
+- “How detailed do you think a therapist profile should be for accurate matching?”  
+  (1 = Very simple, 5 = Very detailed)
+- “How long would you consider reasonable for an onboarding profile questionnaire?”  
+  (2–3 min / 5 min / 10 min / 15+ min)
+- “Would you trust an AI system to pre-match clients based on personality and values if transparent and privacy-compliant?”  
+  (Yes / Maybe / No)
+
+---
+
+#### 💡 Section 4 – Feedback & Participation
+- “Would you like a *free one-year listing* when Therapair launches publicly?”  
+  (Yes, include me / Maybe later / No thanks)
+- “Would you like to be contacted for future pilot sessions or feedback?” (Yes/No)
+- “Any comments or suggestions?” (Open text)
+
+---
+
+#### 🙏 Closing
+> “Thank you for taking part in shaping the future of meaningful therapy connections.  
+> You can explore the sandbox demo anytime here:”  
+> [Sandbox Demo link]
+
+Add two final buttons:
+- `See Sandbox Demo`
+- `Visit Documentation`
+
+---
+
+### 3. Outputs to Generate
+- Full Typebot conversational script (JSON-compatible)
+- Corresponding data schema for database (ready for Supabase or Notion)
+- Consent and privacy text (ethics-lite)
+- Thank-you message with link to landing page
+
+---
+
+### 4. Notes
+- Keep conversation short, human, empathetic.  
+- Maintain 5–7 minute completion time (~12–15 questions).  
+- Optimise for mobile readability and completion.

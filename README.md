@@ -1,115 +1,160 @@
-# Therapair Therapist Matching Tool - Website Deployment Package
+# Therapair - Unified Project
 
-## 📁 Package Contents
+## Overview
+Therapair is a non-profit initiative by Unison Mental Health that helps people find the right therapist through personality, values, and lived experience alignment.
 
-This folder contains everything needed to deploy the Therapair therapist matching tool to your website:
+## 🏗️ Project Structure
 
-### Core Files
-- **`therapair-standalone.html`** - Complete standalone application (main file)
-- **`images/`** - All optimized therapist profile images
-- **`WordPress-Elementor-Integration.md`** - Detailed integration instructions
-- **`Therapair-Copy-Elements.md`** - All text content for copywriters
-- **`Design System.md`** - Brand guidelines and color specifications
-
-## 🚀 Quick Deployment Guide
-
-### Option 1: Direct Upload (Recommended)
-1. Upload the entire folder to your website's root directory or a subfolder
-2. Access via: `yourwebsite.com/therapair-website-deployment/therapair-standalone.html`
-3. Test the application to ensure all images load correctly
-
-### Option 2: Elementor Integration
-1. Follow instructions in `WordPress-Elementor-Integration.md`
-2. Copy the HTML content from `therapair-standalone.html`
-3. Paste into an Elementor HTML widget
-4. Upload images to your WordPress media library
-5. Update image paths in the HTML if needed
-
-## 🎯 Key Features
-
-- ✅ **Fully Responsive** - Works on desktop, tablet, and mobile
-- ✅ **Self-Contained** - No external dependencies required
-- ✅ **Optimized Images** - All therapist photos are web-optimized
-- ✅ **Professional Design** - Matches Therapair brand guidelines
-- ✅ **Accessible** - WCAG compliant color contrast and interactions
-- ✅ **Gender Filtering** - Respects user gender preferences
-- ✅ **Clean UI** - Modern, professional interface
-
-## 🎨 Design System
-
-- **Background**: `#F8F4FF` (very light purple)
-- **Primary Purple**: `#9B74B7` (buttons, progress bars)
-- **Hover/Selection**: `#4F064F` (dark purple for interactions)
-- **Text**: `#202020` (dark gray for readability)
-- **Font**: Google Open Sans (loaded from Google Fonts)
-
-## 📱 Responsive Breakpoints
-
-- **Mobile**: 320px - 768px
-- **Tablet**: 768px - 1024px
-- **Desktop**: 1024px+
-
-## 🔧 Customization
-
-### Updating Therapist Information
-1. Edit the therapist data in `therapair-standalone.html` (lines 236-315)
-2. Update images in the `images/` folder
-3. Modify image paths if needed
-
-### Changing Colors
-1. Update CSS variables in the `<style>` section
-2. Ensure contrast ratios meet accessibility standards
-3. Test across different devices and browsers
-
-### Adding New Questions
-1. Add to the questions array in the JavaScript
-2. Update matching logic in `getMatchedTherapists()` function
-3. Test the complete user journey
-
-## 🌐 Browser Support
-
-- ✅ Chrome 90+
-- ✅ Firefox 88+
-- ✅ Safari 14+
-- ✅ Edge 90+
-- ✅ Mobile browsers (iOS Safari, Chrome Mobile)
-
-## 📊 Analytics Integration
-
-To track usage, add your analytics code before the closing `</body>` tag in `therapair-standalone.html`:
-
-```html
-<!-- Google Analytics or other tracking code -->
-<script>
-  // Your analytics code here
-</script>
+```
+therapair/
+├── products/           # Individual product repositories (Git submodules)
+│   ├── landing-page/   # Main marketing website
+│   ├── sandbox/        # Interactive therapist matching demo
+│   ├── widget/         # Embeddable therapist finder widget
+│   └── email-campaign/ # Email outreach campaigns
+├── campaigns/          # Marketing and outreach
+│   ├── email-campaign/ # Email templates and campaigns
+│   └── typebot-survey/ # User research surveys
+├── docs/               # Shared documentation
+│   ├── strategy/       # Business strategy and planning
+│   ├── architecture/   # Technical architecture
+│   ├── design-system/  # Design guidelines
+│   └── deployment/     # Deployment guides
+├── scripts/            # Shared automation scripts
+└── tests/              # Integration and E2E tests
 ```
 
-## 🔒 Security Notes
+## 🚀 Quick Start
 
-- All images are optimized for web use
-- No external API calls or data collection
-- Client-side only application
-- GDPR compliant (no personal data stored)
+### Initial Setup
+```bash
+# Clone this repository with all submodules
+git clone --recursive <repo-url>
 
-## 📞 Support
+# Or if already cloned, initialize submodules
+git submodule update --init --recursive
+```
 
-For technical support or customization requests, refer to:
-- `WordPress-Elementor-Integration.md` for integration help
-- `Design System.md` for brand guidelines
-- `Therapair-Copy-Elements.md` for content updates
+### Working with Submodules
+```bash
+# Update all submodules to latest
+git submodule update --remote
 
-## 🎯 Testing Checklist
+# Work in a submodule
+cd products/landing-page
+# Make your changes, commit, and push
+git add .
+git commit -m "Your changes"
+git push
 
-Before going live:
-- [ ] Test on desktop, tablet, and mobile
-- [ ] Verify all images load correctly
-- [ ] Check gender filtering works properly
-- [ ] Test quiz completion and results
-- [ ] Verify responsive design
-- [ ] Check color contrast accessibility
-- [ ] Test in different browsers
+# Update main repo to reference new submodule commit
+cd ../..
+git add products/landing-page
+git commit -m "Update landing page submodule"
+git push
+```
+
+## 📦 Products
+
+### [Landing Page](./products/landing-page/)
+Main marketing website for Therapair
+- **Tech Stack:** React, TypeScript, Tailwind CSS
+- **Deployment:** Static hosting
+- **Documentation:** [README](./products/landing-page/README.md)
+
+### [Sandbox Demo](./products/sandbox/)
+Interactive therapist matching demonstration
+- **Tech Stack:** Vanilla JavaScript, HTML, CSS
+- **Features:** 100 realistic therapist profiles, matching algorithm
+- **Documentation:** [SANDBOX-DEMO-GUIDE](./products/sandbox/SANDBOX-DEMO-GUIDE.md)
+
+### [Widget](./products/widget/)
+Embeddable therapist finder widget
+- **Tech Stack:** Vanilla JavaScript, PHP
+- **Deployment:** Unison Mental Health website
+- **Documentation:** [WIDGET-DOCUMENTATION](./products/widget/WIDGET-DOCUMENTATION.md)
+
+### [Email Campaign](./campaigns/email-campaign/)
+Therapist outreach and engagement
+- **Platform:** Mailchimp
+- **Content:** HTML and plain text templates
+- **Documentation:** [README](./campaigns/email-campaign/README.md)
+
+## 🎯 Target Audience
+
+### Primary: Solo Sarah
+Independent therapist running a solo practice
+- **Pain Points:** Client matching, directory visibility, administrative overhead
+- **Goals:** Find quality clients, build reputation, focus on therapy
+- **Technology:** Moderate comfort, prefers simple tools
+
+### Secondary: Clients Seeking Therapy
+Individuals looking for the right therapist match
+- **Pain Points:** Overwhelming choice, unclear fit, trial and error
+- **Goals:** Find compatible therapist quickly
+- **Technology:** High comfort, mobile-first
+
+## 📊 Key Metrics
+
+- **Therapist Sign-ups:** Target 100+ Victorian therapists in Year 1
+- **Client Matches:** Quality over quantity, focus on successful matches
+- **Engagement:** Survey completion, demo usage, email open rates
+- **Impact:** Therapist satisfaction, client retention
+
+## 🛠️ Development
+
+### Prerequisites
+- Node.js 18+ (for products)
+- Git with submodule support
+- GitHub account
+
+### Setup
+```bash
+# Install dependencies for all products
+./scripts/setup-all.sh
+
+# Run all tests
+./scripts/test-all.sh
+
+# Deploy all products
+./scripts/deploy-all.sh
+```
+
+### Adding a New Product
+1. Create new directory in `products/`
+2. Initialize as separate Git repository
+3. Add as submodule: `git submodule add <repo-url> products/new-product`
+4. Update this README
+
+## 📚 Documentation
+
+- **Strategy:** [docs/strategy/](./docs/strategy/)
+- **Architecture:** [docs/architecture/](./docs/architecture/)
+- **Design System:** [docs/design-system/](./docs/design-system/)
+- **Deployment:** [docs/deployment/](./docs/deployment/)
+
+## 🤝 Contributing
+
+1. Work in the appropriate product subdirectory
+2. Follow the product-specific contribution guidelines
+3. Update shared documentation in `docs/`
+4. Submit pull requests to respective repositories
+
+## 📝 License
+
+Non-profit initiative by Unison Mental Health
+
+## 🔗 Links
+
+- **Website:** https://therapair.com.au
+- **Sandbox Demo:** https://therapair.com.au/sandbox-demo.html
+- **Email Campaign:** See [campaigns/email-campaign/](./campaigns/email-campaign/)
+
+## 📞 Contact
+
+For questions or support, see individual product documentation or contact Unison Mental Health.
 
 ---
 
-**Ready to deploy!** 🚀
+**Last Updated:** October 17, 2025
+**Status:** Active Development

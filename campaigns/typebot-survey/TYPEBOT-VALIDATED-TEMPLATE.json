@@ -1,0 +1,145 @@
+{
+    "version": "6.1",
+    "id": "template-survey-id",
+    "name": "Template Survey Name",
+    "events": [
+        {
+            "id": "start",
+            "outgoingEdgeId": "edge_start_to_first_group",
+            "graphCoordinates": {
+                "x": -1800,
+                "y": -300
+            },
+            "type": "start"
+        }
+    ],
+    "groups": [
+        {
+            "id": "group_intro",
+            "title": "Group Title",
+            "graphCoordinates": {
+                "x": -1500,
+                "y": -300
+            },
+            "blocks": [
+                {
+                    "id": "text_block_id",
+                    "type": "text",
+                    "content": {
+                        "richText": [
+                            {
+                                "type": "p",
+                                "children": [
+                                    {
+                                        "text": "Your text content here"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                },
+                {
+                    "id": "choice_block_id",
+                    "type": "choice input",
+                    "items": [
+                        {
+                            "id": "choice_item_1",
+                            "outgoingEdgeId": "edge_to_next_group",
+                            "content": "Option 1"
+                        },
+                        {
+                            "id": "choice_item_2",
+                            "outgoingEdgeId": "edge_to_next_group",
+                            "content": "Option 2"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "group_final",
+            "title": "Final Group",
+            "graphCoordinates": {
+                "x": 1000,
+                "y": -300
+            },
+            "blocks": [
+                {
+                    "id": "final_message",
+                    "type": "text",
+                    "content": {
+                        "richText": [
+                            {
+                                "type": "p",
+                                "children": [
+                                    {
+                                        "text": "Thank you message"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                }
+            ]
+        }
+    ],
+    "edges": [
+        {
+            "id": "edge_start_to_first_group",
+            "from": {
+                "eventId": "start"
+            },
+            "to": {
+                "groupId": "group_intro"
+            }
+        },
+        {
+            "id": "edge_to_next_group",
+            "from": {
+                "blockId": "choice_block_id"
+            },
+            "to": {
+                "groupId": "group_final"
+            }
+        }
+    ],
+    "variables": [],
+    "theme": {
+        "general": {
+            "background": {
+                "type": "Color",
+                "content": "#ffffff"
+            },
+            "progressBar": {
+                "isEnabled": true,
+                "color": "#10b981"
+            }
+        },
+        "chat": {
+            "guestBubbles": {
+                "backgroundColor": "#f7fafc"
+            },
+            "buttons": {
+                "backgroundColor": "#10b981"
+            }
+        }
+    },
+    "selectedThemeTemplateId": null,
+    "settings": {
+        "general": {
+            "isBrandingEnabled": true
+        }
+    },
+    "createdAt": "2025-10-17T00:00:00.000Z",
+    "updatedAt": "2025-10-17T00:00:00.000Z",
+    "icon": null,
+    "folderId": null,
+    "publicId": null,
+    "customDomain": null,
+    "workspaceId": "",
+    "resultsTablePreferences": null,
+    "isArchived": false,
+    "isClosed": false,
+    "whatsAppCredentialsId": null,
+    "riskLevel": null
+}

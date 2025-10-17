@@ -1,0 +1,14 @@
+[submodule "products/landing-page"]
+	path = products/landing-page
+	url = https://github.com/captuspario/therapair-landing.git
+	branch = main
+
+[submodule "products/sandbox"]
+	path = products/sandbox
+	url = https://github.com/captuspario/therapair-sandbox.git
+	branch = main
+
+[submodule "products/widget"]
+	path = products/widget
+	url = https://github.com/captuspario/therapair-widget-unison.git
+	branch = main

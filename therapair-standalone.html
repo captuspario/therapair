@@ -129,7 +129,7 @@
             border-radius: 24px;
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
             overflow: hidden;
-            height: 760px;
+            height: 820px;
             display: flex;
             flex-direction: column;
             max-width: 380px;
@@ -303,7 +303,7 @@
             flex-direction: column;
             min-height: 0;
             overflow: hidden;
-            height: 488px;
+            padding-bottom: 240px;
         }
 
         .card-buttons {
@@ -314,8 +314,8 @@
             display: flex;
             flex-direction: column;
             gap: 1rem;
-            padding: 0 1.5rem 1.5rem 1.5rem;
-            height: 196px;
+            padding: 60px 1.5rem 1.5rem 1.5rem;
+            height: 200px;
             justify-content: flex-end;
         }
 
@@ -519,8 +519,20 @@
         ];
 
         function getImagePath(filename) {
-            // Use optimized images for standalone testing
-            return `images/resized/${filename}`;
+            // Smart domain detection for image paths
+            const hostname = window.location.hostname;
+            const isLocalFile = window.location.protocol === 'file:';
+
+            if (hostname.includes('unisonmentalhealth.com')) {
+                // Production domain - use absolute path
+                return `https://unisonmentalhealth.com/therapair-widget/images/${filename.replace('.jpg', '.jpeg')}`;
+            } else if (isLocalFile || hostname === 'localhost' || hostname.includes('127.0.0.1')) {
+                // Local testing - use relative path to resized images when available, fallback to main images
+                return `images/resized/${filename}`;
+            } else {
+                // Other hosting - try relative path first
+                return `images/${filename.replace('.jpg', '.jpeg')}`;
+            }
         }
 
         // Updated therapist data with new information
@@ -1313,7 +1325,7 @@
                         <div style="margin-bottom: 1.5rem; flex: 1; display: flex; flex-direction: column; min-height: 140px;">
                             <p style="font-size: 0.875rem; color: #6b7280; margin-bottom: 0.75rem; font-weight: 500; margin-top: 0;" id="specialties-${therapist.name.replace(/\s+/g, '-').toLowerCase()}">Specializes in:</p>
                             <div aria-labelledby="specialties-${therapist.name.replace(/\s+/g, '-').toLowerCase()}" style="flex: 1; display: flex; flex-direction: column; justify-content: flex-start;">
-                                <div style="flex-wrap: wrap; display: flex; align-items: flex-start; align-content: flex-start;">
+                                <div style="flex-wrap: wrap; display: flex; align-items: flex-start; align-content: flex-start; margin-bottom: 3rem;">
                                     ${therapist.specialties.slice(0, 3).map(specialty => `
                                         <span class="specialty-tag" role="text">${specialty}</span>
                                     `).join('')}

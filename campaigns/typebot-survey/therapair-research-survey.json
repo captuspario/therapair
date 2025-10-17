@@ -1,0 +1,670 @@
+{
+  "version": "6",
+  "id": "therapair-research-survey",
+  "name": "Therapair User Research Survey",
+  "groups": [
+    {
+      "id": "intro",
+      "title": "Welcome",
+      "blocks": [
+        {
+          "id": "welcome-message",
+          "type": "text",
+          "options": {
+            "content": "Hi, and thank you for taking a few minutes to support Therapair — a non-profit initiative by Unison Mental Health.\n\nWe're developing a system that helps people find the right therapist through personality, values, and lived experience alignment.\n\nYou may have seen our basic sandbox demo—it's just a starting point. We need to make the questions much more sophisticated to create truly personalised connections.\n\nThis short 5–7 minute survey explores:\n• What questions matter most for matching\n• How many questions people will actually answer\n• What level of personalisation feels right\n• What options resonate most\n\nYour feedback will help shape a more ethical, inclusive, and human-centred platform.",
+            "isHtml": false
+          }
+        },
+        {
+          "id": "intro-actions",
+          "type": "buttons",
+          "options": {
+            "labels": {
+              "button1": "Start survey",
+              "button2": "Read about the project"
+            },
+            "isMultipleChoice": false
+          },
+          "items": [
+            {
+              "id": "start-survey",
+              "blockId": "start-survey"
+            },
+            {
+              "id": "read-more",
+              "blockId": "read-more",
+              "url": "https://therapair.com.au/documentation.html"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "about-you",
+      "title": "About You",
+      "blocks": [
+        {
+          "id": "profession",
+          "type": "buttons",
+          "options": {
+            "labels": {
+              "button1": "Psychologist",
+              "button2": "Counsellor",
+              "button3": "Social Worker",
+              "button4": "Psychotherapist",
+              "button5": "Other"
+            },
+            "isMultipleChoice": false
+          },
+          "items": [
+            {
+              "id": "psychologist",
+              "blockId": "next-question"
+            },
+            {
+              "id": "counsellor",
+              "blockId": "next-question"
+            },
+            {
+              "id": "social-worker",
+              "blockId": "next-question"
+            },
+            {
+              "id": "psychotherapist",
+              "blockId": "next-question"
+            },
+            {
+              "id": "other-profession",
+              "blockId": "next-question"
+            }
+          ]
+        },
+        {
+          "id": "years-practice",
+          "type": "buttons",
+          "options": {
+            "labels": {
+              "button1": "0-2 years",
+              "button2": "3-5 years",
+              "button3": "6-10 years",
+              "button4": "10+ years"
+            },
+            "isMultipleChoice": false
+          },
+          "items": [
+            {
+              "id": "0-2-years",
+              "blockId": "next-question"
+            },
+            {
+              "id": "3-5-years",
+              "blockId": "next-question"
+            },
+            {
+              "id": "6-10-years",
+              "blockId": "next-question"
+            },
+            {
+              "id": "10-plus-years",
+              "blockId": "next-question"
+            }
+          ]
+        },
+        {
+          "id": "client-types",
+          "type": "buttons",
+          "options": {
+            "labels": {
+              "button1": "Adults",
+              "button2": "Teens",
+              "button3": "Couples",
+              "button4": "LGBTQ+",
+              "button5": "Trauma-focused",
+              "button6": "Neurodivergent",
+              "button7": "Other"
+            },
+            "isMultipleChoice": true
+          },
+          "items": [
+            {
+              "id": "adults",
+              "blockId": "next-question"
+            },
+            {
+              "id": "teens",
+              "blockId": "next-question"
+            },
+            {
+              "id": "couples",
+              "blockId": "next-question"
+            },
+            {
+              "id": "lgbtq",
+              "blockId": "next-question"
+            },
+            {
+              "id": "trauma",
+              "blockId": "next-question"
+            },
+            {
+              "id": "neurodivergent",
+              "blockId": "next-question"
+            },
+            {
+              "id": "other-clients",
+              "blockId": "next-question"
+            }
+          ]
+        },
+        {
+          "id": "modalities",
+          "type": "text-input",
+          "options": {
+            "labels": {
+              "placeholder": "e.g., CBT, EMDR, Person-Centred, Somatic..."
+            },
+            "isLong": true
+          }
+        }
+      ]
+    },
+    {
+      "id": "matching-experience",
+      "title": "Matching Experience",
+      "blocks": [
+        {
+          "id": "how-clients-find-you",
+          "type": "buttons",
+          "options": {
+            "labels": {
+              "button1": "Referrals",
+              "button2": "Directories",
+              "button3": "Word of mouth",
+              "button4": "Online search",
+              "button5": "Other"
+            },
+            "isMultipleChoice": true
+          },
+          "items": [
+            {
+              "id": "referrals",
+              "blockId": "next-question"
+            },
+            {
+              "id": "directories",
+              "blockId": "next-question"
+            },
+            {
+              "id": "word-of-mouth",
+              "blockId": "next-question"
+            },
+            {
+              "id": "online-search",
+              "blockId": "next-question"
+            },
+            {
+              "id": "other-source",
+              "blockId": "next-question"
+            }
+          ]
+        },
+        {
+          "id": "great-match",
+          "type": "text-input",
+          "options": {
+            "labels": {
+              "placeholder": "What makes a great match between client and therapist?"
+            },
+            "isLong": true
+          }
+        },
+        {
+          "id": "biggest-gap",
+          "type": "text-input",
+          "options": {
+            "labels": {
+              "placeholder": "What's the biggest frustration or gap in existing referral or directory systems?"
+            },
+            "isLong": true
+          }
+        },
+        {
+          "id": "screen-clients",
+          "type": "buttons",
+          "options": {
+            "labels": {
+              "button1": "Yes",
+              "button2": "No"
+            },
+            "isMultipleChoice": false
+          },
+          "items": [
+            {
+              "id": "yes-screen",
+              "blockId": "next-question"
+            },
+            {
+              "id": "no-screen",
+              "blockId": "next-question"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "profiling",
+      "title": "Personality & Fit Profiling",
+      "blocks": [
+        {
+          "id": "question-sophistication",
+          "type": "text",
+          "options": {
+            "content": "Our current sandbox demo has basic questions. To create deeper personalisation, we're considering questions about:\n\n• Communication style (direct vs. gentle, structured vs. exploratory)\n• Therapeutic relationship preferences (collaborative, directive, etc.)\n• Personality traits (introversion, openness, etc.)\n• Lived experience (trauma, identity, culture)\n• Values and beliefs\n• Work style and boundaries",
+            "isHtml": false
+          }
+        },
+        {
+          "id": "which-questions-matter",
+          "type": "buttons",
+          "options": {
+            "labels": {
+              "button1": "Communication style",
+              "button2": "Therapeutic relationship style",
+              "button3": "Personality traits",
+              "button4": "Lived experience",
+              "button5": "Values and beliefs",
+              "button6": "Work style and boundaries",
+              "button7": "All of the above",
+              "button8": "None - keep it simple"
+            },
+            "isMultipleChoice": true
+          },
+          "items": [
+            {
+              "id": "communication-style",
+              "blockId": "next-question"
+            },
+            {
+              "id": "relationship-style",
+              "blockId": "next-question"
+            },
+            {
+              "id": "personality-traits",
+              "blockId": "next-question"
+            },
+            {
+              "id": "lived-experience",
+              "blockId": "next-question"
+            },
+            {
+              "id": "values-beliefs",
+              "blockId": "next-question"
+            },
+            {
+              "id": "work-style",
+              "blockId": "next-question"
+            },
+            {
+              "id": "all-above",
+              "blockId": "next-question"
+            },
+            {
+              "id": "keep-simple",
+              "blockId": "next-question"
+            }
+          ]
+        },
+        {
+          "id": "open-to-sharing",
+          "type": "buttons",
+          "options": {
+            "labels": {
+              "button1": "Yes",
+              "button2": "Maybe",
+              "button3": "No"
+            },
+            "isMultipleChoice": false
+          },
+          "items": [
+            {
+              "id": "yes-sharing",
+              "blockId": "next-question"
+            },
+            {
+              "id": "maybe-sharing",
+              "blockId": "next-question"
+            },
+            {
+              "id": "no-sharing",
+              "blockId": "next-question"
+            }
+          ]
+        },
+        {
+          "id": "too-personal",
+          "type": "buttons",
+          "options": {
+            "labels": {
+              "button1": "Personal trauma history",
+              "button2": "Religious beliefs",
+              "button3": "Political views",
+              "button4": "Personal relationships",
+              "button5": "Financial situation",
+              "button6": "None of these"
+            },
+            "isMultipleChoice": true
+          },
+          "items": [
+            {
+              "id": "trauma-history",
+              "blockId": "next-question"
+            },
+            {
+              "id": "religious",
+              "blockId": "next-question"
+            },
+            {
+              "id": "political",
+              "blockId": "next-question"
+            },
+            {
+              "id": "relationships",
+              "blockId": "next-question"
+            },
+            {
+              "id": "financial",
+              "blockId": "next-question"
+            },
+            {
+              "id": "none-personal",
+              "blockId": "next-question"
+            }
+          ]
+        },
+        {
+          "id": "profile-detail",
+          "type": "rating",
+          "options": {
+            "labels": {
+              "left": "Very simple",
+              "right": "Very detailed"
+            },
+            "length": 5
+          }
+        },
+        {
+          "id": "onboarding-time",
+          "type": "buttons",
+          "options": {
+            "labels": {
+              "button1": "2-3 minutes",
+              "button2": "5 minutes",
+              "button3": "10 minutes",
+              "button4": "15+ minutes"
+            },
+            "isMultipleChoice": false
+          },
+          "items": [
+            {
+              "id": "2-3-min",
+              "blockId": "next-question"
+            },
+            {
+              "id": "5-min",
+              "blockId": "next-question"
+            },
+            {
+              "id": "10-min",
+              "blockId": "next-question"
+            },
+            {
+              "id": "15-plus-min",
+              "blockId": "next-question"
+            }
+          ]
+        },
+        {
+          "id": "trust-ai",
+          "type": "buttons",
+          "options": {
+            "labels": {
+              "button1": "Yes",
+              "button2": "Maybe",
+              "button3": "No"
+            },
+            "isMultipleChoice": false
+          },
+          "items": [
+            {
+              "id": "yes-ai",
+              "blockId": "next-question"
+            },
+            {
+              "id": "maybe-ai",
+              "blockId": "next-question"
+            },
+            {
+              "id": "no-ai",
+              "blockId": "next-question"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "participation",
+      "title": "Feedback & Participation",
+      "blocks": [
+        {
+          "id": "free-listing",
+          "type": "buttons",
+          "options": {
+            "labels": {
+              "button1": "Yes, include me",
+              "button2": "Maybe later",
+              "button3": "No thanks"
+            },
+            "isMultipleChoice": false
+          },
+          "items": [
+            {
+              "id": "yes-include",
+              "blockId": "next-question"
+            },
+            {
+              "id": "maybe-later",
+              "blockId": "next-question"
+            },
+            {
+              "id": "no-thanks",
+              "blockId": "next-question"
+            }
+          ]
+        },
+        {
+          "id": "future-contact",
+          "type": "buttons",
+          "options": {
+            "labels": {
+              "button1": "Yes",
+              "button2": "No"
+            },
+            "isMultipleChoice": false
+          },
+          "items": [
+            {
+              "id": "yes-contact",
+              "blockId": "next-question"
+            },
+            {
+              "id": "no-contact",
+              "blockId": "next-question"
+            }
+          ]
+        },
+        {
+          "id": "comments",
+          "type": "text-input",
+          "options": {
+            "labels": {
+              "placeholder": "Any comments or suggestions?"
+            },
+            "isLong": true
+          }
+        },
+        {
+          "id": "email-capture",
+          "type": "text-input",
+          "options": {
+            "labels": {
+              "placeholder": "Email (optional, for follow-up)"
+            },
+            "isLong": false
+          }
+        }
+      ]
+    },
+    {
+      "id": "closing",
+      "title": "Thank You",
+      "blocks": [
+        {
+          "id": "thank-you-message",
+          "type": "text",
+          "options": {
+            "content": "Thank you for taking part in shaping the future of meaningful therapy connections.\n\nYou can explore the sandbox demo anytime:",
+            "isHtml": false
+          }
+        },
+        {
+          "id": "closing-actions",
+          "type": "buttons",
+          "options": {
+            "labels": {
+              "button1": "See Sandbox Demo",
+              "button2": "Visit Documentation"
+            },
+            "isMultipleChoice": false
+          },
+          "items": [
+            {
+              "id": "see-demo",
+              "blockId": "see-demo",
+              "url": "https://therapair.com.au/quiz"
+            },
+            {
+              "id": "visit-docs",
+              "blockId": "visit-docs",
+              "url": "https://therapair.com.au/documentation.html"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "id": "intro-to-about",
+      "from": {
+        "blockId": "start-survey"
+      },
+      "to": {
+        "blockId": "profession"
+      }
+    },
+    {
+      "id": "about-to-matching",
+      "from": {
+        "blockId": "modalities"
+      },
+      "to": {
+        "blockId": "how-clients-find-you"
+      }
+    },
+    {
+      "id": "matching-to-profiling",
+      "from": {
+        "blockId": "screen-clients"
+      },
+      "to": {
+        "blockId": "open-to-sharing"
+      }
+    },
+    {
+      "id": "profiling-to-participation",
+      "from": {
+        "blockId": "trust-ai"
+      },
+      "to": {
+        "blockId": "free-listing"
+      }
+    },
+    {
+      "id": "participation-to-closing",
+      "from": {
+        "blockId": "email-capture"
+      },
+      "to": {
+        "blockId": "thank-you-message"
+      }
+    }
+  ],
+  "settings": {
+    "general": {
+      "isBrandingEnabled": true,
+      "isTypingEmulationEnabled": true,
+      "isNewResultOnRefreshEnabled": false,
+      "isHideQueryParamsEnabled": false,
+      "isInputPrefillEnabled": true,
+      "isRememberUserEnabled": true,
+      "isResultSavingEnabled": true,
+      "isTypebotNameVisible": true
+    },
+    "metadata": {
+      "description": "Therapair User Research Survey - 5-7 minute survey for therapists",
+      "title": "Therapair Research Survey",
+      "favIconUrl": "https://therapair.com.au/favicon.ico",
+      "imageUrl": "https://therapair.com.au/og-image.png"
+    },
+    "publicShare": {
+      "isEnabled": true,
+      "publicId": "therapair-research-survey"
+    },
+    "whatsApp": {
+      "isEnabled": false
+    },
+    "googleAnalytics": {
+      "isEnabled": true,
+      "measurementId": "G-XXXXXXXXXX"
+    }
+  },
+  "theme": {
+    "general": {
+      "background": {
+        "type": "color",
+        "content": "#ffffff"
+      },
+      "font": "Inter"
+    },
+    "chat": {
+      "hostBubbles": {
+        "backgroundColor": "#10b981",
+        "color": "#ffffff"
+      },
+      "guestBubbles": {
+        "backgroundColor": "#f7fafc",
+        "color": "#1a202c"
+      },
+      "inputs": {
+        "backgroundColor": "#ffffff",
+        "color": "#1a202c",
+        "placeholderColor": "#a0aec0"
+      },
+      "buttons": {
+        "backgroundColor": "#10b981",
+        "color": "#ffffff"
+      }
+    }
+  },
+  "variables": []
+}

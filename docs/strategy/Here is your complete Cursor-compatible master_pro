@@ -1,0 +1,188 @@
+Here is your complete Cursor-compatible master_prompt.md — a single, self-contained instruction file you can drop into your project to generate the retrospective documentation structure and populate each section as modular .md prompts.
+
+It follows global best practices for agentic prompt writing, Markdown formatting, and is optimised for Claude-in-Cursor workflows.
+
+⸻
+
+✅ Filename: master_prompt.md
+
+# 🧠 Therapair Project — Master Prompt for Retrospective Reconstruction
+
+## 🎯 OBJECTIVE:
+Reconstruct the full Therapair project journey as a structured, modular case study.
+
+Your job is to:
+- Create a subfolder called `project-retrospective`
+- Populate that folder with **9 markdown prompt files**, each documenting a key phase or component
+- Each prompt should be usable by Claude, Cursor, or any intelligent agent to reconstruct, expand, or publish the knowledge
+
+This will form the foundation for onboarding, storytelling, pitch decks, technical documentation, and strategic case studies.
+
+---
+
+## 📁 FOLDER STRUCTURE TO GENERATE:
+
+/project-retrospective/
+│
+├── 01_vision_and_origin.md
+├── 02_first_widget_typebot.md
+├── 03_landing_page_and_forms.md
+├── 04_email_hosting_and_privacy.md
+├── 05_git_and_deployment.md
+├── 06_strategy_prompt_framework.md
+├── 07_documentation_and_onboarding.md
+├── 08_lessons_and_principles.md
+├── 09_presentation_summary.md
+
+---
+
+## 📌 SHARED INSTRUCTIONS FOR ALL `.md` FILES:
+
+Each file must:
+- Be written in Markdown
+- Be standalone Claude-usable prompt instructions
+- Include:
+  - The goal of the section
+  - Known context and facts (seeded below)
+  - Questions to expand knowledge
+  - Any relevant prompt examples or files
+- Use readable formatting (headings, bullets, code blocks)
+
+---
+
+## 🧠 MEMORY CONTEXT (Seeded Knowledge for All Prompts):
+
+Use the following as preloaded memory in all sub-prompts where relevant:
+
+- **Therapair** is an emotionally resonant, inclusive therapist-matching concierge tool.
+- Started via Unison Mental Health to support queer, neurodivergent, and underrepresented users.
+- Built without third-party tools for maximum privacy and control.
+- First product was a **Typebot-based quiz widget** matched to a local CSV of inclusive therapists.
+- Deployed using **Cursor + Git + CLI auto-deploys** to a Hostinger-hosted HTML/CSS site.
+- Forms used direct email submission to `contact@therapair.com.au`.
+- A **modular prompt system** was developed using a master strategy prompt, writing `.md` files for Claude to execute each section (audiences, pricing, value prop, onboarding, etc.).
+- Goal is now to document the full journey for onboarding, investment, and community learning.
+
+---
+
+## 📄 FILE PROMPT OUTLINES:
+
+### `01_vision_and_origin.md`
+**Purpose:** Reconstruct the earliest phases: where the idea came from, what problem it solves, emotional goals, and early user group thinking.
+
+Include:
+- Quotes or memories from early Claude chats (if available)
+- Mission and emotional resonance
+- Design ethos and inclusive tone
+- Early experiments or sketches
+
+---
+
+### `02_first_widget_typebot.md`
+**Purpose:** Detail the first working product — the therapist-matching Typebot quiz.
+
+Include:
+- Why Typebot was chosen
+- Matching logic using tags
+- Therapist CSV structure
+- Challenges with accuracy or feedback
+- Link or screenshot if available
+
+---
+
+### `03_landing_page_and_forms.md`
+**Purpose:** Document the website structure, audience separation (clients vs therapists), form handling, and page goals.
+
+Include:
+- Copywriting tone
+- Page sections
+- HTML/CSS structure
+- How form data is submitted (without third-party)
+
+---
+
+### `04_email_hosting_and_privacy.md`
+**Purpose:** Showcase how the team avoided external services and ensured privacy.
+
+Include:
+- Hostinger email setup
+- Custom routing to `contact@therapair.com.au`
+- HIPAA-lite and privacy-first choices
+- Optional confirmation email logic
+
+---
+
+### `05_git_and_deployment.md`
+**Purpose:** Explain the development workflow and deployment structure.
+
+Include:
+- Git setup
+- Auto-deploy commands
+- Folder structure
+- How production is kept up to date in Cursor
+
+---
+
+### `06_strategy_prompt_framework.md`
+**Purpose:** Document the Claude-powered strategy system.
+
+Include:
+- Master prompt logic
+- Strategy `.md` modules created (audiences, differentiators, pricing, etc.)
+- How it supports code/marketing/SEO
+- Claude/Cursor interaction model
+
+---
+
+### `07_documentation_and_onboarding.md`
+**Purpose:** Lay out the plan for multi-audience onboarding and in-product documentation.
+
+Include:
+- Planned sections (for therapists, clients, contributors)
+- Widget embeds
+- Value-aligned copy
+- Future knowledge base features
+
+---
+
+### `08_lessons_and_principles.md`
+**Purpose:** Capture insights, failures, design philosophy, and replicable ideas.
+
+Include:
+- Agentic system building lessons
+- Cursor + Claude synergy
+- Vibe-based coding mindset
+- What to avoid, what worked
+
+---
+
+### `09_presentation_summary.md`
+**Purpose:** Write a compelling, visual summary for external audiences.
+
+Include:
+- Timeline (phase-by-phase)
+- Screenshots or placeholder tags
+- Outcome summary
+- CTA or next steps
+
+---
+
+## ❓FINAL QUESTIONS TO CLARIFY WITH TINO (if not already known):
+
+1. Should any files link directly to Figma, Notion, or Git resources?
+2. Any preferred visual style or diagrams to include?
+3. Should this eventually export to Notion, website, or pitch deck?
+4. Should we auto-generate a `README.md` index linking all 9 files?
+
+---
+
+## ✅ NEXT STEP:
+
+→ Once this prompt runs, generate all 9 files above in `/project-retrospective/`, each following the guidance, and begin populating their contents.
+
+You are now ready to fully document the Therapair journey in a modular, agentic, and scalable format.
+
+
+⸻
+
+Would you like me to now generate the actual content of a few of the .md sub-prompts (e.g. 01_vision_and_origin.md, 02_first_widget_typebot.md) to start filling the folder?

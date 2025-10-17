@@ -129,7 +129,7 @@
             border-radius: 24px;
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
             overflow: hidden;
-            height: 760px;
+            height: 820px;
             display: flex;
             flex-direction: column;
             max-width: 380px;
@@ -297,13 +297,13 @@
         }
 
         .card-content {
-            padding: 1.5rem 1.5rem 2rem 1.5rem;
+            padding: 1.5rem 1.5rem 0 1.5rem;
             flex: 1;
             display: flex;
             flex-direction: column;
             min-height: 0;
             overflow: hidden;
-            padding-bottom: 160px;
+            padding-bottom: 240px;
         }
 
         .card-buttons {
@@ -314,8 +314,8 @@
             display: flex;
             flex-direction: column;
             gap: 1rem;
-            padding: 0 1.5rem 1.5rem 1.5rem;
-            height: 144px;
+            padding: 60px 1.5rem 1.5rem 1.5rem;
+            height: 200px;
             justify-content: flex-end;
         }
 
@@ -519,99 +519,32 @@
         ];
 
         function getImagePath(filename) {
-            // Production widget image paths with fallbacks
-            const imagePaths = [
-                `./images/${filename}`,           // Relative to widget location
-                `images/${filename}`,             // Simple relative path
-                `/images/${filename}`,            // Absolute path from domain root
-                `../images/${filename}`,          // Parent directory fallback
-            ];
+            // Force absolute URLs for production deployment
+            const protocol = window.location.protocol;
+            const hostname = window.location.hostname;
+            const isLocalFile = protocol === 'file:';
 
-            // Return first path for now, but we'll add fallback logic
-            return imagePaths[0];
-        }
+            // Debug logging
+            console.log('Image path debug:', {
+                filename,
+                hostname,
+                protocol,
+                href: window.location.href
+            });
 
-        // Image loading with fallback function
-        function loadImageWithFallback(imgElement, filename) {
-            // For local testing, use a simple test pattern
-            if (window.location.protocol === 'file:') {
-                // Local file testing - show gradient fallback immediately
-                showImageFallback(imgElement, filename);
-                return;
-            }
-
-            // Detect hosting environment and build appropriate paths
-            const currentDomain = window.location.origin;
-            const currentPath = window.location.pathname;
-
-            let imagePaths = [];
-
-            // If we're on unisonmentalhealth.com, use the specific path structure
-            if (currentDomain.includes('unisonmentalhealth.com')) {
-                imagePaths = [
-                    `${currentDomain}/therapair-widget/images/${filename}`,
-                    `${currentDomain}/wp-content/uploads/therapair-widget/images/${filename}`,
-                    `${currentDomain}/images/${filename}`,
-                ];
+            // ALWAYS use absolute URLs for unisonmentalhealth.com
+            // This ensures images load correctly when deployed online
+            if (!isLocalFile && hostname) {
+                // Online deployment - use absolute HTTPS path to unisonmentalhealth.com
+                const path = `https://unisonmentalhealth.com/therapair-widget/images/${filename.replace('.jpg', '.jpeg')}`;
+                console.log('Using absolute production path:', path);
+                return path;
             } else {
-                // Generic paths for other hosting environments
-                const basePath = currentPath.substring(0, currentPath.lastIndexOf('/'));
-                imagePaths = [
-                    `${currentDomain}${basePath}/images/${filename}`,
-                    `${currentDomain}/therapair-widget/images/${filename}`,
-                    `./images/${filename}`,
-                    `images/${filename}`,
-                    `/images/${filename}`,
-                    `../images/${filename}`,
-                ];
+                // Local file testing only - use relative path
+                const path = `images/${filename.replace('.jpg', '.jpeg')}`;
+                console.log('Using local file path:', path);
+                return path;
             }
-
-            console.log(`Loading images for domain: ${currentDomain}`);
-            console.log(`Trying paths for ${filename}:`, imagePaths);
-
-            let pathIndex = 0;
-
-            function tryNextPath() {
-                if (pathIndex >= imagePaths.length) {
-                    // All paths failed, show placeholder
-                    showImageFallback(imgElement, filename);
-                    console.warn(`All image paths failed for: ${filename}`);
-                    console.warn(`Tried paths:`, imagePaths);
-                    return;
-                }
-
-                imgElement.src = imagePaths[pathIndex];
-                imgElement.onerror = () => {
-                    console.log(`Failed to load: ${imagePaths[pathIndex]}`);
-                    pathIndex++;
-                    tryNextPath();
-                };
-
-                imgElement.onload = () => {
-                    console.log(`✅ Successfully loaded: ${imagePaths[pathIndex]}`);
-                    imgElement.style.display = 'block';
-                };
-            }
-
-            tryNextPath();
-        }
-
-        function showImageFallback(imgElement, filename) {
-            // Create nice gradient fallback
-            const nameHash = filename.split('').reduce((a, b) => {
-                a = ((a << 5) - a) + b.charCodeAt(0);
-                return a & a;
-            }, 0);
-            const hue = Math.abs(nameHash) % 360;
-
-            imgElement.style.background = `linear-gradient(135deg, hsl(${hue}, 70%, 60%), hsl(${(hue + 60) % 360}, 70%, 70%))`;
-            imgElement.style.display = 'flex';
-            imgElement.style.alignItems = 'center';
-            imgElement.style.justifyContent = 'center';
-            imgElement.style.color = 'white';
-            imgElement.style.fontSize = '48px';
-            imgElement.style.fontWeight = 'bold';
-            imgElement.innerHTML = filename.charAt(0).toUpperCase();
         }
 
         // Updated therapist data with new information
@@ -1385,7 +1318,9 @@
                 <article role="article" aria-labelledby="therapist-${therapist.name.replace(/\s+/g, '-').toLowerCase()}">
                     <div class="image-container">
                         <img
+                            src="${therapist.image}"
                             alt="Profile photo of ${therapist.name}, ${therapist.specialties[0]} therapist"
+                            onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
                             loading="lazy"
                         />
                         <div style="display: none; width: 100%; height: 100%; ${fallbackGradient}; align-items: center; justify-content: center; color: white; font-weight: bold; font-size: 1.2rem;" aria-label="Initials for ${therapist.name}">
@@ -1402,7 +1337,7 @@
                         <div style="margin-bottom: 1.5rem; flex: 1; display: flex; flex-direction: column; min-height: 140px;">
                             <p style="font-size: 0.875rem; color: #6b7280; margin-bottom: 0.75rem; font-weight: 500; margin-top: 0;" id="specialties-${therapist.name.replace(/\s+/g, '-').toLowerCase()}">Specializes in:</p>
                             <div aria-labelledby="specialties-${therapist.name.replace(/\s+/g, '-').toLowerCase()}" style="flex: 1; display: flex; flex-direction: column; justify-content: flex-start;">
-                                <div style="flex-wrap: wrap; display: flex; align-items: flex-start; align-content: flex-start;">
+                                <div style="flex-wrap: wrap; display: flex; align-items: flex-start; align-content: flex-start; margin-bottom: 3rem;">
                                     ${therapist.specialties.slice(0, 3).map(specialty => `
                                         <span class="specialty-tag" role="text">${specialty}</span>
                                     `).join('')}
@@ -1428,11 +1363,6 @@
                     </div>
                 </article>
             `;
-
-            // Load image with fallback handling
-            const imgElement = card.querySelector('img');
-            const filename = therapist.image.split('/').pop(); // Extract filename from path
-            loadImageWithFallback(imgElement, filename);
 
             return card;
         }

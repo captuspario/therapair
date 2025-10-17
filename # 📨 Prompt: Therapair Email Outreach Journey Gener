@@ -1,0 +1,68 @@
+# 📨 Prompt: Therapair Email Outreach Journey Generator
+
+## 🎯 Objective
+Create a warm, credible, and research-driven email campaign that invites publicly listed Victorian therapists to:
+1. Learn about Therapair’s mission and documentation.
+2. Explore the sandbox demo (100 fake profiles).
+3. Join a short user-research survey.
+4. Accept a *one-year free listing* offer if they wish to be included, based on their existing public profile on [vicinclusivepractitioners.com](https://www.vicinclusivepractitioners.com/).
+
+All messaging must feel collegial, non-commercial, and values-aligned with mental-health ethics.  
+Tone: calm, authentic, and intelligent — written by a peer, not a marketer.
+
+---
+
+## ⚙️ Step-by-Step Instructions for Cursor
+
+### 1. Define Campaign Structure
+- Email sender: **contact@therapair.com.au**
+- Target audience: ~200 Victorian therapists (psychologists, counsellors, psychotherapists, social workers)
+- Subject line A/B variants:
+  1. “Help us build a better therapist-matching system (invitation inside)”
+  2. “Join the Therapair pilot – aligning therapists and clients through values and lived experience”
+
+- Call-to-action buttons (3):
+  1. **Try the Sandbox Demo**
+  2. **Join the Research Survey**
+  3. **Learn More About Therapair**
+
+---
+
+### 2. Email Body (to generate)
+
+Include:
+- **Opening (personal, mission-aligned)**  
+  Reference the shared goal of improving access and fit in therapy.  
+  Example tone:  
+  > “As practitioners, we know that the right fit between therapist and client can change everything. Therapair is a small, non-profit initiative from Unison that’s building a new way to match people with the therapists who truly fit them — by values, lived experience, and communication style.”
+
+- **Middle (credibility + opportunity)**  
+  - Mention Unison Mental Health pilot with real practitioners.  
+  - Invite them to preview the sandbox demo to see how it works.  
+  - Offer one year of free listing if they’d like to be included later (using their already public profile).
+
+- **CTA block**  
+  Clear buttons/links:
+  - `Try the Sandbox Demo`
+  - `Join the Research Survey`
+  - `View Documentation & Legal Info`
+
+- **Closing (ethical reassurance + appreciation)**  
+  Emphasise voluntary participation, confidentiality, and appreciation for professional insight.  
+  > “Participation is optional and non-commercial. All information is used solely for improving therapist-client matching research. Thank you for contributing your perspective to a more inclusive future of care.”
+
+---
+
+### 3. Ethical & Legal Notes
+- Add small footer with:
+  - Non-profit statement (“Therapair is a not-for-profit research initiative under Unison Mental Health.”)
+  - Data usage note (“All information shared remains confidential and used only for product research and ethical development.”)
+  - Link: **Documentation & Legal Framework** (placeholder URL)
+
+---
+
+### 4. Outputs to Generate
+- Full email copy (A and B variants)
+- Plain-text + HTML version
+- Typebot link placeholders for CTA buttons
+- Tracking note (open/click analytics optional)

@@ -1,0 +1,1384 @@
+{
+    "version": "6.1",
+    "id": "therapair-research-survey",
+    "name": "Therapair User Research Survey",
+    "events": [
+        {
+            "id": "start",
+            "outgoingEdgeId": "edge_start_to_intro",
+            "graphCoordinates": {
+                "x": -1800,
+                "y": -300
+            },
+            "type": "start"
+        }
+    ],
+    "groups": [
+        {
+            "id": "group_intro",
+            "title": "Welcome",
+            "graphCoordinates": {
+                "x": -1500,
+                "y": -300
+            },
+            "blocks": [
+                {
+                    "id": "intro_welcome",
+                    "type": "text",
+                    "content": {
+                        "richText": [
+                            {
+                                "type": "p",
+                                "children": [
+                                    {
+                                        "text": "Hi, and thank you for taking a few minutes to support Therapair — a non-profit initiative by Unison Mental Health."
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                },
+                {
+                    "id": "intro_context",
+                    "type": "text",
+                    "content": {
+                        "richText": [
+                            {
+                                "type": "p",
+                                "children": [
+                                    {
+                                        "text": "We're developing a system that helps people find the right therapist through personality, values, and lived experience alignment."
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                },
+                {
+                    "id": "intro_demo",
+                    "type": "text",
+                    "content": {
+                        "richText": [
+                            {
+                                "type": "p",
+                                "children": [
+                                    {
+                                        "text": "You may have seen our basic sandbox demo—it's just a starting point. We need to make the questions much more sophisticated to create truly personalised connections."
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                },
+                {
+                    "id": "intro_goals",
+                    "type": "text",
+                    "content": {
+                        "richText": [
+                            {
+                                "type": "p",
+                                "children": [
+                                    {
+                                        "text": "This short 5–7 minute survey explores:"
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "ul",
+                                "children": [
+                                    {
+                                        "type": "li",
+                                        "children": [
+                                            {
+                                                "text": "What questions matter most for matching"
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "type": "li",
+                                        "children": [
+                                            {
+                                                "text": "How many questions people will actually answer"
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "type": "li",
+                                        "children": [
+                                            {
+                                                "text": "What level of personalisation feels right"
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "type": "li",
+                                        "children": [
+                                            {
+                                                "text": "What options resonate most"
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                },
+                {
+                    "id": "intro_start_choice",
+                    "type": "choice input",
+                    "items": [
+                        {
+                            "id": "intro_start",
+                            "outgoingEdgeId": "edge_intro_to_about",
+                            "content": "Start survey"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "group_about",
+            "title": "About You",
+            "graphCoordinates": {
+                "x": -800,
+                "y": -300
+            },
+            "blocks": [
+                {
+                    "id": "about_profession_text",
+                    "type": "text",
+                    "content": {
+                        "richText": [
+                            {
+                                "type": "p",
+                                "children": [
+                                    {
+                                        "bold": true,
+                                        "text": "What's your profession?"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                },
+                {
+                    "id": "about_profession_choice",
+                    "type": "choice input",
+                    "items": [
+                        {
+                            "id": "prof_psychologist",
+                            "outgoingEdgeId": "edge_profession_to_years",
+                            "content": "Psychologist"
+                        },
+                        {
+                            "id": "prof_counsellor",
+                            "outgoingEdgeId": "edge_profession_to_years",
+                            "content": "Counsellor"
+                        },
+                        {
+                            "id": "prof_social_worker",
+                            "outgoingEdgeId": "edge_profession_to_years",
+                            "content": "Social Worker"
+                        },
+                        {
+                            "id": "prof_psychotherapist",
+                            "outgoingEdgeId": "edge_profession_to_years",
+                            "content": "Psychotherapist"
+                        },
+                        {
+                            "id": "prof_other",
+                            "outgoingEdgeId": "edge_profession_to_years",
+                            "content": "Other"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "group_years",
+            "title": "Years in Practice",
+            "graphCoordinates": {
+                "x": -200,
+                "y": -300
+            },
+            "blocks": [
+                {
+                    "id": "years_text",
+                    "type": "text",
+                    "content": {
+                        "richText": [
+                            {
+                                "type": "p",
+                                "children": [
+                                    {
+                                        "bold": true,
+                                        "text": "How many years have you been practising?"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                },
+                {
+                    "id": "years_choice",
+                    "type": "choice input",
+                    "items": [
+                        {
+                            "id": "years_0_2",
+                            "outgoingEdgeId": "edge_years_to_clients",
+                            "content": "0-2 years"
+                        },
+                        {
+                            "id": "years_3_5",
+                            "outgoingEdgeId": "edge_years_to_clients",
+                            "content": "3-5 years"
+                        },
+                        {
+                            "id": "years_6_10",
+                            "outgoingEdgeId": "edge_years_to_clients",
+                            "content": "6-10 years"
+                        },
+                        {
+                            "id": "years_10_plus",
+                            "outgoingEdgeId": "edge_years_to_clients",
+                            "content": "10+ years"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "group_clients",
+            "title": "Client Types",
+            "graphCoordinates": {
+                "x": 400,
+                "y": -300
+            },
+            "blocks": [
+                {
+                    "id": "clients_text",
+                    "type": "text",
+                    "content": {
+                        "richText": [
+                            {
+                                "type": "p",
+                                "children": [
+                                    {
+                                        "bold": true,
+                                        "text": "What type of clients do you primarily support?"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                },
+                {
+                    "id": "clients_choice",
+                    "type": "choice input",
+                    "items": [
+                        {
+                            "id": "client_adults",
+                            "outgoingEdgeId": "edge_clients_to_modalities",
+                            "content": "Adults"
+                        },
+                        {
+                            "id": "client_teens",
+                            "outgoingEdgeId": "edge_clients_to_modalities",
+                            "content": "Teens"
+                        },
+                        {
+                            "id": "client_couples",
+                            "outgoingEdgeId": "edge_clients_to_modalities",
+                            "content": "Couples"
+                        },
+                        {
+                            "id": "client_lgbtq",
+                            "outgoingEdgeId": "edge_clients_to_modalities",
+                            "content": "LGBTQ+"
+                        },
+                        {
+                            "id": "client_trauma",
+                            "outgoingEdgeId": "edge_clients_to_modalities",
+                            "content": "Trauma-focused"
+                        },
+                        {
+                            "id": "client_neurodivergent",
+                            "outgoingEdgeId": "edge_clients_to_modalities",
+                            "content": "Neurodivergent"
+                        },
+                        {
+                            "id": "client_other",
+                            "outgoingEdgeId": "edge_clients_to_modalities",
+                            "content": "Other"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "group_modalities",
+            "title": "Modalities",
+            "graphCoordinates": {
+                "x": 1000,
+                "y": -300
+            },
+            "blocks": [
+                {
+                    "id": "modalities_text",
+                    "type": "text",
+                    "content": {
+                        "richText": [
+                            {
+                                "type": "p",
+                                "children": [
+                                    {
+                                        "bold": true,
+                                        "text": "What therapy modalities do you mainly use?"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                },
+                {
+                    "id": "modalities_choice",
+                    "type": "choice input",
+                    "items": [
+                        {
+                            "id": "modality_cbt",
+                            "outgoingEdgeId": "edge_modalities_to_matching",
+                            "content": "CBT"
+                        },
+                        {
+                            "id": "modality_emdr",
+                            "outgoingEdgeId": "edge_modalities_to_matching",
+                            "content": "EMDR"
+                        },
+                        {
+                            "id": "modality_person_centred",
+                            "outgoingEdgeId": "edge_modalities_to_matching",
+                            "content": "Person-Centred"
+                        },
+                        {
+                            "id": "modality_somatic",
+                            "outgoingEdgeId": "edge_modalities_to_matching",
+                            "content": "Somatic"
+                        },
+                        {
+                            "id": "modality_other",
+                            "outgoingEdgeId": "edge_modalities_to_matching",
+                            "content": "Other"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "group_matching",
+            "title": "Matching Experience",
+            "graphCoordinates": {
+                "x": 1600,
+                "y": -300
+            },
+            "blocks": [
+                {
+                    "id": "matching_find_text",
+                    "type": "text",
+                    "content": {
+                        "richText": [
+                            {
+                                "type": "p",
+                                "children": [
+                                    {
+                                        "bold": true,
+                                        "text": "How do clients usually find you?"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                },
+                {
+                    "id": "matching_find_choice",
+                    "type": "choice input",
+                    "items": [
+                        {
+                            "id": "find_referrals",
+                            "outgoingEdgeId": "edge_find_to_great",
+                            "content": "Referrals"
+                        },
+                        {
+                            "id": "find_directories",
+                            "outgoingEdgeId": "edge_find_to_great",
+                            "content": "Directories"
+                        },
+                        {
+                            "id": "find_word_of_mouth",
+                            "outgoingEdgeId": "edge_find_to_great",
+                            "content": "Word of mouth"
+                        },
+                        {
+                            "id": "find_online_search",
+                            "outgoingEdgeId": "edge_find_to_great",
+                            "content": "Online search"
+                        },
+                        {
+                            "id": "find_other",
+                            "outgoingEdgeId": "edge_find_to_great",
+                            "content": "Other"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "group_great_match",
+            "title": "Great Match",
+            "graphCoordinates": {
+                "x": 2200,
+                "y": -300
+            },
+            "blocks": [
+                {
+                    "id": "great_match_text",
+                    "type": "text",
+                    "content": {
+                        "richText": [
+                            {
+                                "type": "p",
+                                "children": [
+                                    {
+                                        "bold": true,
+                                        "text": "In your view, what makes a great match between client and therapist?"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                },
+                {
+                    "id": "great_match_choice",
+                    "type": "choice input",
+                    "items": [
+                        {
+                            "id": "match_trust",
+                            "outgoingEdgeId": "edge_great_to_gap",
+                            "content": "Trust and rapport"
+                        },
+                        {
+                            "id": "match_shared_values",
+                            "outgoingEdgeId": "edge_great_to_gap",
+                            "content": "Shared values and beliefs"
+                        },
+                        {
+                            "id": "match_communication",
+                            "outgoingEdgeId": "edge_great_to_gap",
+                            "content": "Good communication style"
+                        },
+                        {
+                            "id": "match_expertise",
+                            "outgoingEdgeId": "edge_great_to_gap",
+                            "content": "Relevant expertise"
+                        },
+                        {
+                            "id": "match_approach",
+                            "outgoingEdgeId": "edge_great_to_gap",
+                            "content": "Therapeutic approach fit"
+                        },
+                        {
+                            "id": "match_other",
+                            "outgoingEdgeId": "edge_great_to_gap",
+                            "content": "Other"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "group_biggest_gap",
+            "title": "Biggest Gap",
+            "graphCoordinates": {
+                "x": 2800,
+                "y": -300
+            },
+            "blocks": [
+                {
+                    "id": "biggest_gap_text",
+                    "type": "text",
+                    "content": {
+                        "richText": [
+                            {
+                                "type": "p",
+                                "children": [
+                                    {
+                                        "bold": true,
+                                        "text": "What's the biggest frustration or gap in existing referral or directory systems?"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                },
+                {
+                    "id": "biggest_gap_choice",
+                    "type": "choice input",
+                    "items": [
+                        {
+                            "id": "gap_overwhelming",
+                            "outgoingEdgeId": "edge_gap_to_screen",
+                            "content": "Too many options, overwhelming"
+                        },
+                        {
+                            "id": "gap_no_guidance",
+                            "outgoingEdgeId": "edge_gap_to_screen",
+                            "content": "No guidance on fit"
+                        },
+                        {
+                            "id": "gap_generic",
+                            "outgoingEdgeId": "edge_gap_to_screen",
+                            "content": "Generic, not personalized"
+                        },
+                        {
+                            "id": "gap_poor_matching",
+                            "outgoingEdgeId": "edge_gap_to_screen",
+                            "content": "Poor matching quality"
+                        },
+                        {
+                            "id": "gap_other",
+                            "outgoingEdgeId": "edge_gap_to_screen",
+                            "content": "Other"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "group_screen",
+            "title": "Screen Clients",
+            "graphCoordinates": {
+                "x": 3400,
+                "y": -300
+            },
+            "blocks": [
+                {
+                    "id": "screen_text",
+                    "type": "text",
+                    "content": {
+                        "richText": [
+                            {
+                                "type": "p",
+                                "children": [
+                                    {
+                                        "bold": true,
+                                        "text": "Do you currently screen clients for fit before working together?"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                },
+                {
+                    "id": "screen_choice",
+                    "type": "choice input",
+                    "items": [
+                        {
+                            "id": "screen_yes",
+                            "outgoingEdgeId": "edge_screen_to_profiling",
+                            "content": "Yes"
+                        },
+                        {
+                            "id": "screen_no",
+                            "outgoingEdgeId": "edge_screen_to_profiling",
+                            "content": "No"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "group_profiling",
+            "title": "Personality & Fit Profiling",
+            "graphCoordinates": {
+                "x": 4000,
+                "y": -300
+            },
+            "blocks": [
+                {
+                    "id": "profiling_context",
+                    "type": "text",
+                    "content": {
+                        "richText": [
+                            {
+                                "type": "p",
+                                "children": [
+                                    {
+                                        "text": "Our current sandbox demo has basic questions. To create deeper personalisation, we're considering questions about:"
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "ul",
+                                "children": [
+                                    {
+                                        "type": "li",
+                                        "children": [
+                                            {
+                                                "text": "Communication style (direct vs. gentle, structured vs. exploratory)"
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "type": "li",
+                                        "children": [
+                                            {
+                                                "text": "Therapeutic relationship preferences (collaborative, directive, etc.)"
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "type": "li",
+                                        "children": [
+                                            {
+                                                "text": "Personality traits (introversion, openness, etc.)"
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "type": "li",
+                                        "children": [
+                                            {
+                                                "text": "Lived experience (trauma, identity, culture)"
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "type": "li",
+                                        "children": [
+                                            {
+                                                "text": "Values and beliefs"
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "type": "li",
+                                        "children": [
+                                            {
+                                                "text": "Work style and boundaries"
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                },
+                {
+                    "id": "profiling_questions_matter_text",
+                    "type": "text",
+                    "content": {
+                        "richText": [
+                            {
+                                "type": "p",
+                                "children": [
+                                    {
+                                        "bold": true,
+                                        "text": "Which of these question types matter most for creating deep personalisation?"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                },
+                {
+                    "id": "profiling_questions_matter_choice",
+                    "type": "choice input",
+                    "items": [
+                        {
+                            "id": "qm_communication",
+                            "outgoingEdgeId": "edge_qm_to_sharing",
+                            "content": "Communication style"
+                        },
+                        {
+                            "id": "qm_relationship",
+                            "outgoingEdgeId": "edge_qm_to_sharing",
+                            "content": "Therapeutic relationship style"
+                        },
+                        {
+                            "id": "qm_personality",
+                            "outgoingEdgeId": "edge_qm_to_sharing",
+                            "content": "Personality traits"
+                        },
+                        {
+                            "id": "qm_lived",
+                            "outgoingEdgeId": "edge_qm_to_sharing",
+                            "content": "Lived experience"
+                        },
+                        {
+                            "id": "qm_values",
+                            "outgoingEdgeId": "edge_qm_to_sharing",
+                            "content": "Values and beliefs"
+                        },
+                        {
+                            "id": "qm_work_style",
+                            "outgoingEdgeId": "edge_qm_to_sharing",
+                            "content": "Work style and boundaries"
+                        },
+                        {
+                            "id": "qm_all",
+                            "outgoingEdgeId": "edge_qm_to_sharing",
+                            "content": "All of the above"
+                        },
+                        {
+                            "id": "qm_none",
+                            "outgoingEdgeId": "edge_qm_to_sharing",
+                            "content": "None - keep it simple"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "group_sharing",
+            "title": "Open to Sharing",
+            "graphCoordinates": {
+                "x": 4600,
+                "y": -300
+            },
+            "blocks": [
+                {
+                    "id": "sharing_text",
+                    "type": "text",
+                    "content": {
+                        "richText": [
+                            {
+                                "type": "p",
+                                "children": [
+                                    {
+                                        "bold": true,
+                                        "text": "Would you be open to sharing aspects of your personality, communication style, or lived experience to help clients find a better fit?"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                },
+                {
+                    "id": "sharing_choice",
+                    "type": "choice input",
+                    "items": [
+                        {
+                            "id": "sharing_yes",
+                            "outgoingEdgeId": "edge_sharing_to_personal",
+                            "content": "Yes"
+                        },
+                        {
+                            "id": "sharing_maybe",
+                            "outgoingEdgeId": "edge_sharing_to_personal",
+                            "content": "Maybe"
+                        },
+                        {
+                            "id": "sharing_no",
+                            "outgoingEdgeId": "edge_sharing_to_personal",
+                            "content": "No"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "group_too_personal",
+            "title": "Too Personal",
+            "graphCoordinates": {
+                "x": 5200,
+                "y": -300
+            },
+            "blocks": [
+                {
+                    "id": "too_personal_text",
+                    "type": "text",
+                    "content": {
+                        "richText": [
+                            {
+                                "type": "p",
+                                "children": [
+                                    {
+                                        "bold": true,
+                                        "text": "Which aspects feel too personal or unnecessary to share?"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                },
+                {
+                    "id": "too_personal_choice",
+                    "type": "choice input",
+                    "items": [
+                        {
+                            "id": "personal_trauma",
+                            "outgoingEdgeId": "edge_personal_to_detail",
+                            "content": "Personal trauma history"
+                        },
+                        {
+                            "id": "personal_religious",
+                            "outgoingEdgeId": "edge_personal_to_detail",
+                            "content": "Religious beliefs"
+                        },
+                        {
+                            "id": "personal_political",
+                            "outgoingEdgeId": "edge_personal_to_detail",
+                            "content": "Political views"
+                        },
+                        {
+                            "id": "personal_relationships",
+                            "outgoingEdgeId": "edge_personal_to_detail",
+                            "content": "Personal relationships"
+                        },
+                        {
+                            "id": "personal_financial",
+                            "outgoingEdgeId": "edge_personal_to_detail",
+                            "content": "Financial situation"
+                        },
+                        {
+                            "id": "personal_none",
+                            "outgoingEdgeId": "edge_personal_to_detail",
+                            "content": "None of these"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "group_detail",
+            "title": "Profile Detail",
+            "graphCoordinates": {
+                "x": 5800,
+                "y": -300
+            },
+            "blocks": [
+                {
+                    "id": "detail_text",
+                    "type": "text",
+                    "content": {
+                        "richText": [
+                            {
+                                "type": "p",
+                                "children": [
+                                    {
+                                        "bold": true,
+                                        "text": "How detailed do you think a therapist profile should be for accurate matching?"
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "p",
+                                "children": [
+                                    {
+                                        "text": "(1 = Very simple, 5 = Very detailed)"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                },
+                {
+                    "id": "detail_choice",
+                    "type": "choice input",
+                    "items": [
+                        {
+                            "id": "detail_1",
+                            "outgoingEdgeId": "edge_detail_to_time",
+                            "content": "1 - Very simple"
+                        },
+                        {
+                            "id": "detail_2",
+                            "outgoingEdgeId": "edge_detail_to_time",
+                            "content": "2"
+                        },
+                        {
+                            "id": "detail_3",
+                            "outgoingEdgeId": "edge_detail_to_time",
+                            "content": "3 - Moderate"
+                        },
+                        {
+                            "id": "detail_4",
+                            "outgoingEdgeId": "edge_detail_to_time",
+                            "content": "4"
+                        },
+                        {
+                            "id": "detail_5",
+                            "outgoingEdgeId": "edge_detail_to_time",
+                            "content": "5 - Very detailed"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "group_time",
+            "title": "Onboarding Time",
+            "graphCoordinates": {
+                "x": 6400,
+                "y": -300
+            },
+            "blocks": [
+                {
+                    "id": "time_text",
+                    "type": "text",
+                    "content": {
+                        "richText": [
+                            {
+                                "type": "p",
+                                "children": [
+                                    {
+                                        "bold": true,
+                                        "text": "How long would you consider reasonable for an onboarding profile questionnaire?"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                },
+                {
+                    "id": "time_choice",
+                    "type": "choice input",
+                    "items": [
+                        {
+                            "id": "time_2_3",
+                            "outgoingEdgeId": "edge_time_to_ai",
+                            "content": "2-3 minutes"
+                        },
+                        {
+                            "id": "time_5",
+                            "outgoingEdgeId": "edge_time_to_ai",
+                            "content": "5 minutes"
+                        },
+                        {
+                            "id": "time_10",
+                            "outgoingEdgeId": "edge_time_to_ai",
+                            "content": "10 minutes"
+                        },
+                        {
+                            "id": "time_15_plus",
+                            "outgoingEdgeId": "edge_time_to_ai",
+                            "content": "15+ minutes"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "group_ai_trust",
+            "title": "AI Trust",
+            "graphCoordinates": {
+                "x": 7000,
+                "y": -300
+            },
+            "blocks": [
+                {
+                    "id": "ai_trust_text",
+                    "type": "text",
+                    "content": {
+                        "richText": [
+                            {
+                                "type": "p",
+                                "children": [
+                                    {
+                                        "bold": true,
+                                        "text": "Would you trust an AI system to pre-match clients based on personality and values if transparent and privacy-compliant?"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                },
+                {
+                    "id": "ai_trust_choice",
+                    "type": "choice input",
+                    "items": [
+                        {
+                            "id": "ai_yes",
+                            "outgoingEdgeId": "edge_ai_to_listing",
+                            "content": "Yes"
+                        },
+                        {
+                            "id": "ai_maybe",
+                            "outgoingEdgeId": "edge_ai_to_listing",
+                            "content": "Maybe"
+                        },
+                        {
+                            "id": "ai_no",
+                            "outgoingEdgeId": "edge_ai_to_listing",
+                            "content": "No"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "group_listing",
+            "title": "Free Listing",
+            "graphCoordinates": {
+                "x": 7600,
+                "y": -300
+            },
+            "blocks": [
+                {
+                    "id": "listing_text",
+                    "type": "text",
+                    "content": {
+                        "richText": [
+                            {
+                                "type": "p",
+                                "children": [
+                                    {
+                                        "bold": true,
+                                        "text": "Would you like a free one-year listing when Therapair launches publicly?"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                },
+                {
+                    "id": "listing_choice",
+                    "type": "choice input",
+                    "items": [
+                        {
+                            "id": "listing_yes",
+                            "outgoingEdgeId": "edge_listing_to_contact",
+                            "content": "Yes, include me"
+                        },
+                        {
+                            "id": "listing_maybe",
+                            "outgoingEdgeId": "edge_listing_to_contact",
+                            "content": "Maybe later"
+                        },
+                        {
+                            "id": "listing_no",
+                            "outgoingEdgeId": "edge_listing_to_contact",
+                            "content": "No thanks"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "group_contact",
+            "title": "Future Contact",
+            "graphCoordinates": {
+                "x": 8200,
+                "y": -300
+            },
+            "blocks": [
+                {
+                    "id": "contact_text",
+                    "type": "text",
+                    "content": {
+                        "richText": [
+                            {
+                                "type": "p",
+                                "children": [
+                                    {
+                                        "bold": true,
+                                        "text": "Would you like to be contacted for future pilot sessions or feedback?"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                },
+                {
+                    "id": "contact_choice",
+                    "type": "choice input",
+                    "items": [
+                        {
+                            "id": "contact_yes",
+                            "outgoingEdgeId": "edge_contact_to_thankyou",
+                            "content": "Yes"
+                        },
+                        {
+                            "id": "contact_no",
+                            "outgoingEdgeId": "edge_contact_to_thankyou",
+                            "content": "No"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "group_thankyou",
+            "title": "Thank You",
+            "graphCoordinates": {
+                "x": 8800,
+                "y": -300
+            },
+            "blocks": [
+                {
+                    "id": "thankyou_message",
+                    "type": "text",
+                    "content": {
+                        "richText": [
+                            {
+                                "type": "p",
+                                "children": [
+                                    {
+                                        "text": "Thank you for taking part in shaping the future of meaningful therapy connections."
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "p",
+                                "children": [
+                                    {
+                                        "text": "You can explore the sandbox demo anytime:"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                },
+                {
+                    "id": "thankyou_choice",
+                    "type": "choice input",
+                    "items": [
+                        {
+                            "id": "demo_link",
+                            "outgoingEdgeId": "edge_demo",
+                            "content": "See Sandbox Demo"
+                        },
+                        {
+                            "id": "docs_link",
+                            "outgoingEdgeId": "edge_docs",
+                            "content": "Visit Documentation"
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "edges": [
+        {
+            "id": "edge_start_to_intro",
+            "from": {
+                "eventId": "start"
+            },
+            "to": {
+                "groupId": "group_intro"
+            }
+        },
+        {
+            "id": "edge_intro_to_about",
+            "from": {
+                "blockId": "intro_start_choice",
+                "itemId": "intro_start"
+            },
+            "to": {
+                "groupId": "group_about"
+            }
+        },
+        {
+            "id": "edge_profession_to_years",
+            "from": {
+                "blockId": "about_profession_choice"
+            },
+            "to": {
+                "groupId": "group_years"
+            }
+        },
+        {
+            "id": "edge_years_to_clients",
+            "from": {
+                "blockId": "years_choice"
+            },
+            "to": {
+                "groupId": "group_clients"
+            }
+        },
+        {
+            "id": "edge_clients_to_modalities",
+            "from": {
+                "blockId": "clients_choice"
+            },
+            "to": {
+                "groupId": "group_modalities"
+            }
+        },
+        {
+            "id": "edge_modalities_to_matching",
+            "from": {
+                "blockId": "modalities_choice"
+            },
+            "to": {
+                "groupId": "group_matching"
+            }
+        },
+        {
+            "id": "edge_find_to_great",
+            "from": {
+                "blockId": "matching_find_choice"
+            },
+            "to": {
+                "groupId": "group_great_match"
+            }
+        },
+        {
+            "id": "edge_great_to_gap",
+            "from": {
+                "blockId": "great_match_choice"
+            },
+            "to": {
+                "groupId": "group_biggest_gap"
+            }
+        },
+        {
+            "id": "edge_gap_to_screen",
+            "from": {
+                "blockId": "biggest_gap_choice"
+            },
+            "to": {
+                "groupId": "group_screen"
+            }
+        },
+        {
+            "id": "edge_screen_to_profiling",
+            "from": {
+                "blockId": "screen_choice"
+            },
+            "to": {
+                "groupId": "group_profiling"
+            }
+        },
+        {
+            "id": "edge_qm_to_sharing",
+            "from": {
+                "blockId": "profiling_questions_matter_choice"
+            },
+            "to": {
+                "groupId": "group_sharing"
+            }
+        },
+        {
+            "id": "edge_sharing_to_personal",
+            "from": {
+                "blockId": "sharing_choice"
+            },
+            "to": {
+                "groupId": "group_too_personal"
+            }
+        },
+        {
+            "id": "edge_personal_to_detail",
+            "from": {
+                "blockId": "too_personal_choice"
+            },
+            "to": {
+                "groupId": "group_detail"
+            }
+        },
+        {
+            "id": "edge_detail_to_time",
+            "from": {
+                "blockId": "detail_choice"
+            },
+            "to": {
+                "groupId": "group_time"
+            }
+        },
+        {
+            "id": "edge_time_to_ai",
+            "from": {
+                "blockId": "time_choice"
+            },
+            "to": {
+                "groupId": "group_ai_trust"
+            }
+        },
+        {
+            "id": "edge_ai_to_listing",
+            "from": {
+                "blockId": "ai_trust_choice"
+            },
+            "to": {
+                "groupId": "group_listing"
+            }
+        },
+        {
+            "id": "edge_listing_to_contact",
+            "from": {
+                "blockId": "listing_choice"
+            },
+            "to": {
+                "groupId": "group_contact"
+            }
+        },
+        {
+            "id": "edge_contact_to_thankyou",
+            "from": {
+                "blockId": "contact_choice"
+            },
+            "to": {
+                "groupId": "group_thankyou"
+            }
+        },
+        {
+            "id": "edge_demo",
+            "from": {
+                "blockId": "thankyou_choice",
+                "itemId": "demo_link"
+            },
+            "to": {
+                "groupId": "group_thankyou"
+            }
+        },
+        {
+            "id": "edge_docs",
+            "from": {
+                "blockId": "thankyou_choice",
+                "itemId": "docs_link"
+            },
+            "to": {
+                "groupId": "group_thankyou"
+            }
+        }
+    ],
+    "variables": [],
+    "theme": {
+        "general": {
+            "background": {
+                "type": "Color",
+                "content": "#ffffff"
+            },
+            "progressBar": {
+                "isEnabled": true,
+                "color": "#10b981"
+            }
+        },
+        "chat": {
+            "guestBubbles": {
+                "backgroundColor": "#f7fafc"
+            },
+            "buttons": {
+                "backgroundColor": "#10b981"
+            }
+        }
+    },
+    "selectedThemeTemplateId": null,
+    "settings": {
+        "general": {
+            "isBrandingEnabled": true
+        }
+    },
+    "createdAt": "2025-10-17T00:00:00.000Z",
+    "updatedAt": "2025-10-17T00:00:00.000Z",
+    "icon": null,
+    "folderId": null,
+    "publicId": null,
+    "customDomain": null,
+    "workspaceId": "",
+    "resultsTablePreferences": null,
+    "isArchived": false,
+    "isClosed": false,
+    "whatsAppCredentialsId": null,
+    "riskLevel": null
+}
