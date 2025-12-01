@@ -1,0 +1,71 @@
+**Prompt for Cursor:**
+
+***
+
+I am building a Typebot chatbot flow with multiple multi-select (multiple choice) blocks. Please generate code/configuration and block logic that ensures:
+
+**General Requirements:**
+- Each multi-select block must store its answers in a uniquely named variable (using best practices for variable naming: lowercase, underscores or camelCase, descriptive).
+- For each multi-select block, one option should be “Other”.
+- If the user selects “Other” (alone or with other options), a text input field should immediately appear to ask them for their specific input, and their answer should be saved in a logically named separate variable.
+- If “Other” is not selected, the flow must continue directly to the next relevant question.
+- All branches must be connected to avoid stalls.
+- Follow official Typebot documentation structure and recommended practices for logic, variables, and data handling (see: https://docs.typebot.io/editor/blocks/inputs/buttons, https://docs.typebot.io/editor/blocks/logic/condition, https://docs.typebot.io/editor/variables).
+
+**Block-by-Block Detailed Steps:**
+
+1. **Multi-select Block Creation:**
+   - Add a multi-select (button/choice) block for each question.
+   - Name the variable for the answer stored (e.g., `client_types`, `therapy_modalities`).
+   - Set “Other” as the final option.
+
+2. **Condition Block Setup:**
+   - After each multi-select block, add a Condition block.
+   - The condition should use “contains” logic (not “equals” or "is") to check if the array response **contains** the string “Other”.
+   - For example: `if client_types contains "Other"` (case-sensitive, no leading/trailing whitespace).
+
+3. **Branch Logic:**
+   - **If TRUE (user selected “Other”)**:
+     - Route to a text input block.
+     - Prompt: “If you selected ‘Other’ for [question name], please specify:”
+     - Save the user’s input in a variable named `client_types_other` (match this convention for each question).
+     - After text input, go to the next main question block.
+   - **If FALSE (user did not select “Other”)**:
+     - Route directly to the next relevant main question block.
+
+4. **Good Practices:**
+   - Make all blocks required unless “Other” is the only logic-dependent answer.
+   - Use variable references throughout (e.g., `{{client_types}}`, `{{therapy_modalities}}`).
+   - Ensure there are *no* dead-ends in the flow—both branches of each condition must join the next question.
+   - Use preview and debug to check variable values and branch transitions.
+   - Use clear, user-friendly field prompts, and document variable purpose in comments (if script-based).
+
+5. **Example Block/Script Outline:**
+
+```
+# Q1: Multi-select
+Block: Client Types
+  Options: Adults, Teens, Couples, ... , Other
+  Save answer as variable: client_types
+
+# Condition block
+IF client_types contains "Other"
+  THEN:
+    Block: Client Types Other (text input)
+      Prompt: If you selected 'Other', please specify:
+      Save answer as: client_types_other
+      Next: Go to next question
+  ELSE:
+    Next: Go to next question (skip text input)
+
+# Q2: Next question...
+```
+
+6. **If scripting/exporting JSON/YAML:**
+   - Output variable names and condition logic explicitly.
+   - Follow official nesting of blocks, with IDs and labels aligned to Typebot’s expected structure.
+
+***
+
+**End of prompt.**
+

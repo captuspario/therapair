@@ -1,0 +1,2077 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Therapair Sandbox Demo - Find Your Perfect Therapist Match</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+        :root {
+          /* Therapair Visual Design System Colors */
+          --bg: #ffffff; /* Clean white background */
+          --ink: #1A1A1A; /* Primary text */
+          --muted: #718096; /* Muted foreground */
+          --primary: #4A90E2; /* Blue Primary */
+          --primary-hover: #3A7BC8;
+          --primary-light: #E8F4FF; /* Blue light background */
+          --secondary: #F5F3FF; /* Purple light background */
+          --success: #48BB78; /* Success green */
+          --panel: #ffffff;
+          --option: #1A1A1A;
+          --option-hover: #4A5568;
+          --option-selected: #4A90E2;
+          --dot: #E2E8F0; /* Border color for dots */
+          --accent: #4A90E2;
+          --shadow: 0 20px 25px -5px rgba(74, 144, 226, 0.1), 0 10px 10px -5px rgba(74, 144, 226, 0.04);
+          --border: rgba(74, 144, 226, 0.2);
+        }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: 'Inter', ui-sans-serif, system-ui, sans-serif;
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem;
+    }
+
+    .hero {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+
+        .hero h1 {
+          font-size: 3rem;
+          font-weight: 800;
+          margin-bottom: 1rem;
+          background: linear-gradient(135deg, var(--primary), #8B5CF6);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          background-clip: text;
+        }
+
+    .hero p {
+      font-size: 1.25rem;
+      color: var(--muted);
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .widget {
+      background: var(--panel);
+      border-radius: 2rem;
+      box-shadow: var(--shadow);
+      padding: 2rem;
+      margin-bottom: 2rem;
+      position: relative;
+    }
+
+    .progress {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    .dots {
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    .dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: var(--dot);
+      transition: all 0.3s ease;
+    }
+
+    .dot.active {
+      background: var(--accent);
+      transform: scale(1.2);
+    }
+
+    .counter {
+      color: var(--muted);
+      font-weight: 600;
+      font-size: 0.875rem;
+    }
+
+    .question {
+      margin-bottom: 2rem;
+    }
+
+    .question h2 {
+      font-size: 1.875rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      color: var(--ink);
+    }
+
+    .question p {
+      color: var(--muted);
+      margin-bottom: 1.5rem;
+    }
+
+    .options {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+
+    .option {
+      padding: 1rem 1.5rem;
+      border: 2px solid #e5e7eb;
+      border-radius: 1rem;
+      background: white;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-weight: 500;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .option:hover {
+      border-color: var(--primary);
+      background: var(--primary-light);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(74, 144, 226, 0.15);
+    }
+
+    .option.selected {
+      border-color: var(--option-selected);
+      background: var(--option-selected);
+      color: white;
+      transform: translateY(-1px);
+      box-shadow: 0 6px 20px rgba(74, 144, 226, 0.2);
+    }
+
+    .option.selected:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(74, 144, 226, 0.25);
+    }
+
+    .actions {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      margin-top: 2rem;
+    }
+
+    .btn {
+      padding: 0.75rem 2rem;
+      border: none;
+      border-radius: 0.75rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      font-size: 1rem;
+    }
+
+    .btn-primary {
+      background: var(--primary);
+      color: white;
+    }
+
+    .btn-primary:hover {
+      background: var(--primary-hover);
+      transform: translateY(-2px);
+    }
+
+    .btn-secondary {
+      background: white;
+      color: var(--primary);
+      border: 2px solid var(--primary);
+    }
+
+    .btn-secondary:hover {
+      background: var(--primary);
+      color: white;
+    }
+
+    .results {
+      display: none;
+    }
+
+    .results.show {
+      display: block;
+    }
+
+    .results h2 {
+      text-align: center;
+      font-size: 2rem;
+      margin-bottom: 2rem;
+      color: var(--ink);
+    }
+
+    .therapist-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      margin-bottom: 2rem;
+    }
+
+    .therapist-card {
+      background: white;
+      border-radius: 1.5rem;
+      overflow: hidden;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+      transition: all 0.3s ease;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+    }
+
+    .therapist-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+    }
+
+        .therapist-image {
+          width: 100%;
+          height: 200px;
+          background: linear-gradient(135deg, var(--primary-light), var(--secondary));
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-size: 3rem;
+          font-weight: bold;
+          color: var(--primary);
+          position: relative;
+          overflow: hidden;
+        }
+
+    .therapist-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+
+    .therapist-image .initials {
+      position: relative;
+      z-index: 2;
+      background: rgba(255, 255, 255, 0.9);
+      padding: 1rem;
+      border-radius: 50%;
+      backdrop-filter: blur(10px);
+    }
+
+    .therapist-content {
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+    }
+
+    .therapist-name {
+      font-size: 1.25rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      color: var(--ink);
+    }
+
+    .therapist-pronouns {
+      color: var(--muted);
+      font-size: 0.875rem;
+      margin-bottom: 1rem;
+    }
+
+    .therapist-bio {
+      color: var(--muted);
+      margin-bottom: 1rem;
+      line-height: 1.5;
+    }
+
+    .therapist-specialties {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .specialty-tag {
+      background: var(--primary);
+      color: white;
+      padding: 0.25rem 0.75rem;
+      border-radius: 9999px;
+      font-size: 0.75rem;
+      font-weight: 500;
+    }
+
+    .therapist-details {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
+      font-size: 0.875rem;
+      color: var(--muted);
+    }
+
+    .therapist-actions {
+      display: flex;
+      gap: 0.75rem;
+      margin-top: auto;
+      padding-top: 1rem;
+    }
+
+    .btn-small {
+      padding: 0.5rem 1rem;
+      font-size: 0.875rem;
+    }
+
+    .loading {
+      text-align: center;
+      padding: 3rem;
+    }
+
+    .spinner {
+      width: 40px;
+      height: 40px;
+      border: 4px solid var(--primary-light);
+      border-top: 4px solid var(--primary);
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      margin: 0 auto 1rem;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    .error {
+      text-align: center;
+      padding: 3rem;
+      color: #ef4444;
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        padding: 1rem;
+      }
+
+      .hero h1 {
+        font-size: 2rem;
+      }
+
+      .widget {
+        padding: 1.5rem;
+      }
+
+      .therapist-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .options {
+        grid-template-columns: 1fr;
+      }
+
+      .form-row {
+        grid-template-columns: 1fr;
+      }
+
+      .booking-modal {
+        max-width: 95%;
+        margin: 1rem;
+      }
+
+      .form-actions {
+        flex-direction: column;
+      }
+
+      .form-actions .btn {
+        width: 100%;
+      }
+
+      .therapist-profile-full {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .therapist-profile-image-large {
+        margin: 0 auto 1.5rem auto;
+      }
+
+      .therapist-profile-modal {
+        max-width: 95%;
+        margin: 1rem;
+      }
+    }
+
+    /* Modal Styles */
+    .modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+    }
+
+    .modal-content {
+      background: var(--panel);
+      border-radius: 1rem;
+      width: 90%;
+      max-width: 500px;
+      max-height: 90vh;
+      overflow-y: auto;
+      box-shadow: var(--shadow);
+    }
+
+    .booking-modal {
+      max-width: 700px;
+    }
+
+    .therapist-profile-section {
+      display: flex;
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+      padding: 1.5rem;
+      background: #f8f9fa;
+      border-radius: 0.75rem;
+    }
+
+    .therapist-profile-image {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      overflow: hidden;
+      flex-shrink: 0;
+      background: var(--primary-light);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .therapist-profile-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .therapist-profile-initials {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: var(--primary);
+    }
+
+    .therapist-profile-info {
+      flex: 1;
+    }
+
+    .therapist-profile-info h4 {
+      margin: 0 0 0.5rem 0;
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--ink);
+    }
+
+    .therapist-profile-info p {
+      margin: 0 0 1rem 0;
+      color: var(--muted);
+      font-size: 0.9rem;
+      line-height: 1.4;
+    }
+
+    .therapist-profile-specialties {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .therapist-profile-specialties .specialty-tag {
+      background: var(--primary);
+      color: white;
+      padding: 0.25rem 0.75rem;
+      border-radius: 9999px;
+      font-size: 0.75rem;
+      font-weight: 500;
+    }
+
+    .preferences-summary {
+      margin-bottom: 2rem;
+    }
+
+    .preferences-summary h4 {
+      margin: 0 0 1rem 0;
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--primary);
+    }
+
+    .preferences-list {
+      background: #f8f9fa;
+      padding: 1rem;
+      border-radius: 0.5rem;
+      font-size: 0.9rem;
+      line-height: 1.6;
+    }
+
+    .preferences-list div {
+      margin-bottom: 0.5rem;
+    }
+
+    .preferences-list div:last-child {
+      margin-bottom: 0;
+    }
+
+    .contact-section h4 {
+      margin: 0 0 1.5rem 0;
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--primary);
+    }
+
+    .next-steps-info {
+      background: #E8F4FF;
+      padding: 1rem;
+      border-radius: 0.5rem;
+      margin: 1.5rem 0;
+      font-size: 0.9rem;
+      color: #1E40AF;
+    }
+
+    .next-steps-info p {
+      margin: 0;
+    }
+
+    .therapist-profile-modal {
+      max-width: 800px;
+    }
+
+    .therapist-profile-full {
+      display: flex;
+      gap: 1.5rem;
+    }
+
+    .therapist-profile-image-large {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      overflow: hidden;
+      flex-shrink: 0;
+      background: var(--primary-light);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .therapist-profile-image-large img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .therapist-profile-initials-large {
+      font-size: 2rem;
+      font-weight: bold;
+      color: var(--primary);
+    }
+
+    .therapist-profile-details {
+      flex: 1;
+    }
+
+    .therapist-profile-details h2 {
+      margin: 0 0 0.5rem 0;
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--ink);
+    }
+
+    .therapist-pronouns {
+      margin: 0 0 1rem 0;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    .therapist-bio-full {
+      margin-bottom: 1.5rem;
+      font-size: 1rem;
+      line-height: 1.5;
+      color: var(--ink);
+    }
+
+    .therapist-specialties-full {
+      margin-bottom: 1.5rem;
+    }
+
+    .therapist-specialties-full .specialty-tag {
+      background: var(--primary);
+      color: white;
+      padding: 0.375rem 0.75rem;
+      border-radius: 9999px;
+      font-size: 0.8rem;
+      font-weight: 500;
+      margin-right: 0.5rem;
+      margin-bottom: 0.5rem;
+      display: inline-block;
+    }
+
+    .therapist-details-full {
+      background: #f8f9fa;
+      padding: 1rem;
+      border-radius: 0.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .detail-item {
+      margin-bottom: 0.75rem;
+      font-size: 0.9rem;
+    }
+
+    .detail-item:last-child {
+      margin-bottom: 0;
+    }
+
+    .detail-item strong {
+      color: var(--ink);
+    }
+
+    .therapist-actions-full {
+      text-align: center;
+    }
+
+    .therapist-modalities {
+      margin-bottom: 1.5rem;
+    }
+
+    .therapist-modalities h4 {
+      margin: 0 0 0.75rem 0;
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--ink);
+    }
+
+    .therapist-modalities .modality-tag {
+      background: #E8F4FF;
+      color: #1E40AF;
+      padding: 0.375rem 0.75rem;
+      border-radius: 9999px;
+      font-size: 0.8rem;
+      font-weight: 500;
+      margin-right: 0.5rem;
+      margin-bottom: 0.5rem;
+      display: inline-block;
+    }
+
+    .therapist-approach {
+      margin-bottom: 1.5rem;
+    }
+
+    .therapist-approach h4 {
+      margin: 0 0 0.75rem 0;
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--ink);
+    }
+
+    .therapist-approach p {
+      margin: 0;
+      font-size: 0.9rem;
+      line-height: 1.5;
+      color: var(--muted);
+    }
+
+    .therapist-session-info {
+      margin-bottom: 1.5rem;
+    }
+
+    .therapist-session-info h4 {
+      margin: 0 0 0.75rem 0;
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--ink);
+    }
+
+    .therapist-session-info p {
+      margin: 0;
+      font-size: 0.9rem;
+      line-height: 1.5;
+      color: var(--muted);
+    }
+
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .modal-header h3 {
+      margin: 0;
+      color: var(--ink);
+    }
+
+    .modal-close {
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: var(--muted);
+      padding: 0;
+      width: 2rem;
+      height: 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .modal-close:hover {
+      color: var(--ink);
+    }
+
+    .modal-body {
+      padding: 1.5rem;
+    }
+
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 600;
+      color: var(--ink);
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      padding: 0.75rem;
+      border: 1px solid var(--border);
+      border-radius: 0.5rem;
+      font-size: 1rem;
+      background: var(--panel);
+      color: var(--ink);
+    }
+
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.1);
+    }
+
+    .booking-intro {
+      margin-bottom: 1.5rem;
+      padding: 1rem;
+      background: var(--primary-light);
+      border-radius: 0.5rem;
+      text-align: center;
+    }
+
+    .booking-intro p {
+      margin: 0;
+      color: var(--ink);
+      font-size: 0.95rem;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .form-actions {
+      display: flex;
+      gap: 1rem;
+      justify-content: flex-end;
+      margin-top: 2rem;
+    }
+
+    /* Thank You Page Styles */
+    .thank-you-section {
+      text-align: center;
+      padding: 3rem 2rem;
+    }
+
+    .thank-you-content {
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .success-icon {
+      width: 4rem;
+      height: 4rem;
+      background: var(--success);
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      font-weight: bold;
+      margin: 0 auto 2rem;
+    }
+
+    .thank-you-content h2 {
+      color: var(--ink);
+      margin-bottom: 1rem;
+    }
+
+    .thank-you-content p {
+      color: var(--muted);
+      font-size: 1.1rem;
+      margin-bottom: 2rem;
+    }
+
+    .next-steps {
+      background: var(--primary-light);
+      padding: 2rem;
+      border-radius: 1rem;
+      margin: 2rem 0;
+      text-align: left;
+    }
+
+    .next-steps h3 {
+      color: var(--ink);
+      margin-bottom: 1rem;
+    }
+
+    .next-steps ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .next-steps li {
+      padding: 0.5rem 0;
+      color: var(--muted);
+      position: relative;
+      padding-left: 1.5rem;
+    }
+
+    .next-steps li:before {
+      content: "✓";
+      position: absolute;
+      left: 0;
+      color: var(--success);
+      font-weight: bold;
+    }
+
+    .thank-you-actions {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      margin-top: 2rem;
+    }
+
+    .prototype-notice {
+      margin: 0 auto 2.5rem auto;
+      max-width: 760px;
+      padding: 1rem 1.25rem;
+      border-radius: 1rem;
+      background: #fff7ed;
+      border: 1px solid rgba(249, 115, 22, 0.25);
+      color: #9a3412;
+      font-size: 0.95rem;
+      text-align: center;
+      box-shadow: 0 10px 25px -15px rgba(249, 115, 22, 0.35);
+    }
+
+    .prototype-notice strong {
+      display: block;
+      font-weight: 700;
+      margin-bottom: 0.25rem;
+    }
+
+    .prototype-disclaimer {
+      margin: -0.5rem 0 2rem;
+      padding: 1rem 1.25rem;
+      border-radius: 0.75rem;
+      background: #f1f5f9;
+      color: #0f172a;
+      font-size: 0.95rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="hero">
+      <h1>Find a therapist who really gets you</h1>
+      <p>Answer a few quick questions — this sandbox prototype will show you how matching could feel once we build the real thing.</p>
+    </div>
+
+    <div class="prototype-notice" role="status" aria-live="polite">
+      <strong>Prototype for research only</strong>
+      This journey is our first iteration, powered by fictional data and made solely for testing. Your responses help us refine the real experience — matches shown here are illustrative and not real clinicians.
+    </div>
+
+    <div class="widget">
+      <div class="progress">
+        <div class="dots" id="progressDots"></div>
+        <div class="counter" id="progressCounter">1 of 9</div>
+      </div>
+
+      <div id="questionContainer">
+        <div class="question">
+          <h2 id="questionText">Loading...</h2>
+          <p id="questionSubtitle"></p>
+          <div class="options" id="optionsContainer"></div>
+        </div>
+        <div class="actions" id="actionsContainer"></div>
+      </div>
+
+      <div class="loading" id="loadingContainer" style="display: none;">
+        <div class="spinner"></div>
+        <p>Finding your perfect matches...</p>
+      </div>
+
+      <div class="results" id="resultsContainer">
+        <h2>Here are your matches</h2>
+        <p class="prototype-disclaimer">
+          These matches are examples only. Real therapist availability and profiles will change once we launch the production-ready journey.
+        </p>
+        <div class="therapist-grid" id="therapistGrid"></div>
+        <div class="actions">
+          <button class="btn btn-secondary" onclick="startOver()">Start Over</button>
+        </div>
+      </div>
+
+      <!-- Booking Form Modal -->
+      <div id="bookingModal" class="modal" style="display: none;" onclick="closeBookingModal()">
+        <div class="modal-content booking-modal" onclick="event.stopPropagation()">
+          <div class="modal-header">
+            <h3 id="bookingTherapistName">Book with Sarah Chen</h3>
+            <button class="modal-close" onclick="closeBookingModal()">&times;</button>
+          </div>
+          <div class="modal-body">
+            <!-- Therapist Profile Section -->
+            <div class="therapist-profile-section">
+              <div class="therapist-profile-image">
+                <img id="bookingTherapistImage" src="sandbox-demo.html" alt="" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                <div class="therapist-profile-initials" style="display: none;"></div>
+              </div>
+              <div class="therapist-profile-info">
+                <h4 id="bookingTherapistNameFull">Sarah Chen</h4>
+                <p id="bookingTherapistBio">Specializing in anxiety and depression, Sarah creates a warm, collaborative therapeutic space using CBT and mindfulness approaches.</p>
+                <div class="therapist-profile-specialties" id="bookingTherapistSpecialties">
+                  <!-- Specialties will be populated here -->
+                </div>
+              </div>
+            </div>
+
+            <!-- Preferences Summary -->
+            <div class="preferences-summary">
+              <h4>Your Preferences Summary</h4>
+              <div class="preferences-list" id="preferencesList">
+                <!-- Preferences will be populated here -->
+              </div>
+            </div>
+
+            <!-- Contact Form -->
+            <div class="contact-section">
+              <h4>Your Contact Information</h4>
+              <form id="bookingForm" onsubmit="submitBooking(event)">
+                <div class="form-group">
+                  <label for="clientName">Full Name *</label>
+                  <input type="text" id="clientName" name="clientName" required placeholder="Enter your full name">
+                </div>
+                <div class="form-group">
+                  <label for="clientEmail">Email Address *</label>
+                  <input type="email" id="clientEmail" name="clientEmail" required placeholder="Enter your email address">
+                </div>
+                <div class="form-group">
+                  <label for="clientPhone">Phone Number *</label>
+                  <input type="tel" id="clientPhone" name="clientPhone" required placeholder="Enter your phone number">
+                </div>
+                
+                <div class="next-steps-info">
+                  <p><strong>Next steps:</strong> We will respond within one business day to arrange your first session and discuss session details.</p>
+                </div>
+                
+                <div class="form-actions">
+                  <button type="button" class="btn btn-secondary" onclick="closeBookingModal()">Cancel</button>
+                  <button type="submit" class="btn btn-primary">Send Booking Request</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Therapist Profile Modal -->
+      <div id="therapistProfileModal" class="modal" style="display: none;" onclick="closeTherapistProfile()">
+        <div class="modal-content therapist-profile-modal" onclick="event.stopPropagation()">
+          <div class="modal-header">
+            <h3 id="profileTherapistName">Therapist Profile</h3>
+            <button class="modal-close" onclick="closeTherapistProfile()">&times;</button>
+          </div>
+          <div class="modal-body">
+            <div class="therapist-profile-full">
+              <div class="therapist-profile-image-large">
+                <img id="profileTherapistImage" src="sandbox-demo.html" alt="" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                <div class="therapist-profile-initials-large" style="display: none;"></div>
+              </div>
+              <div class="therapist-profile-details">
+                <h2 id="profileTherapistNameFull">Sarah Chen</h2>
+                <p class="therapist-pronouns" id="profileTherapistPronouns">she/her</p>
+                
+                <div class="therapist-bio-full" id="profileTherapistBioFull">
+                  <!-- Full bio will be populated here -->
+                </div>
+                
+                <div class="therapist-specialties-full" id="profileTherapistSpecialtiesFull">
+                  <!-- All specialties will be populated here -->
+                </div>
+                
+                <div class="therapist-details-full">
+                  <div class="detail-item">
+                    <strong>Qualifications:</strong> <span id="profileTherapistQualifications">-</span>
+                  </div>
+                  <div class="detail-item">
+                    <strong>Experience:</strong> <span id="profileTherapistExperience">-</span>
+                  </div>
+                  <div class="detail-item">
+                    <strong>Location:</strong> <span id="profileTherapistLocation">Melbourne</span>
+                  </div>
+                  <div class="detail-item">
+                    <strong>Session Fee:</strong> <span id="profileTherapistPrice">$150/session</span>
+                  </div>
+                  <div class="detail-item">
+                    <strong>Availability:</strong> <span id="profileTherapistAvailability">Accepting new clients</span>
+                  </div>
+                  <div class="detail-item">
+                    <strong>Languages:</strong> <span id="profileTherapistLanguages">-</span>
+                  </div>
+                  <div class="detail-item">
+                    <strong>Insurance:</strong> <span id="profileTherapistInsurance">-</span>
+                  </div>
+                </div>
+                
+                <div class="therapist-modalities" id="profileTherapistModalities">
+                  <!-- Modalities will be populated here -->
+                </div>
+                
+                <div class="therapist-approach" id="profileTherapistApproach">
+                  <!-- Approach will be populated here -->
+                </div>
+                
+                <div class="therapist-session-info" id="profileTherapistSessionInfo">
+                  <!-- Session info will be populated here -->
+                </div>
+                
+                <div class="therapist-actions-full">
+                  <button class="btn btn-primary" onclick="closeTherapistProfile(); openBookingForm(selectedTherapist.id);">Book with this therapist</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Thank You Page -->
+      <div id="thankYouContainer" class="thank-you-section" style="display: none;">
+        <div class="thank-you-content">
+          <div class="success-icon">✓</div>
+          <h2>Thank you for your booking request!</h2>
+          <p>We've received your request and will be in touch within 24 hours to confirm your appointment details.</p>
+          <div class="next-steps">
+            <h3>What happens next?</h3>
+            <ul>
+              <li>Your therapist will review your request</li>
+              <li>They'll contact you to confirm availability</li>
+              <li>You'll receive appointment details via email</li>
+              <li>Your first session will be scheduled</li>
+            </ul>
+          </div>
+          <div class="thank-you-actions">
+            <button class="btn btn-primary" onclick="startOver()">Find Another Therapist</button>
+            <button class="btn btn-secondary" onclick="window.location.reload()">Start Over</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="error" id="errorContainer" style="display: none;">
+        <h3>Something went wrong</h3>
+        <p>Please refresh the page and try again.</p>
+        <button class="btn btn-primary" onclick="location.reload()">Refresh</button>
+      </div>
+
+      <feedback-widget inline data-config="./public/feedback-config.json" style="--tp-primary:#3a6ea5; --tp-accent:#6f4a8e;"></feedback-widget>
+    </div>
+  </div>
+
+  <script>
+    // Sandbox Demo Data
+    const questions = [
+      {
+        id: 'who',
+        text: 'Who is seeking therapy?',
+        type: 'single',
+        required: true,
+        options: [
+          { text: 'For myself (adult 18+)', value: 'adult_individual' },
+          { text: 'For my partner and I', value: 'couple' },
+          { text: 'For my child or teen (under 18)', value: 'child_teen' },
+          { text: 'For my family', value: 'family' },
+        ]
+      },
+      {
+        id: 'location',
+        text: 'How would you prefer to meet with your therapist?',
+        type: 'single',
+        required: true,
+        options: [
+          { text: 'Either in-person or online', value: 'either', preselected: true },
+          { text: 'In-person only', value: 'inperson_only' },
+          { text: 'Online only', value: 'online_only' },
+        ]
+      },
+      {
+        id: 'regions',
+        text: 'Which area works best for you?',
+        subtitle: 'Select all that apply',
+        type: 'multiple',
+        required: false,
+        options: [
+          { text: 'Melbourne Inner City', value: 'melbourne_inner' },
+          { text: 'Melbourne North', value: 'melbourne_north' },
+          { text: 'Melbourne East', value: 'melbourne_east' },
+          { text: 'Melbourne South', value: 'melbourne_south' },
+          { text: 'Melbourne West', value: 'melbourne_west' },
+          { text: 'Greater Victoria', value: 'greater_victoria' },
+          { text: 'Anywhere in Australia (Online)', value: 'australia_online' },
+        ]
+      },
+      {
+        id: 'concerns',
+        text: 'What brings you to therapy?',
+        subtitle: 'Select all that apply',
+        type: 'multiple',
+        required: true,
+        options: [
+          { text: 'Not sure / Exploring', value: 'exploring', preselected: true },
+          { text: 'Anxiety or depression', value: 'anxiety_depression' },
+          { text: 'Trauma or PTSD', value: 'trauma' },
+          { text: 'Relationship challenges', value: 'relationships' },
+          { text: 'LGBTQI+ identity support', value: 'lgbtqi' },
+          { text: 'Neurodiversity (ADHD, autism)', value: 'neurodiversity' },
+          { text: 'Grief and loss', value: 'grief' },
+          { text: 'Life transitions', value: 'transitions' },
+          { text: 'Addiction or recovery', value: 'addiction' },
+          { text: 'Sexual health or intimacy', value: 'sexual_health' },
+        ]
+      },
+      {
+        id: 'approach',
+        text: 'What type of therapy approach interests you?',
+        subtitle: 'Select all that apply',
+        type: 'multiple',
+        required: false,
+        options: [
+          { text: 'No preferences', value: 'no_preference', preselected: true },
+          { text: 'Talk therapy / Psychodynamic', value: 'psychodynamic' },
+          { text: 'CBT / Skills-focused', value: 'cbt' },
+          { text: 'Trauma-specific (EMDR, Somatic)', value: 'trauma_focused' },
+          { text: 'Creative / Art-based', value: 'creative' },
+          { text: 'Mindfulness / Acceptance-based', value: 'mindfulness' },
+        ]
+      },
+      {
+        id: 'community',
+        text: 'Are there specific communities or experiences important to you?',
+        subtitle: 'Select all that apply',
+        type: 'multiple',
+        required: false,
+        options: [
+          { text: 'No preferences', value: 'none', preselected: true },
+          { text: 'LGBTQI+ community', value: 'lgbtqi' },
+          { text: 'Neurodivergent community', value: 'neurodivergent' },
+          { text: 'Kink / ENM community', value: 'kink_enm' },
+          { text: 'Cultural / Ethnic minority', value: 'cultural' },
+          { text: 'Disability community', value: 'disability' },
+          { text: 'Lived experience of trauma', value: 'trauma_lived' },
+        ]
+      },
+      {
+        id: 'character',
+        text: 'What kind of therapeutic style resonates with you?',
+        subtitle: 'Optional',
+        type: 'single',
+        required: false,
+        options: [
+          { text: 'Warm and nurturing', value: 'warm' },
+          { text: 'Direct and practical', value: 'direct' },
+          { text: 'Collaborative and exploratory', value: 'collaborative' },
+          { text: 'Structured and goal-oriented', value: 'structured' },
+          { text: 'Flexible - I\'ll know when I meet them', value: 'flexible' },
+        ]
+      },
+      {
+        id: 'languages',
+        text: 'Do you need a therapist who speaks a language other than English?',
+        type: 'single',
+        required: false,
+        options: [
+          { text: 'English is fine', value: 'english_only', preselected: true },
+          { text: 'Yes - Mandarin', value: 'mandarin' },
+          { text: 'Yes - Cantonese', value: 'cantonese' },
+          { text: 'Yes - Arabic', value: 'arabic' },
+          { text: 'Yes - Spanish', value: 'spanish' },
+          { text: 'Yes - Other language', value: 'other_language' },
+        ]
+      },
+      {
+        id: 'accessibility',
+        text: 'Do you have any accessibility requirements?',
+        subtitle: 'Select all that apply',
+        type: 'multiple',
+        required: false,
+        options: [
+          { text: 'No specific requirements', value: 'none', preselected: true },
+          { text: 'Wheelchair accessible', value: 'wheelchair' },
+          { text: 'Near public transport', value: 'public_transport' },
+          { text: 'Auslan / Sign language', value: 'auslan' },
+          { text: 'Sensory-friendly space', value: 'sensory_friendly' },
+        ]
+      },
+      {
+        id: 'pricing',
+        text: 'What\'s important to you regarding cost?',
+        type: 'single',
+        required: false,
+        options: [
+          { text: 'Cost is not a primary concern', value: 'flexible', preselected: true },
+          { text: 'Bulk billing / Medicare preferred', value: 'bulk_billing' },
+          { text: 'Medicare rebate available', value: 'medicare_rebate' },
+          { text: 'Sliding scale / Reduced fees', value: 'sliding_scale' },
+        ]
+      }
+    ];
+
+    // Sample therapist data with real profile images
+    const therapists = [
+      {
+        id: 't1',
+        name: 'Sarah Chen',
+        pronouns: 'she/her',
+        bio: 'Specializing in anxiety and depression, Sarah creates a warm, collaborative therapeutic space using CBT and mindfulness approaches.',
+        specialties: ['Anxiety', 'Depression', 'CBT', 'Mindfulness'],
+        location: 'Melbourne',
+        price: 150,
+        accepting: true,
+        image: 'businesswoman-happy-be-back-work_23-2148727621.jpg',
+        qualifications: 'PhD Clinical Psychology, Master of Counselling',
+        experience: '8 years',
+        modalities: ['Cognitive Behavioral Therapy', 'Mindfulness-Based Therapy', 'Acceptance and Commitment Therapy'],
+        clientTypes: ['Adults (18+)', 'Young Adults (18-25)'],
+        languages: ['English', 'Mandarin'],
+        availability: 'Monday-Friday, 9am-6pm',
+        insurance: 'Medicare, Private Health',
+        fullBio: 'Sarah Chen is a registered clinical psychologist with over 8 years of experience helping individuals overcome anxiety and depression. She completed her PhD in Clinical Psychology at the University of Melbourne and has specialized training in CBT and mindfulness-based interventions. Sarah believes in creating a safe, non-judgmental space where clients can explore their thoughts and feelings while developing practical coping strategies. She has particular expertise in working with young adults navigating life transitions and has published research on anxiety management techniques.',
+        areasOfExpertise: ['Generalized Anxiety Disorder', 'Social Anxiety', 'Major Depressive Disorder', 'Panic Disorders', 'Stress Management', 'Life Transitions'],
+        approach: 'Sarah uses evidence-based approaches including Cognitive Behavioral Therapy (CBT) and Mindfulness-Based Cognitive Therapy (MBCT). She helps clients identify and challenge unhelpful thought patterns while developing practical skills for managing anxiety and depression. Her approach is collaborative, warm, and focused on empowering clients to become their own therapists.',
+        sessionInfo: 'Initial sessions are 60 minutes, follow-up sessions are 50 minutes. Sarah offers both in-person sessions at her Melbourne office and online sessions via secure video platform.'
+      },
+      {
+        id: 't2',
+        name: 'Alex Rivera',
+        pronouns: 'they/them',
+        bio: 'LGBTQIA+ affirming therapist with expertise in trauma and identity work. Uses EMDR and somatic approaches.',
+        specialties: ['LGBTQIA+', 'Trauma', 'EMDR', 'Identity'],
+        location: 'Online',
+        price: 140,
+        accepting: true,
+        image: 'jennifer-kalenberg-eGbWStueZXU-unsplash.jpg',
+        qualifications: 'Master of Counselling, EMDR Certified',
+        experience: '6 years',
+        modalities: ['EMDR', 'Somatic Therapy', 'Trauma-Informed Care', 'Identity Work'],
+        clientTypes: ['Adults (18+)', 'LGBTQIA+ Community'],
+        languages: ['English', 'Spanish'],
+        availability: 'Tuesday-Saturday, 10am-7pm',
+        insurance: 'Private Health, Sliding Scale Available',
+        fullBio: 'Alex Rivera is a trauma-informed counsellor specializing in LGBTQIA+ affirming therapy and identity work. With 6 years of experience, Alex has extensive training in EMDR and somatic approaches to healing. They are passionate about creating safe, inclusive spaces for clients to explore their identities and process trauma. Alex has particular expertise in working with trans and non-binary individuals, and has completed specialized training in gender-affirming care.',
+        areasOfExpertise: ['PTSD', 'Complex Trauma', 'Gender Identity', 'Sexual Orientation', 'Identity Exploration', 'Anxiety', 'Depression'],
+        approach: 'Alex uses a trauma-informed, person-centered approach that integrates EMDR, somatic therapy, and identity-affirming practices. They believe in the importance of understanding how trauma and identity intersect, and work collaboratively with clients to develop personalized healing strategies. Their approach is warm, non-judgmental, and deeply respectful of each client\'s unique journey.',
+        sessionInfo: 'Sessions are 50 minutes and conducted online via secure video platform. Alex offers flexible scheduling including evening and weekend appointments. Sliding scale fees available based on financial need.'
+      },
+      {
+        id: 't3',
+        name: 'Michael Thompson',
+        pronouns: 'he/him',
+        bio: 'Experienced in working with neurodivergent clients and families. Specializes in ADHD and autism support.',
+        specialties: ['ADHD', 'Autism', 'Neurodivergence', 'Family Therapy'],
+        location: 'Melbourne',
+        price: 160,
+        accepting: true,
+        image: 'jurica-koletic-7YVZYZeITc8-unsplash.jpg',
+        qualifications: 'Master of Psychology (Clinical), PhD in Developmental Psychology',
+        experience: '10 years',
+        modalities: ['Cognitive Behavioral Therapy', 'Applied Behavior Analysis', 'Family Systems Therapy', 'Neuropsychological Assessment'],
+        clientTypes: ['Children (5-17)', 'Adults (18+)', 'Families'],
+        languages: ['English'],
+        availability: 'Monday-Friday, 8am-6pm',
+        insurance: 'Medicare, Private Health, NDIS',
+        fullBio: 'Dr. Michael Thompson is a clinical psychologist with over 10 years of experience specializing in neurodevelopmental conditions. He completed his PhD in Developmental Psychology at Monash University and has extensive training in ADHD and autism assessment and intervention. Michael is passionate about supporting neurodivergent individuals and their families, using evidence-based approaches that respect neurodiversity. He has published research on executive functioning in ADHD and has presented at international conferences on neurodevelopmental support.',
+        areasOfExpertise: ['ADHD Assessment and Treatment', 'Autism Spectrum Disorders', 'Executive Functioning', 'Learning Disabilities', 'Family Therapy', 'Parent Training', 'School Consultation'],
+        approach: 'Michael uses a strengths-based, neurodiversity-affirming approach that recognizes the unique strengths and challenges of neurodivergent individuals. He integrates cognitive-behavioral techniques with family systems therapy and collaborates closely with schools and other professionals. His approach is practical, solution-focused, and emphasizes building skills while celebrating neurodivergent strengths.',
+        sessionInfo: 'Initial assessments are 90 minutes, regular sessions are 50 minutes. Michael offers both individual and family therapy sessions. He provides comprehensive neuropsychological assessments and works with children as young as 5 years old. NDIS funding accepted for eligible clients.'
+      },
+      {
+        id: 't4',
+        name: 'Priya Patel',
+        pronouns: 'she/her',
+        bio: 'Culturally informed therapist specializing in relationship issues and life transitions. Uses EFT and narrative therapy.',
+        specialties: ['Relationships', 'Life Transitions', 'EFT', 'Cultural Identity'],
+        location: 'Melbourne',
+        price: 145,
+        accepting: true,
+        image: 'karsten-winegeart-bwDnRf-r4u8-unsplash.jpg',
+        qualifications: 'Master of Counselling, Graduate Diploma in Family Therapy',
+        experience: '7 years',
+        modalities: ['Emotionally Focused Therapy (EFT)', 'Narrative Therapy', 'Family Systems Therapy', 'Cultural Therapy'],
+        clientTypes: ['Adults (18+)', 'Couples', 'Families'],
+        languages: ['English', 'Hindi', 'Gujarati'],
+        availability: 'Tuesday-Saturday, 9am-7pm',
+        insurance: 'Medicare, Private Health',
+        fullBio: 'Priya Patel is a culturally informed counsellor with 7 years of experience helping individuals, couples, and families navigate relationship challenges and life transitions. She completed her Master of Counselling at Deakin University and has specialized training in Emotionally Focused Therapy and narrative approaches. Priya is passionate about providing culturally sensitive therapy that honors diverse backgrounds and experiences. She has particular expertise in working with South Asian communities and intergenerational family dynamics.',
+        areasOfExpertise: ['Couples Therapy', 'Relationship Issues', 'Life Transitions', 'Cultural Identity', 'Intergenerational Conflict', 'Marriage Counselling', 'Family Therapy'],
+        approach: 'Priya uses a culturally sensitive, strengths-based approach that integrates Emotionally Focused Therapy with narrative techniques. She believes in the importance of understanding cultural context and family dynamics in therapy. Her approach is collaborative, warm, and focused on helping clients build stronger relationships and navigate life changes with confidence.',
+        sessionInfo: 'Initial sessions are 60 minutes, regular sessions are 50 minutes. Priya offers both individual and couples therapy sessions. She provides culturally sensitive therapy and works with clients from diverse cultural backgrounds. Flexible scheduling available including evening and weekend appointments.'
+      },
+      {
+        id: 't5',
+        name: 'Jordan Kim',
+        pronouns: 'they/them',
+        bio: 'Art therapist and trauma specialist. Works with creative approaches to healing and recovery.',
+        specialties: ['Art Therapy', 'Trauma', 'Creative Approaches', 'Recovery'],
+        location: 'Online',
+        price: 135,
+        accepting: true,
+        image: 'the-connected-narrative-N8lRH2uxih4-unsplash.jpg',
+        qualifications: 'Master of Art Therapy, Graduate Certificate in Trauma-Informed Care',
+        experience: '5 years',
+        modalities: ['Art Therapy', 'Trauma-Informed Care', 'Expressive Arts Therapy', 'Somatic Therapy'],
+        clientTypes: ['Adults (18+)', 'Adolescents (13-17)'],
+        languages: ['English', 'Korean'],
+        availability: 'Monday-Thursday, 10am-8pm',
+        insurance: 'Private Health, Sliding Scale Available',
+        fullBio: 'Jordan Kim is a registered art therapist with 5 years of experience specializing in trauma recovery and creative healing approaches. They completed their Master of Art Therapy at La Trobe University and have extensive training in trauma-informed care and somatic approaches. Jordan is passionate about using creative expression as a pathway to healing and recovery. They have particular expertise in working with survivors of trauma, including complex PTSD, and believe in the power of art to access and process difficult emotions.',
+        areasOfExpertise: ['Trauma Recovery', 'Complex PTSD', 'Art Therapy', 'Expressive Arts', 'Somatic Therapy', 'Anxiety', 'Depression', 'Creative Healing'],
+        approach: 'Jordan uses a trauma-informed, person-centered approach that integrates art therapy with somatic and expressive arts techniques. They believe in the inherent healing power of creativity and work collaboratively with clients to explore their inner world through various artistic mediums. Their approach is gentle, non-judgmental, and honors each client\'s unique creative expression and healing journey.',
+        sessionInfo: 'Sessions are 60 minutes and conducted online via secure video platform. Jordan provides all art materials and guidance for online art therapy sessions. They offer flexible scheduling and sliding scale fees based on financial need. No prior art experience required.'
+      },
+      {
+        id: 't6',
+        name: 'Natasha Lama',
+        pronouns: 'she/her',
+        bio: 'Counsellor & Sex Therapist with cultural sensitivity, specializing in sex-positive approaches and cultural identity.',
+        specialties: ['Sex therapy', 'Cultural sensitivity', 'Sexual health', 'Cultural identity'],
+        location: 'Melbourne',
+        price: 155,
+        accepting: true,
+        image: 'laura-de-moraes-1RV6iEAhNVQ-unsplash.jpg',
+        qualifications: 'Master of Counselling, Graduate Certificate in Sex Therapy',
+        experience: '6 years',
+        modalities: ['Sex Therapy', 'Cultural Therapy', 'Narrative Therapy', 'Trauma-Informed Care'],
+        clientTypes: ['Adults (18+)', 'Couples'],
+        languages: ['English', 'Nepali', 'Hindi'],
+        availability: 'Monday-Friday, 9am-6pm',
+        insurance: 'Private Health, Sliding Scale Available',
+        fullBio: 'Natasha Lama is a culturally sensitive counsellor and sex therapist with 6 years of experience helping individuals and couples with sexual health, intimacy, and cultural identity issues. She completed her Master of Counselling at RMIT University and has specialized training in sex therapy and cultural approaches to mental health. Natasha is passionate about providing sex-positive, culturally informed therapy that honors diverse sexual orientations, gender identities, and cultural backgrounds. She has particular expertise in working with South Asian communities and addressing cultural taboos around sexuality.',
+        areasOfExpertise: ['Sex Therapy', 'Sexual Health', 'Intimacy Issues', 'Cultural Identity', 'LGBTQIA+ Support', 'Couples Therapy', 'Trauma-Informed Care'],
+        approach: 'Natasha uses a sex-positive, culturally sensitive approach that integrates sex therapy techniques with cultural awareness and trauma-informed care. She believes in the importance of understanding cultural context in sexual health and works to create a safe, non-judgmental space for clients to explore their sexuality and relationships. Her approach is collaborative, affirming, and focused on empowering clients to embrace their authentic selves.',
+        sessionInfo: 'Initial sessions are 60 minutes, regular sessions are 50 minutes. Natasha offers both individual and couples therapy sessions. She provides culturally sensitive therapy and works with clients from diverse cultural and sexual backgrounds. Flexible scheduling available.'
+      },
+      {
+        id: 't7',
+        name: 'James Wilson',
+        pronouns: 'he/him',
+        bio: 'Addiction specialist with 15 years experience in recovery support. Uses evidence-based approaches including CBT and motivational interviewing.',
+        specialties: ['Addiction', 'Recovery', 'CBT', 'Motivational Interviewing'],
+        location: 'Online',
+        price: 165,
+        accepting: true,
+        image: 'portrait-employee-happy-be-back-work_23-2148727615.jpg',
+        qualifications: 'Master of Psychology (Clinical), Graduate Diploma in Addiction Studies',
+        experience: '15 years',
+        modalities: ['Cognitive Behavioral Therapy', 'Motivational Interviewing', 'Relapse Prevention', '12-Step Facilitation'],
+        clientTypes: ['Adults (18+)'],
+        languages: ['English'],
+        availability: 'Monday-Friday, 8am-8pm',
+        insurance: 'Medicare, Private Health',
+        fullBio: 'James Wilson is a clinical psychologist with 15 years of experience specializing in addiction treatment and recovery support. He completed his Master of Psychology at the University of Melbourne and has extensive training in evidence-based addiction treatment approaches. James is passionate about supporting individuals on their recovery journey and believes in the power of evidence-based treatment combined with compassionate care. He has particular expertise in working with alcohol, drug, and behavioral addictions, and has helped hundreds of clients achieve lasting recovery.',
+        areasOfExpertise: ['Alcohol Addiction', 'Drug Addiction', 'Behavioral Addictions', 'Recovery Support', 'Relapse Prevention', 'Co-occurring Disorders', 'Family Support'],
+        approach: 'James uses an evidence-based, person-centered approach that integrates Cognitive Behavioral Therapy with Motivational Interviewing and relapse prevention strategies. He believes in meeting clients where they are in their recovery journey and works collaboratively to develop personalized treatment plans. His approach is non-judgmental, supportive, and focused on building the skills and strategies needed for lasting recovery.',
+        sessionInfo: 'Initial assessments are 90 minutes, regular sessions are 50 minutes. James offers both individual therapy and group support sessions. He provides comprehensive addiction assessments and works with clients at all stages of recovery. Online sessions available with flexible scheduling.'
+      },
+      {
+        id: 't8',
+        name: 'Maya Singh',
+        pronouns: 'she/her',
+        bio: 'Grief and loss specialist with expertise in bereavement counseling. Provides compassionate support through life\'s most difficult transitions.',
+        specialties: ['Grief', 'Loss', 'Bereavement', 'Life Transitions'],
+        location: 'Melbourne',
+        price: 145,
+        accepting: true,
+        image: 'ashley-nicole-q2ns5y64m0I-unsplash.jpg',
+        qualifications: 'Master of Counselling, Graduate Certificate in Grief and Loss',
+        experience: '8 years',
+        modalities: ['Grief Counselling', 'Trauma-Informed Care', 'Narrative Therapy', 'Compassion-Focused Therapy'],
+        clientTypes: ['Adults (18+)', 'Adolescents (13-17)'],
+        languages: ['English', 'Punjabi'],
+        availability: 'Monday-Thursday, 9am-7pm',
+        insurance: 'Medicare, Private Health',
+        fullBio: 'Maya Singh is a grief and loss specialist with 8 years of experience providing compassionate support to individuals navigating life\'s most difficult transitions. She completed her Master of Counselling at Monash University and has specialized training in grief therapy and trauma-informed care. Maya is passionate about supporting people through loss and believes in the importance of honoring grief while finding pathways to healing. She has particular expertise in working with complex grief, traumatic loss, and cultural approaches to bereavement.',
+        areasOfExpertise: ['Grief Counselling', 'Bereavement Support', 'Traumatic Loss', 'Life Transitions', 'Complex Grief', 'Cultural Grief', 'End-of-Life Support'],
+        approach: 'Maya uses a compassionate, trauma-informed approach that honors the unique nature of each person\'s grief journey. She integrates grief counselling techniques with narrative therapy and compassion-focused approaches. Her approach is gentle, patient, and focused on helping clients process their loss while finding meaning and hope for the future. She believes there is no timeline for grief and works at each client\'s pace.',
+        sessionInfo: 'Initial sessions are 60 minutes, regular sessions are 50 minutes. Maya offers both individual and group grief support sessions. She provides culturally sensitive therapy and works with clients from diverse backgrounds. Flexible scheduling available including evening appointments.'
+      },
+      {
+        id: 't9',
+        name: 'Sam Taylor',
+        pronouns: 'they/them',
+        bio: 'Couples therapist specializing in relationship challenges and communication. Uses Emotionally Focused Therapy and Gottman methods.',
+        specialties: ['Couples', 'Relationships', 'EFT', 'Communication'],
+        location: 'Online',
+        price: 170,
+        accepting: true,
+        image: 'portrait-happy-in-life-23-2193826315.jpg.jpg',
+        qualifications: 'Master of Counselling, Certified EFT Therapist, Gottman Method Level 2',
+        experience: '9 years',
+        modalities: ['Emotionally Focused Therapy (EFT)', 'Gottman Method', 'Couples Therapy', 'Communication Skills Training'],
+        clientTypes: ['Couples', 'Adults (18+)'],
+        languages: ['English'],
+        availability: 'Monday-Friday, 10am-8pm',
+        insurance: 'Private Health',
+        fullBio: 'Sam Taylor is a certified couples therapist with 9 years of experience helping couples build stronger, more connected relationships. They completed their Master of Counselling at Swinburne University and have extensive training in Emotionally Focused Therapy and the Gottman Method. Sam is passionate about helping couples understand their relationship patterns and develop healthier ways of communicating and connecting. They have particular expertise in working with LGBTQIA+ couples and non-traditional relationship structures.',
+        areasOfExpertise: ['Couples Therapy', 'Relationship Issues', 'Communication Problems', 'Conflict Resolution', 'Intimacy Issues', 'LGBTQIA+ Relationships', 'Non-traditional Relationships'],
+        approach: 'Sam uses an evidence-based, attachment-focused approach that integrates Emotionally Focused Therapy with Gottman Method techniques. They believe in the importance of understanding each partner\'s emotional needs and helping couples develop secure attachment patterns. Their approach is collaborative, non-judgmental, and focused on helping couples build the skills needed for lasting, fulfilling relationships.',
+        sessionInfo: 'Couples sessions are 75 minutes, individual sessions are 50 minutes. Sam offers both in-person and online couples therapy sessions. They provide comprehensive relationship assessments and work with couples at all stages of their relationship. Flexible scheduling available including evening appointments.'
+      },
+      {
+        id: 't10',
+        name: 'Lisa Park',
+        pronouns: 'she/her',
+        bio: 'Psychodynamic therapist with expertise in childhood trauma and attachment issues. Creates a safe space for deep healing work.',
+        specialties: ['Psychodynamic', 'Trauma', 'Attachment', 'Childhood Issues'],
+        location: 'Melbourne',
+        price: 180,
+        accepting: true,
+        image: 'businesswoman-happy-be-back-work_23-2148727621.jpg',
+        qualifications: 'PhD Clinical Psychology, Master of Social Work',
+        experience: '12 years',
+        modalities: ['Psychodynamic Therapy', 'Attachment-Based Therapy', 'Trauma-Informed Care', 'Play Therapy'],
+        clientTypes: ['Adults (18+)', 'Children (5-17)', 'Families'],
+        languages: ['English', 'Korean'],
+        availability: 'Monday-Thursday, 9am-5pm',
+        insurance: 'Medicare, Private Health, NDIS',
+        fullBio: 'Lisa Park is a highly experienced clinical psychologist specializing in psychodynamic therapy and trauma work. With over 12 years of experience, she has extensive training in attachment theory and childhood trauma. Lisa works with both adults and children, helping clients understand how early experiences shape current patterns and relationships. She has particular expertise in working with complex trauma, attachment issues, and intergenerational trauma within families.',
+        areasOfExpertise: ['Childhood Trauma', 'Complex PTSD', 'Attachment Disorders', 'Family Therapy', 'Intergenerational Trauma', 'Anxiety', 'Depression', 'Relationship Issues'],
+        approach: 'Lisa uses a psychodynamic approach that explores unconscious patterns and early life experiences. She believes in the importance of understanding how past experiences influence present behavior and relationships. Her approach is gentle yet insightful, creating a safe space for deep exploration and healing. She integrates attachment theory and trauma-informed practices to help clients develop healthier relationship patterns.',
+        sessionInfo: 'Initial assessment sessions are 90 minutes, regular sessions are 50 minutes. Lisa offers both individual and family therapy sessions. She works with children as young as 5 years old and provides parent consultation sessions. NDIS funding accepted for eligible clients.'
+      }
+    ];
+
+    let currentQuestionIndex = 0;
+    let answers = {};
+
+    function init() {
+      showQuestion();
+      updateProgress();
+    }
+
+    function showQuestion() {
+      const question = questions[currentQuestionIndex];
+      document.getElementById('questionText').textContent = question.text;
+      document.getElementById('questionSubtitle').textContent = question.subtitle || (question.type === 'multiple' ? 'Select all that apply' : '');
+      
+      const optionsContainer = document.getElementById('optionsContainer');
+      optionsContainer.innerHTML = '';
+      
+      // Initialize answer for this question if not exists
+      if (!answers[question.id]) {
+        if (question.type === 'multiple') {
+          answers[question.id] = [];
+        } else {
+          answers[question.id] = null;
+        }
+      }
+      
+      question.options.forEach(option => {
+        const optionElement = document.createElement('div');
+        optionElement.className = 'option';
+        optionElement.textContent = option.text;
+        optionElement.dataset.value = option.value;
+        optionElement.onclick = () => selectOption(option.value, question.type, option.preselected);
+        
+        // Check if this option should be pre-selected
+        if (option.preselected) {
+          if (question.type === 'multiple') {
+            if (!answers[question.id].includes(option.value)) {
+              answers[question.id].push(option.value);
+            }
+          } else {
+            answers[question.id] = option.value;
+          }
+          optionElement.classList.add('selected');
+        }
+        
+        // Check if this option is already selected
+        if (question.type === 'multiple') {
+          if (answers[question.id].includes(option.value)) {
+            optionElement.classList.add('selected');
+          }
+        } else {
+          if (answers[question.id] === option.value) {
+            optionElement.classList.add('selected');
+          }
+        }
+        
+        optionsContainer.appendChild(optionElement);
+      });
+
+      const actionsContainer = document.getElementById('actionsContainer');
+      if (question.type === 'multiple') {
+        actionsContainer.innerHTML = `
+          <button class="btn btn-secondary" onclick="skipQuestion()">Skip</button>
+          <button class="btn btn-primary" onclick="nextQuestion()">Continue</button>
+        `;
+      } else {
+        actionsContainer.innerHTML = '';
+      }
+    }
+
+    function selectOption(value, type, isPreselected) {
+      const question = questions[currentQuestionIndex];
+      const questionId = question.id;
+      
+      if (type === 'single') {
+        answers[questionId] = value;
+        // Update visual selection
+        const options = document.querySelectorAll('.option');
+        options.forEach(opt => opt.classList.remove('selected'));
+        event.target.classList.add('selected');
+        setTimeout(() => nextQuestion(), 300);
+      } else {
+        // Multiple selection with auto-deselection logic
+        if (!answers[questionId]) {
+          answers[questionId] = [];
+        }
+        
+        const currentAnswers = answers[questionId];
+        const index = currentAnswers.indexOf(value);
+        
+        // Handle auto-deselection for "no preference" type options
+        if (value === 'no_preference' || value === 'none' || value === 'exploring' || value === 'flexible' || value === 'english_only') {
+          // If clicking a "no preference" option, clear all other selections
+          answers[questionId] = [value];
+          const options = document.querySelectorAll('.option');
+          options.forEach(opt => {
+            opt.classList.remove('selected');
+            if (opt.dataset.value === value) {
+              opt.classList.add('selected');
+            }
+          });
+        } else {
+          // If clicking a specific option, remove any "no preference" selections
+          const noPreferenceValues = ['no_preference', 'none', 'exploring', 'flexible', 'english_only'];
+          answers[questionId] = currentAnswers.filter(v => !noPreferenceValues.includes(v));
+          
+          // Toggle the current selection
+          if (index > -1) {
+            answers[questionId].splice(index, 1);
+          } else {
+            answers[questionId].push(value);
+          }
+          
+          // Update visual selection
+          const options = document.querySelectorAll('.option');
+          options.forEach(opt => {
+            opt.classList.remove('selected');
+            if (answers[questionId].includes(opt.dataset.value)) {
+              opt.classList.add('selected');
+            }
+          });
+        }
+      }
+    }
+
+    function nextQuestion() {
+      if (currentQuestionIndex < questions.length - 1) {
+        currentQuestionIndex++;
+        showQuestion();
+        updateProgress();
+      } else {
+        showResults();
+      }
+    }
+
+    function skipQuestion() {
+      nextQuestion();
+    }
+
+    function updateProgress() {
+      const dotsContainer = document.getElementById('progressDots');
+      dotsContainer.innerHTML = '';
+      
+      for (let i = 0; i < questions.length; i++) {
+        const dot = document.createElement('div');
+        dot.className = `dot ${i <= currentQuestionIndex ? 'active' : ''}`;
+        dotsContainer.appendChild(dot);
+      }
+      
+      document.getElementById('progressCounter').textContent = `${currentQuestionIndex + 1} of ${questions.length}`;
+    }
+
+    function showResults() {
+      document.getElementById('questionContainer').style.display = 'none';
+      document.getElementById('loadingContainer').style.display = 'block';
+      
+      setTimeout(() => {
+        document.getElementById('loadingContainer').style.display = 'none';
+        document.getElementById('resultsContainer').classList.add('show');
+        
+        // Calculate matches based on user answers
+        const matchedTherapists = calculateMatches(answers);
+        
+        const therapistGrid = document.getElementById('therapistGrid');
+        therapistGrid.innerHTML = '';
+        
+        if (matchedTherapists.length === 0) {
+          therapistGrid.innerHTML = `
+            <div style="grid-column: 1 / -1; text-align: center; padding: 2rem;">
+              <h3>No matches found</h3>
+              <p>We couldn't find therapists matching your criteria. Try adjusting your preferences or contact us for personalized recommendations.</p>
+            </div>
+          `;
+          return;
+        }
+        
+        matchedTherapists.forEach((match, index) => {
+          const therapist = match.therapist;
+          const card = document.createElement('div');
+          card.className = 'therapist-card';
+          const initials = therapist.name.split(' ').map(n => n[0]).join('');
+          card.innerHTML = `
+            <div class="therapist-image">
+              <img src="https://therapair.com.au/sandbox/public/portraits/${therapist.image}" alt="${therapist.name}" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+              <div class="initials" style="display: none;">${initials}</div>
+            </div>
+            <div class="therapist-content">
+              <div class="therapist-name">${therapist.name}</div>
+              <div class="therapist-pronouns">${therapist.pronouns}</div>
+              <div class="therapist-bio">${therapist.bio}</div>
+              <div class="therapist-specialties">
+                ${therapist.specialties.map(s => `<span class="specialty-tag">${s}</span>`).join('')}
+              </div>
+              <div class="therapist-details">
+                <span>${therapist.location}</span>
+                <span>$${therapist.price}/session</span>
+              </div>
+              <div class="therapist-actions">
+                <button class="btn btn-secondary btn-small" onclick="showTherapistProfile('${therapist.id}')">More Info</button>
+                <button class="btn btn-primary btn-small" onclick="openBookingForm('${therapist.id}')">Book Now</button>
+              </div>
+            </div>
+          `;
+          therapistGrid.appendChild(card);
+        });
+      }, 2000);
+    }
+
+    function calculateMatches(userAnswers) {
+      console.log('User answers:', userAnswers); // Debug log
+      
+      const scoredTherapists = therapists.map(therapist => {
+        let score = 0;
+        const reasons = [];
+        
+        // Base score for all therapists
+        score += 20;
+        reasons.push('Available therapist');
+        
+        // Location matching (more flexible)
+        if (userAnswers.location) {
+          if (userAnswers.location === 'either') {
+            // Either online or in-person - all therapists get points
+            score += 25;
+            reasons.push('Meets your location preference');
+          } else if (userAnswers.location === 'online_only' && therapist.location === 'Online') {
+            score += 30;
+            reasons.push('Available online');
+          } else if (userAnswers.location === 'inperson_only' && therapist.location === 'Melbourne') {
+            score += 30;
+            reasons.push('Available in Melbourne');
+          } else {
+            // Still give some points even if not exact match
+            score += 10;
+            reasons.push('May be able to accommodate');
+          }
+        }
+        
+        // Who is seeking therapy (more flexible matching)
+        if (userAnswers.who) {
+          if (userAnswers.who === 'adult_individual') {
+            // Most therapists work with adults
+            score += 25;
+            reasons.push('Works with adults');
+          } else if (userAnswers.who === 'couple') {
+            if (therapist.specialties.some(s => s.toLowerCase().includes('relationship') || s.toLowerCase().includes('couple'))) {
+              score += 30;
+              reasons.push('Specializes in couples therapy');
+            } else {
+              score += 15;
+              reasons.push('May work with couples');
+            }
+          } else if (userAnswers.who === 'child_teen') {
+            if (therapist.specialties.some(s => s.toLowerCase().includes('child') || s.toLowerCase().includes('teen') || s.toLowerCase().includes('family'))) {
+              score += 30;
+              reasons.push('Works with children/teens');
+            } else {
+              score += 10;
+              reasons.push('May work with young people');
+            }
+          } else if (userAnswers.who === 'family') {
+            if (therapist.specialties.some(s => s.toLowerCase().includes('family'))) {
+              score += 30;
+              reasons.push('Specializes in family therapy');
+            } else {
+              score += 15;
+              reasons.push('May work with families');
+            }
+          }
+        }
+        
+        // Concerns matching (more flexible)
+        if (userAnswers.concerns && userAnswers.concerns.length > 0 && !userAnswers.concerns.includes('exploring')) {
+          const concernMatches = userAnswers.concerns.filter(concern => {
+            const concernMap = {
+              'anxiety_depression': ['anxiety', 'depression', 'cbt', 'mindfulness', 'mood'],
+              'trauma': ['trauma', 'emdr', 'ptsd', 'somatic'],
+              'relationships': ['relationship', 'eft', 'couples', 'communication'],
+              'lgbtqi': ['lgbtqia+', 'identity', 'queer', 'trans'],
+              'neurodiversity': ['adhd', 'autism', 'neurodivergence', 'neurodiver'],
+              'grief': ['grief', 'loss', 'bereavement'],
+              'transitions': ['life transitions', 'transitions'],
+              'addiction': ['addiction', 'recovery', 'substance'],
+              'sexual_health': ['sex', 'sexual', 'intimacy', 'sex therapy']
+            };
+            
+            const keywords = concernMap[concern] || [];
+            return keywords.some(keyword => 
+              therapist.specialties.some(specialty => 
+                specialty.toLowerCase().includes(keyword.toLowerCase())
+              ) ||
+              therapist.bio.toLowerCase().includes(keyword.toLowerCase())
+            );
+          });
+          
+          if (concernMatches.length > 0) {
+            score += concernMatches.length * 20;
+            reasons.push(`Specializes in ${concernMatches.length} of your concerns`);
+          } else {
+            // Still give some points even if no direct match
+            score += 10;
+            reasons.push('May be able to help with your concerns');
+          }
+        } else if (userAnswers.concerns && userAnswers.concerns.includes('exploring')) {
+          // If exploring, all therapists get points
+          score += 25;
+          reasons.push('Great for exploring therapy options');
+        }
+        
+        // Approach matching (more flexible)
+        if (userAnswers.approach && userAnswers.approach.length > 0 && !userAnswers.approach.includes('no_preference')) {
+          const approachMatches = userAnswers.approach.filter(approach => {
+            const approachMap = {
+              'psychodynamic': ['psychodynamic', 'talk therapy', 'psychoanalytic'],
+              'cbt': ['cbt', 'cognitive', 'behavioral', 'cognitive behavioral'],
+              'trauma_focused': ['emdr', 'somatic', 'trauma', 'trauma-focused'],
+              'creative': ['art', 'creative', 'art therapy', 'expressive'],
+              'mindfulness': ['mindfulness', 'act', 'acceptance', 'meditation']
+            };
+            
+            const keywords = approachMap[approach] || [];
+            return keywords.some(keyword => 
+              therapist.specialties.some(specialty => 
+                specialty.toLowerCase().includes(keyword.toLowerCase())
+              ) ||
+              therapist.bio.toLowerCase().includes(keyword.toLowerCase())
+            );
+          });
+          
+          if (approachMatches.length > 0) {
+            score += approachMatches.length * 15;
+            reasons.push(`Uses your preferred approaches`);
+          } else {
+            score += 5;
+            reasons.push('Uses evidence-based approaches');
+          }
+        } else {
+          // If no preference, all therapists get points
+          score += 15;
+          reasons.push('Uses evidence-based approaches');
+        }
+        
+        // Add some randomness to make results more varied
+        score += Math.random() * 10;
+        
+        return {
+          therapist,
+          score,
+          reasons,
+          matchPercentage: Math.min(score, 100)
+        };
+      });
+      
+      console.log('Scored therapists:', scoredTherapists); // Debug log
+      
+      // Sort by score and return top 5, but ensure we always return some results
+      const sorted = scoredTherapists.sort((a, b) => b.score - a.score);
+      const results = sorted.slice(0, 5);
+      
+      console.log('Final results:', results); // Debug log
+      
+      return results;
+    }
+
+    function startOver() {
+      currentQuestionIndex = 0;
+      answers = {};
+      document.getElementById('resultsContainer').classList.remove('show');
+      document.getElementById('thankYouContainer').style.display = 'none';
+      document.getElementById('questionContainer').style.display = 'block';
+      showQuestion();
+      updateProgress();
+    }
+
+    // Booking form functions
+    let selectedTherapist = null;
+
+    function openBookingForm(therapistId) {
+      selectedTherapist = therapists.find(t => t.id === therapistId);
+      if (selectedTherapist) {
+        // Update modal header
+        document.getElementById('bookingTherapistName').textContent = `Book with ${selectedTherapist.name}`;
+        
+        // Update therapist profile section
+        document.getElementById('bookingTherapistNameFull').textContent = selectedTherapist.name;
+        document.getElementById('bookingTherapistBio').textContent = selectedTherapist.bio;
+        
+        // Update therapist image
+        const therapistImage = document.getElementById('bookingTherapistImage');
+        const therapistInitials = document.querySelector('.therapist-profile-initials');
+        therapistImage.src = `./public/portraits/${selectedTherapist.image}`;
+        therapistImage.alt = selectedTherapist.name;
+        
+        // Set initials fallback
+        const initials = selectedTherapist.name.split(' ').map(n => n[0]).join('');
+        therapistInitials.textContent = initials;
+        
+        // Update specialties
+        const specialtiesContainer = document.getElementById('bookingTherapistSpecialties');
+        specialtiesContainer.innerHTML = selectedTherapist.specialties.map(specialty => 
+          `<span class="specialty-tag">${specialty}</span>`
+        ).join('');
+        
+        // Update preferences summary
+        updatePreferencesSummary();
+        
+        // Show modal
+        document.getElementById('bookingModal').style.display = 'flex';
+      }
+    }
+
+    function updatePreferencesSummary() {
+      const preferencesList = document.getElementById('preferencesList');
+      const preferences = [];
+      
+      // Who is seeking therapy
+      if (answers.who) {
+        const whoMap = {
+          'adult_individual': 'therapy for yourself',
+          'couple': 'therapy for you and your partner',
+          'child_teen': 'therapy for your child or teen',
+          'family': 'family therapy'
+        };
+        preferences.push(`<div><strong>Seeking:</strong> ${whoMap[answers.who] || answers.who}</div>`);
+      }
+      
+      // Location preference
+      if (answers.location) {
+        const locationMap = {
+          'either': 'Online or in-person sessions',
+          'inperson_only': 'In-person sessions only',
+          'online_only': 'Online sessions only'
+        };
+        preferences.push(`<div><strong>Format:</strong> ${locationMap[answers.location] || answers.location}</div>`);
+      }
+      
+      // Primary concerns
+      if (answers.concerns && answers.concerns.length > 0 && !answers.concerns.includes('exploring')) {
+        const concernMap = {
+          'anxiety_depression': 'Anxiety or depression',
+          'trauma': 'Trauma or PTSD',
+          'relationships': 'Relationship challenges',
+          'lgbtqi': 'LGBTQI+ identity support',
+          'neurodiversity': 'Neurodiversity (ADHD, autism)',
+          'grief': 'Grief and loss',
+          'transitions': 'Life transitions',
+          'addiction': 'Addiction or recovery',
+          'sexual_health': 'Sexual health or intimacy'
+        };
+        const concernTexts = answers.concerns.map(concern => concernMap[concern] || concern).join(', ');
+        preferences.push(`<div><strong>Primary concerns:</strong> ${concernTexts}</div>`);
+      }
+      
+      // Timeline
+      preferences.push(`<div><strong>Timeline:</strong> Willing to wait for the right therapist</div>`);
+      
+      // Selected therapist
+      if (selectedTherapist) {
+        preferences.push(`<div><strong>Selected Therapist:</strong> ${selectedTherapist.name}</div>`);
+        preferences.push(`<div><strong>Specializes in:</strong> ${selectedTherapist.specialties[0]}</div>`);
+      }
+      
+      preferencesList.innerHTML = preferences.join('');
+    }
+
+    function closeBookingModal() {
+      document.getElementById('bookingModal').style.display = 'none';
+      selectedTherapist = null;
+    }
+
+    function submitBooking(event) {
+      event.preventDefault();
+      
+      const formData = new FormData(event.target);
+      const bookingData = {
+        therapist: selectedTherapist,
+        clientName: formData.get('clientName'),
+        clientEmail: formData.get('clientEmail'),
+        clientPhone: formData.get('clientPhone'),
+        preferredTime: formData.get('preferredTime'),
+        message: formData.get('message'),
+        timestamp: new Date().toISOString()
+      };
+
+      // Simulate booking submission
+      console.log('Booking submitted:', bookingData);
+      
+      // Close modal and show thank you page
+      closeBookingModal();
+      showThankYouPage();
+    }
+
+    function showThankYouPage() {
+      document.getElementById('questionContainer').style.display = 'none';
+      document.getElementById('resultsContainer').style.display = 'none';
+      document.getElementById('thankYouContainer').style.display = 'block';
+    }
+
+    function showTherapistProfile(therapistId) {
+      selectedTherapist = therapists.find(t => t.id === therapistId);
+      if (selectedTherapist) {
+        // Update modal header
+        document.getElementById('profileTherapistName').textContent = `${selectedTherapist.name} - Profile`;
+        
+        // Update therapist details
+        document.getElementById('profileTherapistNameFull').textContent = selectedTherapist.name;
+        document.getElementById('profileTherapistPronouns').textContent = selectedTherapist.pronouns;
+        document.getElementById('profileTherapistBioFull').textContent = selectedTherapist.fullBio || selectedTherapist.bio;
+        document.getElementById('profileTherapistLocation').textContent = selectedTherapist.location;
+        document.getElementById('profileTherapistPrice').textContent = `$${selectedTherapist.price}/session`;
+        document.getElementById('profileTherapistAvailability').textContent = selectedTherapist.accepting ? 'Accepting new clients' : 'Not currently accepting new clients';
+        
+        // Update additional details
+        document.getElementById('profileTherapistQualifications').textContent = selectedTherapist.qualifications || 'Not specified';
+        document.getElementById('profileTherapistExperience').textContent = selectedTherapist.experience || 'Not specified';
+        document.getElementById('profileTherapistLanguages').textContent = selectedTherapist.languages ? selectedTherapist.languages.join(', ') : 'English';
+        document.getElementById('profileTherapistInsurance').textContent = selectedTherapist.insurance || 'Not specified';
+        
+        // Update therapist image
+        const therapistImage = document.getElementById('profileTherapistImage');
+        const therapistInitials = document.querySelector('.therapist-profile-initials-large');
+        therapistImage.src = `./public/portraits/${selectedTherapist.image}`;
+        therapistImage.alt = selectedTherapist.name;
+        
+        // Reset image display
+        therapistImage.style.display = 'block';
+        therapistInitials.style.display = 'none';
+        
+        // Set initials fallback
+        const initials = selectedTherapist.name.split(' ').map(n => n[0]).join('');
+        therapistInitials.textContent = initials;
+        
+        // Update specialties
+        const specialtiesContainer = document.getElementById('profileTherapistSpecialtiesFull');
+        specialtiesContainer.innerHTML = selectedTherapist.specialties.map(specialty => 
+          `<span class="specialty-tag">${specialty}</span>`
+        ).join('');
+        
+        // Update modalities
+        const modalitiesContainer = document.getElementById('profileTherapistModalities');
+        if (selectedTherapist.modalities && selectedTherapist.modalities.length > 0) {
+          modalitiesContainer.innerHTML = `
+            <h4>Therapeutic Approaches</h4>
+            ${selectedTherapist.modalities.map(modality => 
+              `<span class="modality-tag">${modality}</span>`
+            ).join('')}
+          `;
+        } else {
+          modalitiesContainer.innerHTML = '';
+        }
+        
+        // Update approach
+        const approachContainer = document.getElementById('profileTherapistApproach');
+        if (selectedTherapist.approach) {
+          approachContainer.innerHTML = `
+            <h4>My Approach</h4>
+            <p>${selectedTherapist.approach}</p>
+          `;
+        } else {
+          approachContainer.innerHTML = '';
+        }
+        
+        // Update session info
+        const sessionInfoContainer = document.getElementById('profileTherapistSessionInfo');
+        if (selectedTherapist.sessionInfo) {
+          sessionInfoContainer.innerHTML = `
+            <h4>Session Information</h4>
+            <p>${selectedTherapist.sessionInfo}</p>
+          `;
+        } else {
+          sessionInfoContainer.innerHTML = '';
+        }
+        
+        // Show modal
+        document.getElementById('therapistProfileModal').style.display = 'flex';
+      }
+    }
+
+    function closeTherapistProfile() {
+      document.getElementById('therapistProfileModal').style.display = 'none';
+    }
+
+    // Initialize the demo
+    init();
+  </script>
+  <script defer src="public/feedback-widget.js%3Fv=20250130"></script>
+</body>
+</html>

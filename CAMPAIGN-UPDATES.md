@@ -10,7 +10,7 @@ Based on your feedback, I've updated the campaign to better reflect the research
 
 ### **1. Fixed Sandbox Demo URL**
 **Changed from:** `https://therapair.com.au/quiz`  
-**Changed to:** `https://therapair.com.au/sandbox-demo.html`
+**Changed to:** `https://therapair.com.au/sandbox/sandbox-demo.html`
 
 **Files updated:**
 - ✅ `email-campaign/therapist-outreach-email.html`
@@ -167,7 +167,7 @@ With these updates, the survey will capture:
 4. ✅ Test survey flow with new questions
 
 ### **Before Launch**
-1. **Deploy sandbox demo** to `therapair.com.au/sandbox-demo.html`
+1. **Deploy sandbox demo** to `therapair.com.au/sandbox/sandbox-demo.html`
 2. **Import updated survey** to Typebot
 3. **Update Notion database** with new schema
 4. **Test end-to-end** with new questions

@@ -3,6 +3,18 @@
 ## Overview
 Therapair is a non-profit initiative by Unison Mental Health that helps people find the right therapist through personality, values, and lived experience alignment.
 
+## 🔒 HIPAA Compliance
+Therapair is fully committed to HIPAA compliance and protecting your protected health information (PHI). We implement comprehensive administrative, physical, and technical safeguards to ensure the confidentiality, integrity, and availability of your sensitive health information.
+
+### Security Features
+- **End-to-End Encryption**: AES-256 encryption for data at rest and TLS 1.3 for data in transit
+- **Access Controls**: Multi-factor authentication and role-based access controls
+- **Audit Logging**: Comprehensive audit trails monitor all access to your information
+- **Data Minimization**: We only collect the information necessary for matching
+- **Business Associate Agreements**: All third-party vendors sign BAAs ensuring HIPAA compliance
+
+For detailed information, see our [HIPAA Compliance Guide](docs/strategy/HIPAA-COMPLIANCE-GUIDE.md) and [dedicated compliance page](products/landing-page/legal/hipaa-compliance.html).
+
 ## 🏗️ Project Structure
 
 ```
@@ -147,7 +159,7 @@ Non-profit initiative by Unison Mental Health
 ## 🔗 Links
 
 - **Website:** https://therapair.com.au
-- **Sandbox Demo:** https://therapair.com.au/sandbox-demo.html
+- **Sandbox Demo:** https://therapair.com.au/sandbox/sandbox-demo.html
 - **Email Campaign:** See [campaigns/email-campaign/](./campaigns/email-campaign/)
 
 ## 📞 Contact

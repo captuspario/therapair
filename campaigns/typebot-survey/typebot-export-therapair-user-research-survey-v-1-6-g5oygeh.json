@@ -1,0 +1,2643 @@
+{
+    "version": "6.1",
+    "id": "kahqs2xwq7nwlwgjog5oygeh",
+    "name": "Therapair User Research Survey V1.6",
+    "events":
+    [
+        {
+            "id": "start",
+            "outgoingEdgeId": "edge_start_to_welcome",
+            "graphCoordinates":
+            {
+                "x": -1850.71,
+                "y": -286.71
+            },
+            "type": "start"
+        }
+    ],
+    "groups":
+    [
+        {
+            "id": "group_welcome",
+            "title": "Welcome",
+            "graphCoordinates":
+            {
+                "x": -1555.65,
+                "y": -293.89
+            },
+            "blocks":
+            [
+                {
+                    "id": "welcome_text_1",
+                    "type": "text",
+                    "content":
+                    {
+                        "richText":
+                        [
+                            {
+                                "type": "p",
+                                "children":
+                                [
+                                    {
+                                        "text": "Hi, and thank you for taking a few minutes to support "
+                                    },
+                                    {
+                                        "bold": true,
+                                        "text": "Therapair"
+                                    },
+                                    {
+                                        "text": " — a non-profit initiative by "
+                                    },
+                                    {
+                                        "bold": true,
+                                        "text": "Unison Mental Health"
+                                    },
+                                    {
+                                        "text": "."
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                },
+                {
+                    "id": "welcome_text_2",
+                    "type": "text",
+                    "content":
+                    {
+                        "richText":
+                        [
+                            {
+                                "type": "p",
+                                "children":
+                                [
+                                    {
+                                        "text": "We're developing a system that helps people find the right therapist through personality, values, and lived-experience alignment."
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                },
+                {
+                    "id": "welcome_text_3",
+                    "type": "text",
+                    "content":
+                    {
+                        "richText":
+                        [
+                            {
+                                "type": "p",
+                                "children":
+                                [
+                                    {
+                                        "text": "You may have seen our basic sandbox demo — it's just a starting point. We need to make the questions much more sophisticated to create truly personalised connections."
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                },
+                {
+                    "id": "welcome_text_4",
+                    "type": "text",
+                    "content":
+                    {
+                        "richText":
+                        [
+                            {
+                                "type": "p",
+                                "children":
+                                [
+                                    {
+                                        "text": "This short "
+                                    },
+                                    {
+                                        "bold": true,
+                                        "text": "5–7 minute survey"
+                                    },
+                                    {
+                                        "text": " explores:"
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "ul",
+                                "children":
+                                [
+                                    {
+                                        "type": "li",
+                                        "children":
+                                        [
+                                            {
+                                                "text": "What questions matter most for matching"
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "type": "li",
+                                        "children":
+                                        [
+                                            {
+                                                "text": "How many questions people will actually answer"
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "type": "li",
+                                        "children":
+                                        [
+                                            {
+                                                "text": "What level of personalisation feels right"
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "type": "li",
+                                        "children":
+                                        [
+                                            {
+                                                "text": "What options resonate most"
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                },
+                {
+                    "id": "welcome_text_5",
+                    "type": "text",
+                    "content":
+                    {
+                        "richText":
+                        [
+                            {
+                                "type": "p",
+                                "children":
+                                [
+                                    {
+                                        "text": "Your feedback will help shape a more ethical, inclusive, and human-centred platform."
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                },
+                {
+                    "id": "welcome_continue",
+                    "type": "choice input",
+                    "items":
+                    [
+                        {
+                            "id": "continue_btn",
+                            "outgoingEdgeId": "edge_welcome_to_q1",
+                            "content": "Start survey"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "group_q1",
+            "title": "Q1: Profession",
+            "graphCoordinates":
+            {
+                "x": -1225.17,
+                "y": -294.8
+            },
+            "blocks":
+            [
+                {
+                    "id": "q1_text",
+                    "type": "text",
+                    "content":
+                    {
+                        "richText":
+                        [
+                            {
+                                "type": "p",
+                                "children":
+                                [
+                                    {
+                                        "bold": true,
+                                        "text": "What's your profession?"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                },
+                {
+                    "id": "q1_choice",
+                    "type": "choice input",
+                    "items":
+                    [
+                        {
+                            "id": "prof_psychologist",
+                            "outgoingEdgeId": "edge_q1_to_q2",
+                            "content": "Psychologist"
+                        },
+                        {
+                            "id": "prof_counsellor",
+                            "outgoingEdgeId": "edge_q1_to_q2",
+                            "content": "Counsellor"
+                        },
+                        {
+                            "id": "prof_social_worker",
+                            "outgoingEdgeId": "edge_q1_to_q2",
+                            "content": "Social Worker"
+                        },
+                        {
+                            "id": "prof_psychiatrist",
+                            "outgoingEdgeId": "edge_q1_to_q2",
+                            "content": "Psychiatrist"
+                        },
+                        {
+                            "id": "prof_psychotherapist",
+                            "outgoingEdgeId": "edge_q1_to_q2",
+                            "content": "Psychotherapist"
+                        },
+                        {
+                            "id": "prof_art_therapist",
+                            "outgoingEdgeId": "edge_q1_to_q2",
+                            "content": "Art Therapist"
+                        },
+                        {
+                            "id": "prof_other",
+                            "outgoingEdgeId": "edge_q1_to_q1_other",
+                            "content": "Other"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "group_q1_other",
+            "title": "Q1: Profession Other",
+            "graphCoordinates":
+            {
+                "x": -894.92,
+                "y": -296.71
+            },
+            "blocks":
+            [
+                {
+                    "id": "q1_other_text",
+                    "type": "text",
+                    "content":
+                    {
+                        "richText":
+                        [
+                            {
+                                "type": "p",
+                                "children":
+                                [
+                                    {
+                                        "text": "Please specify your profession:"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                },
+                {
+                    "id": "q1_other_input",
+                    "outgoingEdgeId": "edge_q1_other_to_q2",
+                    "type": "text input",
+                    "options":
+                    {
+                        "labels":
+                        {
+                            "placeholder": "Enter your profession",
+                            "button": "Continue"
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "id": "group_q2",
+            "title": "Q2: Years in Practice",
+            "graphCoordinates":
+            {
+                "x": -568.15,
+                "y": -298.2
+            },
+            "blocks":
+            [
+                {
+                    "id": "q2_text",
+                    "type": "text",
+                    "content":
+                    {
+                        "richText":
+                        [
+                            {
+                                "type": "p",
+                                "children":
+                                [
+                                    {
+                                        "bold": true,
+                                        "text": "How many years have you been practising?"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                },
+                {
+                    "id": "q2_choice",
+                    "type": "choice input",
+                    "items":
+                    [
+                        {
+                            "id": "years_0_2",
+                            "outgoingEdgeId": "edge_q2_to_q3",
+                            "content": "0–2 years"
+                        },
+                        {
+                            "id": "years_3_5",
+                            "outgoingEdgeId": "edge_q2_to_q3",
+                            "content": "3–5 years"
+                        },
+                        {
+                            "id": "years_6_10",
+                            "outgoingEdgeId": "edge_q2_to_q3",
+                            "content": "6–10 years"
+                        },
+                        {
+                            "id": "years_10_plus",
+                            "outgoingEdgeId": "edge_q2_to_q3",
+                            "content": "10+ years"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "group_q3",
+            "title": "Q3: Client Types",
+            "graphCoordinates":
+            {
+                "x": -247.08,
+                "y": -300.68
+            },
+            "blocks":
+            [
+                {
+                    "id": "q3_text",
+                    "type": "text",
+                    "content":
+                    {
+                        "richText":
+                        [
+                            {
+                                "type": "p",
+                                "children":
+                                [
+                                    {
+                                        "bold": true,
+                                        "text": "What type of clients do you primarily support?"
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "p",
+                                "children":
+                                [
+                                    {
+                                        "text": "(Select all that apply)"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                },
+                {
+                    "id": "q3_choice",
+                    "outgoingEdgeId": "peoafzjjw3csm1gxgalqi4rn",
+                    "type": "choice input",
+                    "items":
+                    [
+                        {
+                            "id": "clients_adults",
+                            "content": "Adults"
+                        },
+                        {
+                            "id": "clients_teens",
+                            "content": "Teens"
+                        },
+                        {
+                            "id": "clients_couples",
+                            "content": "Couples"
+                        },
+                        {
+                            "id": "clients_lgbtq",
+                            "content": "LGBTQ+"
+                        },
+                        {
+                            "id": "clients_trauma",
+                            "content": "Trauma-focused"
+                        },
+                        {
+                            "id": "clients_neurodivergent",
+                            "content": "Neurodivergent"
+                        },
+                        {
+                            "id": "clients_other",
+                            "content": "Other"
+                        }
+                    ],
+                    "options":
+                    {
+                        "variableId": "q3_multiselect",
+                        "isMultipleChoice": true,
+                        "buttonLabel": "Continue"
+                    }
+                }
+            ]
+        },
+        {
+            "id": "group_q3_condition",
+            "title": "Q3: Client Types Condition",
+            "graphCoordinates":
+            {
+                "x": 89.07,
+                "y": -621.57
+            },
+            "blocks":
+            [
+                {
+                    "id": "q3_condition",
+                    "outgoingEdgeId": "edge_q3_condition_to_q4",
+                    "type": "Condition",
+                    "items":
+                    [
+                        {
+                            "id": "q3_check_other",
+                            "outgoingEdgeId": "edge_q3_condition_to_q3_other",
+                            "content":
+                            {
+                                "comparisons":
+                                [
+                                    {
+                                        "id": "q3_contains_other",
+                                        "variableId": "q3_multiselect",
+                                        "comparisonOperator": "Contains",
+                                        "value": "Other"
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "group_q3_other_input",
+            "title": "Q3: Client Types Other",
+            "graphCoordinates":
+            {
+                "x": 175.72,
+                "y": -297.51
+            },
+            "blocks":
+            [
+                {
+                    "id": "q3_other_text",
+                    "type": "text",
+                    "content":
+                    {
+                        "richText":
+                        [
+                            {
+                                "id": "mBrYHEg8mK",
+                                "type": "p",
+                                "children":
+                                [
+                                    {
+                                        "text": "If you selected 'Other' for client types, please specify:"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                },
+                {
+                    "id": "q3_other_input",
+                    "outgoingEdgeId": "edge_q3_other_to_q4",
+                    "type": "text input",
+                    "options":
+                    {
+                        "labels":
+                        {
+                            "placeholder": "e.g., Children, Families, etc.",
+                            "button": "Continue"
+                        },
+                        "isLong": false
+                    }
+                }
+            ]
+        },
+        {
+            "id": "group_q4",
+            "title": "Q4: Therapy Modalities",
+            "graphCoordinates":
+            {
+                "x": 598.47,
+                "y": -298.84
+            },
+            "blocks":
+            [
+                {
+                    "id": "q4_text",
+                    "type": "text",
+                    "content":
+                    {
+                        "richText":
+                        [
+                            {
+                                "type": "p",
+                                "children":
+                                [
+                                    {
+                                        "bold": true,
+                                        "text": "What therapy modalities do you mainly use?"
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "p",
+                                "children":
+                                [
+                                    {
+                                        "text": "(Select all that apply)"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                },
+                {
+                    "id": "q4_choice",
+                    "outgoingEdgeId": "edge_q4_to_q4_condition",
+                    "type": "choice input",
+                    "items":
+                    [
+                        {
+                            "id": "mod_cbt",
+                            "content": "CBT"
+                        },
+                        {
+                            "id": "mod_dbt",
+                            "content": "DBT"
+                        },
+                        {
+                            "id": "mod_act",
+                            "content": "ACT"
+                        },
+                        {
+                            "id": "mod_emdr",
+                            "content": "EMDR"
+                        },
+                        {
+                            "id": "mod_person_centred",
+                            "content": "Person-Centred"
+                        },
+                        {
+                            "id": "mod_somatic",
+                            "content": "Somatic"
+                        },
+                        {
+                            "id": "mod_gestalt",
+                            "content": "Gestalt"
+                        },
+                        {
+                            "id": "mod_psychodynamic",
+                            "content": "Psychodynamic"
+                        },
+                        {
+                            "id": "mod_relationship",
+                            "content": "Relationship Therapy"
+                        },
+                        {
+                            "id": "mod_art",
+                            "content": "Art Therapy"
+                        },
+                        {
+                            "id": "mod_other",
+                            "content": "Other"
+                        }
+                    ],
+                    "options":
+                    {
+                        "variableId": "q4_multiselect",
+                        "isMultipleChoice": true,
+                        "buttonLabel": "Continue"
+                    }
+                }
+            ]
+        },
+        {
+            "id": "group_q4_condition",
+            "title": "Q4: Modalities Condition",
+            "graphCoordinates":
+            {
+                "x": 956.69,
+                "y": -563.8
+            },
+            "blocks":
+            [
+                {
+                    "id": "q4_condition",
+                    "outgoingEdgeId": "edge_q4_condition_to_q5",
+                    "type": "Condition",
+                    "items":
+                    [
+                        {
+                            "id": "q4_check_other",
+                            "outgoingEdgeId": "edge_q4_condition_to_q4_other",
+                            "content":
+                            {
+                                "comparisons":
+                                [
+                                    {
+                                        "id": "q4_contains_other",
+                                        "variableId": "q4_multiselect",
+                                        "comparisonOperator": "Contains",
+                                        "value": "Other"
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "group_q4_other_input",
+            "title": "Q4: Modalities Other",
+            "graphCoordinates":
+            {
+                "x": 1108.22,
+                "y": -239
+            },
+            "blocks":
+            [
+                {
+                    "id": "q4_other_text",
+                    "type": "text",
+                    "content":
+                    {
+                        "richText":
+                        [
+                            {
+                                "id": "mzp9VkjCUP",
+                                "type": "p",
+                                "children":
+                                [
+                                    {
+                                        "text": "If you selected 'Other' for therapy modalities, please specify:"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                },
+                {
+                    "id": "q4_other_input",
+                    "outgoingEdgeId": "edge_q4_other_to_q5",
+                    "type": "text input",
+                    "options":
+                    {
+                        "labels":
+                        {
+                            "placeholder": "e.g., Music Therapy, Play Therapy, etc.",
+                            "button": "Continue"
+                        },
+                        "isLong": false
+                    }
+                }
+            ]
+        },
+        {
+            "id": "group_q5",
+            "title": "Q5: How Clients Find You",
+            "graphCoordinates":
+            {
+                "x": 1500,
+                "y": -300
+            },
+            "blocks":
+            [
+                {
+                    "id": "q5_text",
+                    "type": "text",
+                    "content":
+                    {
+                        "richText":
+                        [
+                            {
+                                "type": "p",
+                                "children":
+                                [
+                                    {
+                                        "bold": true,
+                                        "text": "How do clients typically find you?"
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "p",
+                                "children":
+                                [
+                                    {
+                                        "text": "(Select all that apply)"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                },
+                {
+                    "id": "q5_choice",
+                    "outgoingEdgeId": "edge_q5_to_q5_condition",
+                    "type": "choice input",
+                    "items":
+                    [
+                        {
+                            "id": "find_referrals",
+                            "content": "Referrals"
+                        },
+                        {
+                            "id": "find_directories",
+                            "content": "Directories"
+                        },
+                        {
+                            "id": "find_word_mouth",
+                            "content": "Word of mouth"
+                        },
+                        {
+                            "id": "find_online",
+                            "content": "Online search"
+                        },
+                        {
+                            "id": "find_social",
+                            "content": "Social media"
+                        },
+                        {
+                            "id": "find_other",
+                            "content": "Other"
+                        }
+                    ],
+                    "options":
+                    {
+                        "variableId": "q5_multiselect",
+                        "isMultipleChoice": true,
+                        "buttonLabel": "Continue"
+                    }
+                }
+            ]
+        },
+        {
+            "id": "group_q5_condition",
+            "title": "Q5: How Clients Find Condition",
+            "graphCoordinates":
+            {
+                "x": 1865.63,
+                "y": -556.58
+            },
+            "blocks":
+            [
+                {
+                    "id": "q5_condition",
+                    "outgoingEdgeId": "edge_q5_condition_to_q6",
+                    "type": "Condition",
+                    "items":
+                    [
+                        {
+                            "id": "q5_check_other",
+                            "outgoingEdgeId": "edge_q5_condition_to_q5_other",
+                            "content":
+                            {
+                                "comparisons":
+                                [
+                                    {
+                                        "id": "q5_contains_other",
+                                        "variableId": "q5_multiselect",
+                                        "comparisonOperator": "Contains",
+                                        "value": "Other"
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "group_q5_other_input",
+            "title": "Q5: How Clients Find Other",
+            "graphCoordinates":
+            {
+                "x": 2006.74,
+                "y": -246.11
+            },
+            "blocks":
+            [
+                {
+                    "id": "q5_other_text",
+                    "type": "text",
+                    "content":
+                    {
+                        "richText":
+                        [
+                            {
+                                "id": "cJa6DXJjFv",
+                                "type": "p",
+                                "children":
+                                [
+                                    {
+                                        "text": "If you selected 'Other' for how clients find you, please specify:"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                },
+                {
+                    "id": "q5_other_input",
+                    "outgoingEdgeId": "edge_q5_other_to_q6",
+                    "type": "text input",
+                    "options":
+                    {
+                        "labels":
+                        {
+                            "placeholder": "e.g., University clinic, Private practice network, etc.",
+                            "button": "Continue"
+                        },
+                        "isLong": false
+                    }
+                }
+            ]
+        },
+        {
+            "id": "group_q6",
+            "title": "Q6: Great Match Factors",
+            "graphCoordinates":
+            {
+                "x": 2426.99,
+                "y": -297.4
+            },
+            "blocks":
+            [
+                {
+                    "id": "q6_text",
+                    "type": "text",
+                    "content":
+                    {
+                        "richText":
+                        [
+                            {
+                                "type": "p",
+                                "children":
+                                [
+                                    {
+                                        "bold": true,
+                                        "text": "In your experience, what makes a great match?"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                },
+                {
+                    "id": "q6_choice",
+                    "outgoingEdgeId": "edge_q6_to_q6_condition",
+                    "type": "choice input",
+                    "items":
+                    [
+                        {
+                            "id": "match_values",
+                            "content": "Shared core values"
+                        },
+                        {
+                            "id": "match_communication",
+                            "content": "Similar communication style"
+                        },
+                        {
+                            "id": "match_trust",
+                            "content": "Trust"
+                        },
+                        {
+                            "id": "match_goals",
+                            "content": "Life goal alignment"
+                        },
+                        {
+                            "id": "match_lived",
+                            "content": "Lived experience"
+                        },
+                        {
+                            "id": "match_religious",
+                            "content": "Shared religious beliefs/background"
+                        },
+                        {
+                            "id": "match_cultural",
+                            "content": "Shared cultural background"
+                        },
+                        {
+                            "id": "match_diagnosis",
+                            "content": "Shared experience of a diagnosis (ADHD, Autism, OCD, Addiction, etc)"
+                        },
+                        {
+                            "id": "match_other",
+                            "content": "Other"
+                        }
+                    ],
+                    "options":
+                    {
+                        "variableId": "q6_multiselect",
+                        "isMultipleChoice": true,
+                        "buttonLabel": "Continue"
+                    }
+                }
+            ]
+        },
+        {
+            "id": "group_q6_condition",
+            "title": "Q6: Great Match Condition",
+            "graphCoordinates":
+            {
+                "x": 2754.8,
+                "y": -564.66
+            },
+            "blocks":
+            [
+                {
+                    "id": "q6_condition",
+                    "outgoingEdgeId": "edge_q6_condition_to_q7",
+                    "type": "Condition",
+                    "items":
+                    [
+                        {
+                            "id": "q6_check_other",
+                            "outgoingEdgeId": "edge_q6_condition_to_q6_other",
+                            "content":
+                            {
+                                "comparisons":
+                                [
+                                    {
+                                        "id": "q6_contains_other",
+                                        "variableId": "q6_multiselect",
+                                        "comparisonOperator": "Contains",
+                                        "value": "Other"
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "group_q6_other_input",
+            "title": "Q6: Great Match Other",
+            "graphCoordinates":
+            {
+                "x": 2853.41,
+                "y": -241.81
+            },
+            "blocks":
+            [
+                {
+                    "id": "q6_other_text",
+                    "type": "text",
+                    "content":
+                    {
+                        "richText":
+                        [
+                            {
+                                "id": "JWm-tssdKC",
+                                "type": "p",
+                                "children":
+                                [
+                                    {
+                                        "text": "If you selected 'Other' for great match factors, please specify:"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                },
+                {
+                    "id": "q6_other_input",
+                    "outgoingEdgeId": "edge_q6_other_to_q7",
+                    "type": "text input",
+                    "options":
+                    {
+                        "labels":
+                        {
+                            "placeholder": "Enter other great match factors...",
+                            "button": "Continue"
+                        },
+                        "isLong": false
+                    }
+                }
+            ]
+        },
+        {
+            "id": "group_q7",
+            "title": "Q7: Biggest Gap",
+            "graphCoordinates":
+            {
+                "x": 3244.02,
+                "y": -277.69
+            },
+            "blocks":
+            [
+                {
+                    "id": "q7_text",
+                    "type": "text",
+                    "content":
+                    {
+                        "richText":
+                        [
+                            {
+                                "type": "p",
+                                "children":
+                                [
+                                    {
+                                        "bold": true,
+                                        "text": "What is the biggest challenge you face in finding clients who you are well suited for?"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                },
+                {
+                    "id": "q7_input",
+                    "outgoingEdgeId": "edge_q7_to_q8",
+                    "type": "text input",
+                    "options":
+                    {
+                        "labels":
+                        {
+                            "placeholder": "Share your thoughts...",
+                            "button": "Continue"
+                        },
+                        "isLong": true
+                    }
+                }
+            ]
+        },
+        {
+            "id": "group_q8",
+            "title": "Q8: Screening Clients",
+            "graphCoordinates":
+            {
+                "x": 3579.57,
+                "y": -295.56
+            },
+            "blocks":
+            [
+                {
+                    "id": "q8_text",
+                    "type": "text",
+                    "content":
+                    {
+                        "richText":
+                        [
+                            {
+                                "type": "p",
+                                "children":
+                                [
+                                    {
+                                        "bold": true,
+                                        "text": "Do you currently screen clients for fit before accepting them?"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                },
+                {
+                    "id": "q8_choice",
+                    "type": "choice input",
+                    "items":
+                    [
+                        {
+                            "id": "screening_yes",
+                            "outgoingEdgeId": "edge_q8_to_q9",
+                            "content": "Yes"
+                        },
+                        {
+                            "id": "screening_no",
+                            "outgoingEdgeId": "edge_q8_to_q9",
+                            "content": "No"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "group_q9",
+            "title": "Q9: Open to Sharing",
+            "graphCoordinates":
+            {
+                "x": 3906.72,
+                "y": -299.03
+            },
+            "blocks":
+            [
+                {
+                    "id": "q9_text",
+                    "type": "text",
+                    "content":
+                    {
+                        "richText":
+                        [
+                            {
+                                "type": "p",
+                                "children":
+                                [
+                                    {
+                                        "bold": true,
+                                        "text": "Would you be open to sharing your own personality traits, values, and lived experiences to help clients find the right match?"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                },
+                {
+                    "id": "q9_choice",
+                    "type": "choice input",
+                    "items":
+                    [
+                        {
+                            "id": "sharing_yes",
+                            "outgoingEdgeId": "edge_q9_to_q10",
+                            "content": "Yes"
+                        },
+                        {
+                            "id": "sharing_maybe",
+                            "outgoingEdgeId": "edge_q9_to_q10",
+                            "content": "Maybe"
+                        },
+                        {
+                            "id": "sharing_no",
+                            "outgoingEdgeId": "edge_q9_to_q10",
+                            "content": "No"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "group_q10",
+            "title": "Q10: Which Questions Matter",
+            "graphCoordinates":
+            {
+                "x": 4248.68,
+                "y": -298.64
+            },
+            "blocks":
+            [
+                {
+                    "id": "q10_text",
+                    "type": "text",
+                    "content":
+                    {
+                        "richText":
+                        [
+                            {
+                                "type": "p",
+                                "children":
+                                [
+                                    {
+                                        "bold": true,
+                                        "text": "Which of these attributes would create the deepest personalisation?"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                },
+                {
+                    "id": "q10_choice",
+                    "outgoingEdgeId": "edge_q10_to_q10_condition",
+                    "type": "choice input",
+                    "items":
+                    [
+                        {
+                            "id": "attr_communication",
+                            "content": "Communication style"
+                        },
+                        {
+                            "id": "attr_relationship",
+                            "content": "Relationship style"
+                        },
+                        {
+                            "id": "attr_personality",
+                            "content": "Personality traits"
+                        },
+                        {
+                            "id": "attr_lived",
+                            "content": "Lived experience"
+                        },
+                        {
+                            "id": "attr_values",
+                            "content": "Values and beliefs"
+                        },
+                        {
+                            "id": "attr_work_style",
+                            "content": "Therapeutic work style and boundaries"
+                        },
+                        {
+                            "id": "attr_all",
+                            "content": "All of the above"
+                        },
+                        {
+                            "id": "attr_none",
+                            "content": "None"
+                        },
+                        {
+                            "id": "attr_other",
+                            "content": "Other"
+                        }
+                    ],
+                    "options":
+                    {
+                        "variableId": "q10_multiselect",
+                        "isMultipleChoice": true,
+                        "buttonLabel": "Continue"
+                    }
+                }
+            ]
+        },
+        {
+            "id": "group_q10_condition",
+            "title": "Q10: Questions Matter Condition",
+            "graphCoordinates":
+            {
+                "x": 4570.55,
+                "y": -579.04
+            },
+            "blocks":
+            [
+                {
+                    "id": "q10_condition",
+                    "outgoingEdgeId": "edge_q10_condition_to_q11",
+                    "type": "Condition",
+                    "items":
+                    [
+                        {
+                            "id": "q10_check_other",
+                            "outgoingEdgeId": "edge_q10_condition_to_q10_other",
+                            "content":
+                            {
+                                "comparisons":
+                                [
+                                    {
+                                        "id": "q10_contains_other",
+                                        "variableId": "q10_multiselect",
+                                        "comparisonOperator": "Contains",
+                                        "value": "Other"
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "group_q10_other_input",
+            "title": "Q10: Questions Matter Other",
+            "graphCoordinates":
+            {
+                "x": 4666.27,
+                "y": -218.77
+            },
+            "blocks":
+            [
+                {
+                    "id": "q10_other_text",
+                    "type": "text",
+                    "content":
+                    {
+                        "richText":
+                        [
+                            {
+                                "id": "5-FW8zyyIF",
+                                "type": "p",
+                                "children":
+                                [
+                                    {
+                                        "text": "If you selected 'Other' for important attributes, please specify:"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                },
+                {
+                    "id": "q10_other_input",
+                    "outgoingEdgeId": "edge_q10_other_to_q11",
+                    "type": "text input",
+                    "options":
+                    {
+                        "labels":
+                        {
+                            "placeholder": "Enter other important attributes...",
+                            "button": "Continue"
+                        },
+                        "isLong": false
+                    }
+                }
+            ]
+        },
+        {
+            "id": "group_q11",
+            "title": "Q11: Personality Test",
+            "graphCoordinates":
+            {
+                "x": 5070.12,
+                "y": -280.02
+            },
+            "blocks":
+            [
+                {
+                    "id": "q11_text",
+                    "type": "text",
+                    "content":
+                    {
+                        "richText":
+                        [
+                            {
+                                "type": "p",
+                                "children":
+                                [
+                                    {
+                                        "bold": true,
+                                        "text": "Would you be willing to take a personality test such as the Big Five Inventory or HEXACO?"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                },
+                {
+                    "id": "q11_choice",
+                    "type": "choice input",
+                    "items":
+                    [
+                        {
+                            "id": "personality_yes",
+                            "outgoingEdgeId": "edge_q11_to_q12",
+                            "content": "Yes"
+                        },
+                        {
+                            "id": "personality_no",
+                            "outgoingEdgeId": "edge_q11_to_q12",
+                            "content": "No"
+                        },
+                        {
+                            "id": "personality_maybe",
+                            "outgoingEdgeId": "edge_q11_to_q12",
+                            "content": "Maybe"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "group_q12",
+            "title": "Q12: Too Personal",
+            "graphCoordinates":
+            {
+                "x": 5395.76,
+                "y": -287.76
+            },
+            "blocks":
+            [
+                {
+                    "id": "q12_text",
+                    "type": "text",
+                    "content":
+                    {
+                        "richText":
+                        [
+                            {
+                                "type": "p",
+                                "children":
+                                [
+                                    {
+                                        "bold": true,
+                                        "text": "What would you consider too personal to share?"
+                                    }
+                                ]
+                            },
+                            {
+                                "type": "p",
+                                "children":
+                                [
+                                    {
+                                        "text": "(keeping in mind that details of your profile are never shared with the client, they are only used as a tool to correctly pair the therapist with the client using the search feature.)"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                },
+                {
+                    "id": "q12_choice",
+                    "outgoingEdgeId": "edge_q12_to_q12_condition",
+                    "type": "choice input",
+                    "items":
+                    [
+                        {
+                            "id": "personal_trauma",
+                            "content": "Trauma history"
+                        },
+                        {
+                            "id": "personal_religious",
+                            "content": "Religious beliefs/background"
+                        },
+                        {
+                            "id": "personal_political",
+                            "content": "Political views"
+                        },
+                        {
+                            "id": "personal_relationships",
+                            "content": "Personal relationships"
+                        },
+                        {
+                            "id": "personal_financial",
+                            "content": "Financial situation"
+                        },
+                        {
+                            "id": "personal_cultural",
+                            "content": "Cultural background"
+                        },
+                        {
+                            "id": "personal_none",
+                            "content": "None"
+                        },
+                        {
+                            "id": "personal_other",
+                            "content": "Other"
+                        }
+                    ],
+                    "options":
+                    {
+                        "variableId": "q12_multiselect",
+                        "isMultipleChoice": true,
+                        "buttonLabel": "Continue"
+                    }
+                }
+            ]
+        },
+        {
+            "id": "group_q12_condition",
+            "title": "Q12: Too Personal Condition",
+            "graphCoordinates":
+            {
+                "x": 5777.85,
+                "y": -522.69
+            },
+            "blocks":
+            [
+                {
+                    "id": "q12_condition",
+                    "outgoingEdgeId": "edge_q12_condition_to_q13",
+                    "type": "Condition",
+                    "items":
+                    [
+                        {
+                            "id": "q12_check_other",
+                            "outgoingEdgeId": "edge_q12_condition_to_q12_other",
+                            "content":
+                            {
+                                "comparisons":
+                                [
+                                    {
+                                        "id": "q12_contains_other",
+                                        "variableId": "q12_multiselect",
+                                        "comparisonOperator": "Contains",
+                                        "value": "Other"
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "group_q12_other_input",
+            "title": "Q12: Too Personal Other",
+            "graphCoordinates":
+            {
+                "x": 5907.47,
+                "y": -262.19
+            },
+            "blocks":
+            [
+                {
+                    "id": "q12_other_text",
+                    "type": "text",
+                    "content":
+                    {
+                        "richText":
+                        [
+                            {
+                                "id": "uG0oq86hSW",
+                                "type": "p",
+                                "children":
+                                [
+                                    {
+                                        "text": "If you selected 'Other' for too personal information, please specify:"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                },
+                {
+                    "id": "q12_other_input",
+                    "outgoingEdgeId": "edge_q12_other_to_q13",
+                    "type": "text input",
+                    "options":
+                    {
+                        "labels":
+                        {
+                            "placeholder": "Enter other too personal information...",
+                            "button": "Continue"
+                        },
+                        "isLong": false
+                    }
+                }
+            ]
+        },
+        {
+            "id": "group_q13",
+            "title": "Q13: Profile Detail Level",
+            "graphCoordinates":
+            {
+                "x": 6292.9,
+                "y": -300.84
+            },
+            "blocks":
+            [
+                {
+                    "id": "q13_text",
+                    "type": "text",
+                    "content":
+                    {
+                        "richText":
+                        [
+                            {
+                                "type": "p",
+                                "children":
+                                [
+                                    {
+                                        "bold": true,
+                                        "text": "How detailed should therapist profiles be?"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                },
+                {
+                    "id": "q13_choice",
+                    "type": "choice input",
+                    "items":
+                    [
+                        {
+                            "id": "detail_1",
+                            "outgoingEdgeId": "edge_q13_to_q14",
+                            "content": "1 - Simple (a few basic details)"
+                        },
+                        {
+                            "id": "detail_2",
+                            "outgoingEdgeId": "edge_q13_to_q14",
+                            "content": "2"
+                        },
+                        {
+                            "id": "detail_3",
+                            "outgoingEdgeId": "edge_q13_to_q14",
+                            "content": "3"
+                        },
+                        {
+                            "id": "detail_4",
+                            "outgoingEdgeId": "edge_q13_to_q14",
+                            "content": "4"
+                        },
+                        {
+                            "id": "detail_5",
+                            "outgoingEdgeId": "edge_q13_to_q14",
+                            "content": "5"
+                        },
+                        {
+                            "id": "detail_6",
+                            "outgoingEdgeId": "edge_q13_to_q14",
+                            "content": "6"
+                        },
+                        {
+                            "id": "detail_7",
+                            "outgoingEdgeId": "edge_q13_to_q14",
+                            "content": "7"
+                        },
+                        {
+                            "id": "detail_8",
+                            "outgoingEdgeId": "edge_q13_to_q14",
+                            "content": "8"
+                        },
+                        {
+                            "id": "detail_9",
+                            "outgoingEdgeId": "edge_q13_to_q14",
+                            "content": "9"
+                        },
+                        {
+                            "id": "detail_10",
+                            "outgoingEdgeId": "edge_q13_to_q14",
+                            "content": "10 - Very detailed (a full understanding of you as a therapist and as a person)"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "group_q14",
+            "title": "Q14: Onboarding Time",
+            "graphCoordinates":
+            {
+                "x": 6679.91,
+                "y": -305.73
+            },
+            "blocks":
+            [
+                {
+                    "id": "q14_text",
+                    "type": "text",
+                    "content":
+                    {
+                        "richText":
+                        [
+                            {
+                                "type": "p",
+                                "children":
+                                [
+                                    {
+                                        "bold": true,
+                                        "text": "How much time would you be willing to spend on onboarding?"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                },
+                {
+                    "id": "q14_choice",
+                    "type": "choice input",
+                    "items":
+                    [
+                        {
+                            "id": "onboarding_2_3",
+                            "outgoingEdgeId": "edge_q14_to_q16",
+                            "content": "2–3 min"
+                        },
+                        {
+                            "id": "onboarding_5",
+                            "outgoingEdgeId": "edge_q14_to_q16",
+                            "content": "5 min"
+                        },
+                        {
+                            "id": "onboarding_10",
+                            "outgoingEdgeId": "edge_q14_to_q16",
+                            "content": "10 min"
+                        },
+                        {
+                            "id": "onboarding_15_plus",
+                            "outgoingEdgeId": "edge_q14_to_q16",
+                            "content": "15 min+"
+                        },
+                        {
+                            "id": "onboarding_as_long",
+                            "outgoingEdgeId": "edge_q14_to_q16",
+                            "content": "As long as it takes to get the best matches with clients"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "group_q16",
+            "title": "Q16: Free Listing Interest",
+            "graphCoordinates":
+            {
+                "x": 7457.46,
+                "y": -311.48
+            },
+            "blocks":
+            [
+                {
+                    "id": "q16_text",
+                    "type": "text",
+                    "content":
+                    {
+                        "richText":
+                        [
+                            {
+                                "type": "p",
+                                "children":
+                                [
+                                    {
+                                        "bold": true,
+                                        "text": "Would you be interested in a one-year free listing on Therapair when we launch?"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                },
+                {
+                    "id": "q16_choice",
+                    "type": "choice input",
+                    "items":
+                    [
+                        {
+                            "id": "listing_yes",
+                            "outgoingEdgeId": "edge_q16_to_q17",
+                            "content": "Yes"
+                        },
+                        {
+                            "id": "listing_maybe",
+                            "outgoingEdgeId": "edge_q16_to_q17",
+                            "content": "Maybe later"
+                        },
+                        {
+                            "id": "listing_no",
+                            "outgoingEdgeId": "edge_q16_to_q17",
+                            "content": "No"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "group_q17",
+            "title": "Q17: Future Contact",
+            "graphCoordinates":
+            {
+                "x": 7875.07,
+                "y": -312.85
+            },
+            "blocks":
+            [
+                {
+                    "id": "q17_text",
+                    "type": "text",
+                    "content":
+                    {
+                        "richText":
+                        [
+                            {
+                                "type": "p",
+                                "children":
+                                [
+                                    {
+                                        "bold": true,
+                                        "text": "Can we contact you for future research and updates?"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                },
+                {
+                    "id": "q17_choice",
+                    "type": "choice input",
+                    "items":
+                    [
+                        {
+                            "id": "contact_yes",
+                            "outgoingEdgeId": "edge_q17_to_q18",
+                            "content": "Yes"
+                        },
+                        {
+                            "id": "contact_no",
+                            "outgoingEdgeId": "edge_q17_to_q19",
+                            "content": "No"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "group_q18",
+            "title": "Q18: Email",
+            "graphCoordinates":
+            {
+                "x": 8298.75,
+                "y": -642.43
+            },
+            "blocks":
+            [
+                {
+                    "id": "q18_text",
+                    "type": "text",
+                    "content":
+                    {
+                        "richText":
+                        [
+                            {
+                                "type": "p",
+                                "children":
+                                [
+                                    {
+                                        "bold": true,
+                                        "text": "If you'd like updates, please provide your email:"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                },
+                {
+                    "id": "q18_input",
+                    "outgoingEdgeId": "edge_q18_to_q19",
+                    "type": "email input",
+                    "options":
+                    {
+                        "labels":
+                        {
+                            "placeholder": "your.email@example.com",
+                            "button": "Continue"
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "id": "group_q19",
+            "title": "Q19: Additional Comments",
+            "graphCoordinates":
+            {
+                "x": 8312.72,
+                "y": -310.39
+            },
+            "blocks":
+            [
+                {
+                    "id": "q19_text",
+                    "type": "text",
+                    "content":
+                    {
+                        "richText":
+                        [
+                            {
+                                "type": "p",
+                                "children":
+                                [
+                                    {
+                                        "bold": true,
+                                        "text": "Any additional comments or suggestions?"
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                },
+                {
+                    "id": "q19_input",
+                    "outgoingEdgeId": "edge_q19_to_thank_you",
+                    "type": "text input",
+                    "options":
+                    {
+                        "labels":
+                        {
+                            "placeholder": "Share your thoughts...",
+                            "button": "Submit"
+                        },
+                        "isLong": true
+                    }
+                },
+                {
+                    "id": "jthh0e4ozojn6m7nibievuyn",
+                    "outgoingEdgeId": "my8vex1geio0d8h4kz244f3d",
+                    "type": "Zapier",
+                    "options":
+                    {
+                        "webhook":
+                        {
+                            "url": "https://hooks.zapier.com/hooks/standard/25137645/674a575b1b454e81a5dd4a063dde2805/"
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "id": "group_thank_you",
+            "title": "Thank You",
+            "graphCoordinates":
+            {
+                "x": 8326.81,
+                "y": 82.83
+            },
+            "blocks":
+            [
+                {
+                    "id": "thank_you_text",
+                    "type": "text",
+                    "content":
+                    {
+                        "richText":
+                        [
+                            {
+                                "id": "YXXCYjH76T",
+                                "type": "p",
+                                "children":
+                                [
+                                    {
+                                        "bold": true,
+                                        "text": "Thank you so much for your time and insights!"
+                                    }
+                                ]
+                            },
+                            {
+                                "id": "OI7CLKJ7uw",
+                                "type": "p",
+                                "children":
+                                [
+                                    {
+                                        "text": "Your feedback will directly shape how we build "
+                                    },
+                                    {
+                                        "id": "TY1OpoBVYv",
+                                        "url": "https://therapair.com.au",
+                                        "type": "a",
+                                        "children":
+                                        [
+                                            {
+                                                "text": "Therapair.com.au"
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "text": "."
+                                    }
+                                ]
+                            },
+                            {
+                                "id": "i2smwZ5tvm",
+                                "type": "p",
+                                "children":
+                                [
+                                    {
+                                        "text": ""
+                                    }
+                                ]
+                            },
+                            {
+                                "id": "7gmTsDDd8J",
+                                "type": "p",
+                                "children":
+                                [
+                                    {
+                                        "text": "If you're interested in the free listing, we'll reach out when we're ready to launch."
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                }
+            ]
+        }
+    ],
+    "edges":
+    [
+        {
+            "id": "edge_start_to_welcome",
+            "from":
+            {
+                "blockId": "start"
+            },
+            "to":
+            {
+                "groupId": "group_welcome"
+            }
+        },
+        {
+            "id": "edge_welcome_to_q1",
+            "from":
+            {
+                "blockId": "welcome_continue"
+            },
+            "to":
+            {
+                "groupId": "group_q1"
+            }
+        },
+        {
+            "id": "edge_q1_to_q2",
+            "from":
+            {
+                "blockId": "q1_choice"
+            },
+            "to":
+            {
+                "groupId": "group_q2"
+            }
+        },
+        {
+            "id": "edge_q1_to_q1_other",
+            "from":
+            {
+                "blockId": "q1_choice"
+            },
+            "to":
+            {
+                "groupId": "group_q1_other"
+            }
+        },
+        {
+            "id": "edge_q1_other_to_q2",
+            "from":
+            {
+                "blockId": "q1_other_input"
+            },
+            "to":
+            {
+                "groupId": "group_q2"
+            }
+        },
+        {
+            "id": "edge_q2_to_q3",
+            "from":
+            {
+                "blockId": "q2_choice"
+            },
+            "to":
+            {
+                "groupId": "group_q3"
+            }
+        },
+        {
+            "id": "peoafzjjw3csm1gxgalqi4rn",
+            "from":
+            {
+                "blockId": "q3_choice"
+            },
+            "to":
+            {
+                "groupId": "group_q3_condition"
+            }
+        },
+        {
+            "id": "edge_q3_other_to_q4",
+            "from":
+            {
+                "blockId": "q3_other_input"
+            },
+            "to":
+            {
+                "groupId": "group_q4"
+            }
+        },
+        {
+            "id": "edge_q4_to_q4_condition",
+            "from":
+            {
+                "blockId": "q4_choice"
+            },
+            "to":
+            {
+                "groupId": "group_q4_condition"
+            }
+        },
+        {
+            "id": "edge_q4_other_to_q5",
+            "from":
+            {
+                "blockId": "q4_other_input"
+            },
+            "to":
+            {
+                "groupId": "group_q5"
+            }
+        },
+        {
+            "id": "edge_q5_to_q5_condition",
+            "from":
+            {
+                "blockId": "q5_choice"
+            },
+            "to":
+            {
+                "groupId": "group_q5_condition"
+            }
+        },
+        {
+            "id": "edge_q5_other_to_q6",
+            "from":
+            {
+                "blockId": "q5_other_input"
+            },
+            "to":
+            {
+                "groupId": "group_q6"
+            }
+        },
+        {
+            "id": "edge_q6_to_q6_condition",
+            "from":
+            {
+                "blockId": "q6_choice"
+            },
+            "to":
+            {
+                "groupId": "group_q6_condition"
+            }
+        },
+        {
+            "id": "edge_q6_other_to_q7",
+            "from":
+            {
+                "blockId": "q6_other_input"
+            },
+            "to":
+            {
+                "groupId": "group_q7"
+            }
+        },
+        {
+            "id": "edge_q7_to_q8",
+            "from":
+            {
+                "blockId": "q7_input"
+            },
+            "to":
+            {
+                "groupId": "group_q8"
+            }
+        },
+        {
+            "id": "edge_q8_to_q9",
+            "from":
+            {
+                "blockId": "q8_choice"
+            },
+            "to":
+            {
+                "groupId": "group_q9"
+            }
+        },
+        {
+            "id": "edge_q9_to_q10",
+            "from":
+            {
+                "blockId": "q9_choice"
+            },
+            "to":
+            {
+                "groupId": "group_q10"
+            }
+        },
+        {
+            "id": "edge_q10_to_q10_condition",
+            "from":
+            {
+                "blockId": "q10_choice"
+            },
+            "to":
+            {
+                "groupId": "group_q10_condition"
+            }
+        },
+        {
+            "id": "edge_q10_other_to_q11",
+            "from":
+            {
+                "blockId": "q10_other_input"
+            },
+            "to":
+            {
+                "groupId": "group_q11"
+            }
+        },
+        {
+            "id": "edge_q11_to_q12",
+            "from":
+            {
+                "blockId": "q11_choice"
+            },
+            "to":
+            {
+                "groupId": "group_q12"
+            }
+        },
+        {
+            "id": "edge_q12_to_q12_condition",
+            "from":
+            {
+                "blockId": "q12_choice"
+            },
+            "to":
+            {
+                "groupId": "group_q12_condition"
+            }
+        },
+        {
+            "id": "edge_q12_other_to_q13",
+            "from":
+            {
+                "blockId": "q12_other_input"
+            },
+            "to":
+            {
+                "groupId": "group_q13"
+            }
+        },
+        {
+            "id": "edge_q13_to_q14",
+            "from":
+            {
+                "blockId": "q13_choice"
+            },
+            "to":
+            {
+                "groupId": "group_q14"
+            }
+        },
+        {
+            "id": "edge_q14_to_q16",
+            "from":
+            {
+                "blockId": "q14_choice"
+            },
+            "to":
+            {
+                "groupId": "group_q16"
+            }
+        },
+        {
+            "id": "edge_q16_to_q17",
+            "from":
+            {
+                "blockId": "q16_choice"
+            },
+            "to":
+            {
+                "groupId": "group_q17"
+            }
+        },
+        {
+            "id": "edge_q17_to_q18",
+            "from":
+            {
+                "blockId": "q17_choice"
+            },
+            "to":
+            {
+                "groupId": "group_q18"
+            }
+        },
+        {
+            "id": "edge_q17_to_q19",
+            "from":
+            {
+                "blockId": "q17_choice"
+            },
+            "to":
+            {
+                "groupId": "group_q19"
+            }
+        },
+        {
+            "id": "edge_q18_to_q19",
+            "from":
+            {
+                "blockId": "q18_input"
+            },
+            "to":
+            {
+                "groupId": "group_q19"
+            }
+        },
+        {
+            "id": "edge_q3_condition_to_q3_other",
+            "from":
+            {
+                "blockId": "q3_condition",
+                "itemId": "q3_check_other"
+            },
+            "to":
+            {
+                "groupId": "group_q3_other_input"
+            }
+        },
+        {
+            "id": "edge_q3_condition_to_q4",
+            "from":
+            {
+                "blockId": "q3_condition"
+            },
+            "to":
+            {
+                "groupId": "group_q4"
+            }
+        },
+        {
+            "id": "edge_q4_condition_to_q4_other",
+            "from":
+            {
+                "blockId": "q4_condition",
+                "itemId": "q4_check_other"
+            },
+            "to":
+            {
+                "groupId": "group_q4_other_input"
+            }
+        },
+        {
+            "id": "edge_q4_condition_to_q5",
+            "from":
+            {
+                "blockId": "q4_condition"
+            },
+            "to":
+            {
+                "groupId": "group_q5"
+            }
+        },
+        {
+            "id": "edge_q5_condition_to_q5_other",
+            "from":
+            {
+                "blockId": "q5_condition",
+                "itemId": "q5_check_other"
+            },
+            "to":
+            {
+                "groupId": "group_q5_other_input"
+            }
+        },
+        {
+            "id": "edge_q5_condition_to_q6",
+            "from":
+            {
+                "blockId": "q5_condition"
+            },
+            "to":
+            {
+                "groupId": "group_q6"
+            }
+        },
+        {
+            "id": "edge_q6_condition_to_q6_other",
+            "from":
+            {
+                "blockId": "q6_condition",
+                "itemId": "q6_check_other"
+            },
+            "to":
+            {
+                "groupId": "group_q6_other_input"
+            }
+        },
+        {
+            "id": "edge_q6_condition_to_q7",
+            "from":
+            {
+                "blockId": "q6_condition"
+            },
+            "to":
+            {
+                "groupId": "group_q7"
+            }
+        },
+        {
+            "id": "edge_q10_condition_to_q10_other",
+            "from":
+            {
+                "blockId": "q10_condition",
+                "itemId": "q10_check_other"
+            },
+            "to":
+            {
+                "groupId": "group_q10_other_input"
+            }
+        },
+        {
+            "id": "edge_q10_condition_to_q11",
+            "from":
+            {
+                "blockId": "q10_condition"
+            },
+            "to":
+            {
+                "groupId": "group_q11"
+            }
+        },
+        {
+            "id": "edge_q12_condition_to_q12_other",
+            "from":
+            {
+                "blockId": "q12_condition",
+                "itemId": "q12_check_other"
+            },
+            "to":
+            {
+                "groupId": "group_q12_other_input"
+            }
+        },
+        {
+            "id": "edge_q12_condition_to_q13",
+            "from":
+            {
+                "blockId": "q12_condition"
+            },
+            "to":
+            {
+                "groupId": "group_q13"
+            }
+        },
+        {
+            "id": "my8vex1geio0d8h4kz244f3d",
+            "from":
+            {
+                "blockId": "jthh0e4ozojn6m7nibievuyn"
+            },
+            "to":
+            {
+                "groupId": "group_thank_you",
+                "blockId": "thank_you_text"
+            }
+        }
+    ],
+    "variables":
+    [
+        {
+            "id": "profession",
+            "name": "profession"
+        },
+        {
+            "id": "profession_other",
+            "name": "profession_other"
+        },
+        {
+            "id": "years_practice",
+            "name": "years_practice"
+        },
+        {
+            "id": "q3_multiselect",
+            "name": "q3_multiselect",
+            "isSessionVariable": false
+        },
+        {
+            "id": "q4_multiselect",
+            "name": "q4_multiselect",
+            "isSessionVariable": false
+        },
+        {
+            "id": "q5_multiselect",
+            "name": "q5_multiselect",
+            "isSessionVariable": false
+        },
+        {
+            "id": "q6_multiselect",
+            "name": "q6_multiselect",
+            "isSessionVariable": false
+        },
+        {
+            "id": "q10_multiselect",
+            "name": "q10_multiselect",
+            "isSessionVariable": false
+        },
+        {
+            "id": "q12_multiselect",
+            "name": "q12_multiselect",
+            "isSessionVariable": false
+        },
+        {
+            "id": "biggest_gap",
+            "name": "biggest_gap"
+        },
+        {
+            "id": "screening_clients",
+            "name": "screening_clients"
+        },
+        {
+            "id": "open_to_sharing",
+            "name": "open_to_sharing"
+        },
+        {
+            "id": "personality_test",
+            "name": "personality_test"
+        },
+        {
+            "id": "profile_detail_level",
+            "name": "profile_detail_level"
+        },
+        {
+            "id": "onboarding_time",
+            "name": "onboarding_time"
+        },
+        {
+            "id": "free_listing_interest",
+            "name": "free_listing_interest"
+        },
+        {
+            "id": "future_contact",
+            "name": "future_contact"
+        },
+        {
+            "id": "email",
+            "name": "email"
+        },
+        {
+            "id": "comments",
+            "name": "comments"
+        }
+    ],
+    "theme":
+    {
+        "general":
+        {
+            "background":
+            {
+                "type": "Color",
+                "content": "#f5f2fd"
+            },
+            "progressBar":
+            {
+                "isEnabled": true,
+                "color": "#9B74B7",
+                "backgroundColor": "#666460",
+                "thickness": 6
+            }
+        },
+        "chat":
+        {
+            "container":
+            {
+                "backgroundColor": "#fafafa"
+            },
+            "hostBubbles":
+            {
+                "backgroundColor": "#f5f2fd",
+                "color": "#202020"
+            },
+            "guestBubbles":
+            {
+                "backgroundColor": "#8a86c1",
+                "color": "#ffffff"
+            },
+            "buttons":
+            {
+                "backgroundColor": "#8a86c1",
+                "color": "#ffffff"
+            },
+            "inputs":
+            {
+                "backgroundColor": "#ffffff",
+                "color": "#202020",
+                "placeholderColor": "#9ca3af"
+            }
+        }
+    },
+    "selectedThemeTemplateId": null,
+    "settings":
+    {
+        "general":
+        {
+            "isBrandingEnabled": true,
+            "isTypingEmulationEnabled": true,
+            "isInputPrefillEnabled": false
+        },
+        "metadata":
+        {
+            "title": "Therapair User Research Survey",
+            "description": "5-7 minute survey for Victorian therapists",
+            "imageUrl": ""
+        }
+    },
+    "createdAt": "2025-10-28T05:09:01.634Z",
+    "updatedAt": "2025-10-28T05:42:37.927Z",
+    "icon": null,
+    "folderId": null,
+    "publicId": "therapair-user-research-survey-v-1-6-g5oygeh",
+    "customDomain": null,
+    "workspaceId": "cmbg7gvxy000qxleymcankhbu",
+    "resultsTablePreferences": null,
+    "isArchived": false,
+    "isClosed": false,
+    "whatsAppCredentialsId": null,
+    "riskLevel": null
+}

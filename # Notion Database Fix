@@ -1,0 +1,112 @@
+If Cursor says it *“can’t write the columns”* in your Notion database, the problem is almost certainly a **compatibility or permissions issue** between the **Notion MCP server** and your **Notion database schema**. This issue is currently documented in active GitHub and community reports for both Cursor and the official Notion MCP server.[1][2][3][4]
+
+Here’s what’s happening and how to fix it.
+
+***
+
+### Why Cursor Can’t Write Columns
+
+1. **Read-only column types**
+   Cursor’s Notion MCP integration automatically attempts to write **all detected properties** in a database — even those that are *non-editable*.  
+   These include:
+   - Formula  
+   - Rollup  
+   - Unique ID  
+   - Progress Bar  
+   - Button  
+   - Relation (when computed)
+
+   Notion rejects those requests with errors like `"Property X not found"` or `"Invalid argument"` because those columns cannot accept user input via the API.[1]
+
+2. **Out-of-date column cache**
+   The MCP connector caches your database schema on first connection. If the database is modified later (new columns, deletions, or type changes), the cached schema becomes invalid.  
+   Cursor then sends outdated property names, producing a 400 or 422 error (“invalid properties” or “cannot write”).
+
+3. **Permissions mismatch**
+   Even with the right token, Notion only allows writes if:
+   - The integration is **added as a connection** to that specific database (via “Add connections” in Notion).  
+   - The database columns you’re trying to write to are **writable types** (title, text, number, date, select, checkbox, multi-select, URL, etc.).[4]
+
+4. **Known bug in MCP version 0.9.7–1.0.1**
+   Cursor’s current MCP Notion connector intermittently fails when creating or updating schemas due to argument shape mismatches. The error typically appears as:
+   ```
+   MCP error -32602: Invalid arguments for tool create-database: 
+   expected object, received undefined
+   ```
+   This is acknowledged and being patched in newer MCP builds.[2][5]
+
+***
+
+### Fix Steps
+
+**Step 1 — Remove read-only columns**
+- Hide or delete Formula, Rollup, and Button properties, or make a new database copy with only editable fields.  
+- Cursor can only write to columns with types in this list:  
+  `title`, `text`, `number`, `select`, `multi_select`, `date`, `checkbox`, `url`, `email`, `phone_number`, `files`, `relation`, `people`.
+
+**Step 2 — Reconnect your integration**
+1. In Notion, go to the database.  
+2. Click **- - -  → Add connections → [your integration name]**.  
+3. In Cursor, re-run your command so the MCP refreshes its authorization.
+
+**Step 3 — Clear schema cache**
+- Restart Cursor or manually reload the MCP with:  
+  ```
+  Ctrl + Shift + P → Reload MCP servers
+  ```
+  This clears any stored database schema from Notion.
+
+**Step 4 — Update Notion MCP**
+- Run this in your workspace terminal:
+  ```bash
+  npm install -g @makenotion/notion-mcp-server@latest
+  ```
+  This includes the filter that removes read-only columns from payloads.[2][1]
+
+**Step 5 — Retry with minimal payload**
+Try a simple test command:
+```javascript
+await notion.pages.create({
+  parent: { database_id: "YOUR_DATABASE_ID" },
+  properties: {
+    Name: { title: [{ text: { content: "API Test Row" } }] },
+    Status: { select: { name: "In Progress" } }
+  }
+});
+```
+
+If this succeeds, then incrementally add additional columns.
+
+***
+
+### Step 6 (Optional) — Use `PATCH` to update schema manually
+If you actually need to **add or edit columns**, you can call:
+`PATCH https://api.notion.com/v1/databases/{database_id}`
+
+Example:
+```bash
+curl -X PATCH 'https://api.notion.com/v1/databases/YOUR_DATABASE_ID' \
+  -H "Authorization: Bearer YOUR_TOKEN" \
+  -H "Content-Type: application/json" \
+  -H "Notion-Version: 2022-06-28" \
+  -d '{
+    "properties": {
+      "Deadline": { "date": {} },
+      "Assigned": { "people": {} }
+    }
+  }'
+```
+That will add *Deadline* and *Assigned* columns programmatically.[6][4]
+
+***
+
+### Summary
+| Error Cause | Fix |
+|--------------|-----|
+| Includes read-only columns | Remove Formula, Rollup, Button fields |
+| Integration not shared | Re-add integration via **Add connections** |
+| Schema mismatched | Reload MCP or restart Cursor |
+| Bug in Notion MCP versions <1.1.0 | Update the MCP server package |
+| Invalid data types | Use proper property type JSON |
+
+Cursor can then successfully write columns and rows once your database schema is clean and your MCP environment matches current field definitions.

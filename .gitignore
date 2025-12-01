@@ -51,4 +51,4 @@ coverage/
 *.png
 !**/screenshots/**/*.png
 !**/images/**/*.png
-!**/assets/**/*.png
+!**/assets/**/*.png.env.bak

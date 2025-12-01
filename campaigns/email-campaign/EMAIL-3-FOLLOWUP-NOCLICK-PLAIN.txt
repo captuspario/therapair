@@ -1,0 +1,30 @@
+Subject: Don't miss this opportunity to shape the future
+
+Hi {{first_name}},
+
+I noticed you opened my email about our Therapair research initiative but didn't get a chance to explore further. I wanted to make sure you didn't miss this opportunity.
+
+Your perspective as a {{profession}} in {{region}} is exactly what we need to build a better matching system. The research survey takes just 5-7 minutes, and your insights could help thousands of people find the right therapist.
+
+We're specifically interested in:
+• Which questions create the deepest personalisation for therapist-client matching?
+• How many questions would you be willing to answer during onboarding?
+• What resonates most with both therapists and clients?
+
+JOIN THE RESEARCH SURVEY (5-7 minutes)
+https://therapair.com.au/research/survey/index.html?token={{token}}&utm_source=email&utm_medium=research&utm_campaign=therapist_research&utm_content=survey&utm_email=3
+
+Thanks for considering it. If you're not interested, just let me know and I'll remove you from future research invitations.
+
+LEARN MORE ABOUT THERAPAIR
+https://therapair.com.au/documentation.html?utm_source=email&utm_medium=research&utm_campaign=therapist_research&utm_content=learn_more&utm_email=3
+
+Best regards,
+The Therapair Team
+Unison Mental Health
+
+---
+You received this email from Therapair, a not-for-profit research initiative under Unison Mental Health.
+If you would like to unsubscribe, click here: {{unsubscribe}}
+
+Privacy Policy: https://therapair.com.au/legal/privacy-policy.html

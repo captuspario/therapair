@@ -166,7 +166,7 @@ All scripts are in `scripts/` directory:
 ## 🔗 Quick Links
 
 - **Website:** https://therapair.com.au
-- **Sandbox Demo:** https://therapair.com.au/sandbox-demo.html
+- **Sandbox Demo:** https://therapair.com.au/sandbox/sandbox-demo.html
 - **GitHub Landing:** https://github.com/captuspario/therapair-landing.git
 - **GitHub Sandbox:** https://github.com/captuspario/therapair-sandbox.git
 - **GitHub Widget:** https://github.com/captuspario/therapair-widget-unison.git

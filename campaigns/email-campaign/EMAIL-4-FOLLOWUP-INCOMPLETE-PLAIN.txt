@@ -1,0 +1,27 @@
+Subject: Complete your contribution (2 minutes left)
+
+Hi {{first_name}},
+
+I see you started our research survey but didn't finish it. No worries—I know you're busy!
+
+If you have 2 minutes to complete it, your insights would be incredibly valuable. We're specifically interested in your thoughts on what questions matter most for therapist-client matching.
+
+COMPLETE THE SURVEY (2 minutes remaining)
+https://therapair.com.au/research/survey/index.html?token={{token}}&utm_source=email&utm_medium=research&utm_campaign=therapist_research&utm_content=survey&utm_email=4
+
+If you're not interested in completing it, just let me know and I'll remove you from future research invitations.
+
+Thanks for your time.
+
+LEARN MORE ABOUT THERAPAIR
+https://therapair.com.au/documentation.html?utm_source=email&utm_medium=research&utm_campaign=therapist_research&utm_content=learn_more&utm_email=4
+
+Best regards,
+The Therapair Team
+Unison Mental Health
+
+---
+You received this email from Therapair, a not-for-profit research initiative under Unison Mental Health.
+If you would like to unsubscribe, click here: {{unsubscribe}}
+
+Privacy Policy: https://therapair.com.au/legal/privacy-policy.html

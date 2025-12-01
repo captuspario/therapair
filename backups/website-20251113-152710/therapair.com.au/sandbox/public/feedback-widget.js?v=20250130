@@ -1,0 +1,741 @@
+(() => {
+  const DEFAULT_CONFIG = {
+    endpoint: '/api/feedback',
+    position: 'right',
+    buttonLabel: 'Tell us your feedback',
+    title: 'Share feedback',
+    successMessage: "Thanks — your note helps us improve Therapair.",
+    autoCloseDelay: 2000
+  };
+
+  const TAG_OPTIONS = [
+    { id: 'bug', label: 'Bug' },
+    { id: 'usability', label: 'Usability' },
+    { id: 'speed', label: 'Speed' },
+    { id: 'content', label: 'Content' },
+    { id: 'accessibility', label: 'Accessibility' },
+    { id: 'other', label: 'Other' }
+  ];
+
+  const RATING_OPTIONS = [
+    { value: 1, label: '😞' },
+    { value: 2, label: '🙁' },
+    { value: 3, label: '😐' },
+    { value: 4, label: '🙂' },
+    { value: 5, label: '🤩' }
+  ];
+
+  const STORAGE_KEY = 'tp-feedback-widget';
+
+  const template = document.createElement('template');
+  template.innerHTML = `
+    <style>
+      :host {
+        --tp-bg: #ffffff;
+        --tp-surface: #f7f9fb;
+        --tp-text: #1f2937;
+        --tp-muted: #6b7280;
+        --tp-primary: #3a6ea5;
+        --tp-primary-hover: #2f5985;
+        --tp-primary-press: #2a5174;
+        --tp-border: #e5e7eb;
+        --tp-radius: 14px;
+        --tp-shadow: 0 20px 60px rgba(15, 23, 42, 0.18);
+        font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        position: relative;
+        display: block;
+        z-index: 9999;
+      }
+
+      :host([inline]) {
+        position: absolute;
+        top: 0;
+        right: -1.5rem;
+        bottom: 0;
+        display: flex;
+        align-items: center;
+        pointer-events: none;
+      }
+
+      :host([inline]) .cta-wrapper {
+        pointer-events: auto;
+      }
+
+      .cta-wrapper {
+        position: fixed;
+        right: 1.25rem;
+        bottom: 1.25rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .cta {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.6rem;
+        border: none;
+        border-radius: 999px;
+        padding: 0.75rem 1.5rem;
+        background: var(--tp-primary);
+        color: #fff;
+        font-weight: 600;
+        font-size: 0.95rem;
+        cursor: pointer;
+        min-width: 44px;
+        min-height: 44px;
+        box-shadow: 0 16px 32px rgba(58, 110, 165, 0.22);
+        transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
+      }
+
+      .cta svg {
+        width: 20px;
+        height: 20px;
+      }
+
+      .cta:hover {
+        background: var(--tp-primary-hover);
+        transform: translateY(-2px);
+        box-shadow: 0 18px 36px rgba(58, 110, 165, 0.28);
+      }
+
+      .cta:active {
+        background: var(--tp-primary-press);
+        transform: translateY(0);
+        box-shadow: 0 8px 18px rgba(58, 110, 165, 0.18);
+      }
+
+      .cta:focus-visible {
+        outline: none;
+        box-shadow:
+          0 0 0 3px rgba(255, 255, 255, 0.9),
+          0 0 0 6px rgba(58, 110, 165, 0.6);
+      }
+
+      :host([inline]) .cta-wrapper {
+        position: static;
+      }
+
+      .dialog-backdrop {
+        position: fixed;
+        inset: 0;
+        display: none;
+        align-items: center;
+        justify-content: center;
+        background: rgba(15, 23, 42, 0.45);
+        backdrop-filter: blur(2px);
+      }
+
+      .dialog-backdrop[open] {
+        display: flex;
+      }
+
+      .dialog {
+        width: min(360px, calc(100vw - 2.5rem));
+        border-radius: var(--tp-radius);
+        background: linear-gradient(180deg, #ffffff 0%, #f9fbff 100%);
+        border: 1px solid rgba(58, 110, 165, 0.08);
+        box-shadow: var(--tp-shadow);
+        color: var(--tp-text);
+        transform: translateY(16px);
+        opacity: 0;
+        transition: transform 0.2s ease, opacity 0.2s ease;
+        max-height: calc(100vh - 3rem);
+        display: flex;
+        flex-direction: column;
+      }
+
+      .dialog[open] {
+        transform: translateY(0);
+        opacity: 1;
+      }
+
+      .dialog-inner {
+        padding: 1.75rem;
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+        width: 100%;
+      }
+
+      .dialog-header {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 1rem;
+      }
+
+      .dialog-title {
+        margin: 0;
+        font-size: 1.125rem;
+        line-height: 1.75rem;
+        font-weight: 700;
+      }
+
+      .close-btn {
+        appearance: none;
+        background: none;
+        border: none;
+        color: var(--tp-muted);
+        cursor: pointer;
+        padding: 0.35rem;
+        border-radius: 999px;
+        transition: color 0.18s ease, background 0.18s ease;
+      }
+
+      .close-btn:hover {
+        color: var(--tp-text);
+        background: rgba(58, 110, 165, 0.08);
+      }
+
+      .close-btn:focus-visible {
+        outline: none;
+        box-shadow:
+          0 0 0 3px rgba(255, 255, 255, 0.9),
+          0 0 0 6px rgba(58, 110, 165, 0.55);
+      }
+
+      .field-group {
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+      }
+
+      .field-label {
+        font-size: 0.9rem;
+        line-height: 1.35rem;
+        font-weight: 600;
+        color: var(--tp-text);
+      }
+
+      .field-label span {
+        color: var(--tp-muted);
+        font-weight: 500;
+      }
+
+      .rating-group {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.6rem;
+      }
+
+      .rating-button {
+        appearance: none;
+        border: none;
+        width: 56px;
+        height: 56px;
+        border-radius: 18px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.65rem;
+        background: linear-gradient(180deg, #ffffff 0%, #eef4ff 100%);
+        box-shadow: 0 6px 18px rgba(58, 110, 165, 0.12);
+        border: 1px solid rgba(58, 110, 165, 0.18);
+        cursor: pointer;
+        transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+      }
+
+      .rating-button:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 12px 30px rgba(58, 110, 165, 0.18);
+      }
+
+      .rating-button[aria-pressed="true"] {
+        background: linear-gradient(180deg, rgba(58, 110, 165, 0.12) 0%, rgba(58, 110, 165, 0.28) 100%);
+        border-color: rgba(58, 110, 165, 0.8);
+        box-shadow: 0 14px 32px rgba(58, 110, 165, 0.28);
+        transform: translateY(-2px) scale(1.02);
+      }
+
+      .rating-button:focus-visible {
+        outline: none;
+        box-shadow:
+          0 0 0 3px rgba(255, 255, 255, 0.9),
+          0 0 0 6px rgba(58, 110, 165, 0.55);
+      }
+
+      .chip-grid {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+      }
+
+      .chip {
+        border: 1px solid rgba(58, 110, 165, 0.22);
+        background: rgba(247, 249, 251, 0.95);
+        color: var(--tp-text);
+        border-radius: 999px;
+        padding: 0.45rem 0.95rem;
+        font-size: 0.85rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: background 0.18s ease, border-color 0.18s ease, color 0.18s ease, transform 0.18s ease;
+      }
+
+      .chip:hover {
+        transform: translateY(-1px);
+        border-color: rgba(58, 110, 165, 0.45);
+      }
+
+      .chip[aria-pressed="true"] {
+        background: rgba(58, 110, 165, 0.12);
+        border-color: rgba(58, 110, 165, 0.6);
+        color: var(--tp-primary);
+      }
+
+      .actions {
+        display: flex;
+        gap: 0.75rem;
+      }
+
+      .btn {
+        flex: 1;
+        min-height: 44px;
+        border-radius: 12px;
+        font-weight: 600;
+        font-size: 0.95rem;
+        transition: background 0.18s ease, color 0.18s ease, border 0.18s ease, box-shadow 0.18s ease;
+      }
+
+      .btn-secondary {
+        border: 1px solid var(--tp-border);
+        background: #f7f9fb;
+        color: var(--tp-text);
+      }
+
+      .btn-secondary:hover {
+        background: #edf3fb;
+      }
+
+      .btn-secondary:focus-visible {
+        outline: none;
+        box-shadow:
+          0 0 0 3px rgba(255, 255, 255, 0.9),
+          0 0 0 6px rgba(58, 110, 165, 0.45);
+      }
+
+      .btn-primary {
+        border: none;
+        background: var(--tp-primary);
+        color: #fff;
+        box-shadow: 0 10px 24px rgba(58, 110, 165, 0.25);
+      }
+
+      .btn-primary:hover {
+        background: var(--tp-primary-hover);
+        box-shadow: 0 14px 30px rgba(58, 110, 165, 0.32);
+      }
+
+      .btn-primary:focus-visible {
+        outline: none;
+        box-shadow:
+          0 0 0 3px rgba(255, 255, 255, 0.9),
+          0 0 0 6px rgba(58, 110, 165, 0.45);
+      }
+
+      .btn-primary:disabled {
+        background: rgba(229, 231, 235, 0.85);
+        color: rgba(107, 114, 128, 0.85);
+        box-shadow: none;
+        cursor: not-allowed;
+      }
+
+      .error {
+        color: #b91c1c;
+        font-size: 0.85rem;
+      }
+
+      .toast {
+        position: fixed;
+        right: 1.25rem;
+        bottom: 5.5rem;
+        padding: 0.75rem 1.2rem;
+        background: rgba(31, 41, 55, 0.94);
+        color: #f9fafb;
+        border-radius: 999px;
+        font-size: 0.9rem;
+        display: none;
+        box-shadow: 0 14px 32px rgba(15, 23, 42, 0.26);
+      }
+
+      .toast[open] {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.4rem;
+      }
+
+      @media (max-width: 640px) {
+        .cta-wrapper {
+          right: 1rem;
+          bottom: 1rem;
+        }
+
+        :host([inline]) {
+          right: 0;
+          bottom: 0;
+        }
+
+        :host([inline]) .cta-wrapper {
+          position: fixed;
+          right: 1rem;
+          bottom: 1rem;
+        }
+
+        .dialog {
+          margin: 0;
+          width: 100%;
+          border-radius: 20px 20px 0 0;
+        }
+
+        .dialog-inner {
+          padding: 1.5rem;
+        }
+      }
+    </style>
+    <div class="cta-wrapper">
+      <button class="cta" type="button" part="cta">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z" />
+        </svg>
+        <span class="cta-label">${DEFAULT_CONFIG.buttonLabel}</span>
+      </button>
+    </div>
+    <div class="dialog-backdrop" role="presentation">
+      <div class="dialog" role="dialog" aria-modal="true" aria-labelledby="tp-feedback-title">
+        <div class="dialog-inner">
+          <div class="dialog-header">
+            <h2 class="dialog-title" id="tp-feedback-title">${DEFAULT_CONFIG.title}</h2>
+            <button class="close-btn" type="button" aria-label="Close feedback panel">
+              <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="18" y1="6" x2="6" y2="18"></line>
+                <line x1="6" y1="6" x2="18" y2="18"></line>
+              </svg>
+            </button>
+          </div>
+
+          <form class="feedback-form" novalidate>
+            <div class="field-group">
+              <label class="field-label">How’s your experience so far? <span>*</span></label>
+              <div class="rating-group" role="radiogroup" aria-label="Rate your experience">
+                ${RATING_OPTIONS.map(opt => `<button type="button" class="rating-button" data-value="${opt.value}" aria-label="${opt.value} out of 5">${opt.label}</button>`).join('')}
+              </div>
+            </div>
+
+            <div class="field-group">
+              <label class="field-label">Which area best fits your feedback? <span>(optional)</span></label>
+              <div class="chip-grid">
+                ${TAG_OPTIONS.map(opt => `<button type="button" class="chip" data-tag="${opt.id}" aria-pressed="false">${opt.label}</button>`).join('')}
+              </div>
+            </div>
+
+            <div class="actions">
+              <button type="button" class="btn btn-secondary" data-cancel>Cancel</button>
+              <button type="submit" class="btn btn-primary" data-submit disabled>Submit</button>
+            </div>
+            <p class="error" hidden role="alert"></p>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="toast" role="status" aria-live="polite"></div>
+  `;
+
+  class FeedbackWidget extends HTMLElement {
+    constructor() {
+      super();
+      this.attachShadow({ mode: 'open' });
+      this.shadowRoot.appendChild(template.content.cloneNode(true));
+      this.config = { ...DEFAULT_CONFIG };
+      this.state = {
+        open: false,
+        rating: null,
+        tags: new Set(),
+        submitting: false
+      };
+      this.restoreState();
+    }
+
+    connectedCallback() {
+      this.resolveConfig().finally(() => {
+        this.setupElements();
+        this.bindEvents();
+        this.applyPosition();
+        this.prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      });
+    }
+
+    async resolveConfig() {
+      const attr = this.getAttribute('data-config');
+      if (!attr) return;
+      try {
+        const res = await fetch(attr, { cache: 'no-cache' });
+        if (!res.ok) throw new Error(`Config request failed: ${res.status}`);
+        const json = await res.json();
+        this.config = { ...this.config, ...json };
+      } catch (error) {
+        console.warn('[feedback-widget] Unable to load config, using defaults', error);
+      }
+    }
+
+    setupElements() {
+      const root = this.shadowRoot;
+      this.elements = {
+        wrapper: root.querySelector('.cta-wrapper'),
+        cta: root.querySelector('.cta'),
+        backdrop: root.querySelector('.dialog-backdrop'),
+        dialog: root.querySelector('.dialog'),
+        dialogInner: root.querySelector('.dialog-inner'),
+        form: root.querySelector('.feedback-form'),
+        submit: root.querySelector('[data-submit]'),
+        cancel: root.querySelector('[data-cancel]'),
+        close: root.querySelector('.close-btn'),
+        toast: root.querySelector('.toast'),
+        error: root.querySelector('.error'),
+        ratingButtons: Array.from(root.querySelectorAll('.rating-button')),
+        chips: Array.from(root.querySelectorAll('.chip'))
+      };
+
+      if (this.config.buttonLabel) {
+        const label = this.elements.cta.querySelector('.cta-label');
+        if (label) label.textContent = this.config.buttonLabel;
+      }
+
+      if (this.config.title) {
+        const title = this.elements.dialog.querySelector('#tp-feedback-title');
+        if (title) title.textContent = this.config.title;
+      }
+
+      this.applyPersistedStateToUI();
+    }
+
+    bindEvents() {
+      this.elements.cta.addEventListener('click', () => this.open());
+      this.elements.close.addEventListener('click', () => this.close());
+      this.elements.cancel.addEventListener('click', () => this.close());
+      this.elements.backdrop.addEventListener('click', event => {
+        if (event.target === this.elements.backdrop) {
+          this.close();
+        }
+      });
+      this.elements.form.addEventListener('submit', event => {
+        event.preventDefault();
+        this.submit();
+      });
+
+      this.elements.ratingButtons.forEach(button => {
+        button.addEventListener('click', () => this.selectRating(button));
+      });
+
+      this.elements.chips.forEach(chip => {
+        chip.addEventListener('click', () => this.toggleTag(chip));
+      });
+
+      this.keydownHandler = event => this.handleKeydown(event);
+    }
+
+    applyPosition() {
+      if (this.config.position === 'left') {
+        this.elements.wrapper.style.right = '';
+        this.elements.wrapper.style.left = '1.25rem';
+        if (this.hasAttribute('inline')) {
+          this.style.right = '';
+          this.style.left = '-1.5rem';
+        }
+      }
+    }
+
+    open() {
+      if (this.state.open) return;
+      this.state.open = true;
+      this.elements.backdrop.setAttribute('open', '');
+      this.elements.dialog.setAttribute('open', '');
+      this.elements.error.hidden = true;
+      document.addEventListener('keydown', this.keydownHandler);
+      requestAnimationFrame(() => {
+        const target = this.elements.dialog.querySelector('.rating-button');
+        if (target) target.focus({ preventScroll: true });
+      });
+    }
+
+    close() {
+      if (!this.state.open) return;
+      this.state.open = false;
+      this.elements.dialog.removeAttribute('open');
+      this.elements.backdrop.removeAttribute('open');
+      document.removeEventListener('keydown', this.keydownHandler);
+      this.elements.cta.focus({ preventScroll: true });
+    }
+
+    handleKeydown(event) {
+      if (event.key === 'Escape') {
+        event.preventDefault();
+        this.close();
+        return;
+      }
+
+      if (event.key !== 'Tab' || !this.state.open) return;
+
+      const focusable = this.getFocusableElements();
+      if (!focusable.length) return;
+
+      const currentIndex = focusable.indexOf(this.shadowRoot.activeElement);
+      let nextIndex = currentIndex;
+
+      if (event.shiftKey) {
+        nextIndex = currentIndex <= 0 ? focusable.length - 1 : currentIndex - 1;
+      } else {
+        nextIndex = currentIndex === focusable.length - 1 ? 0 : currentIndex + 1;
+      }
+
+      event.preventDefault();
+      focusable[nextIndex].focus();
+    }
+
+    getFocusableElements() {
+      const selectors = [
+        'button:not([disabled])',
+        '[href]',
+        'input:not([disabled])',
+        'select:not([disabled])',
+        'textarea:not([disabled])',
+        '[tabindex]:not([tabindex="-1"])'
+      ];
+      return Array.from(this.elements.dialog.querySelectorAll(selectors.join(',')));
+    }
+
+    selectRating(button) {
+      const value = Number(button.dataset.value);
+      this.state.rating = value;
+      this.elements.ratingButtons.forEach(btn => {
+        const isActive = btn === button;
+        btn.setAttribute('aria-pressed', String(isActive));
+        btn.setAttribute('aria-checked', String(isActive));
+      });
+      this.updateSubmitState();
+      this.persistState();
+    }
+
+    toggleTag(chip) {
+      const tag = chip.dataset.tag;
+      if (!tag) return;
+      if (this.state.tags.has(tag)) {
+        this.state.tags.delete(tag);
+        chip.setAttribute('aria-pressed', 'false');
+      } else {
+        this.state.tags.add(tag);
+        chip.setAttribute('aria-pressed', 'true');
+      }
+      this.persistState();
+    }
+
+    updateSubmitState() {
+      const ready = typeof this.state.rating === 'number';
+      this.elements.submit.disabled = !ready || this.state.submitting;
+    }
+
+    async submit() {
+      if (this.state.submitting || typeof this.state.rating !== 'number') return;
+      this.state.submitting = true;
+      this.updateSubmitState();
+      this.elements.error.hidden = true;
+
+      const payload = {
+        id: typeof crypto !== 'undefined' && crypto.randomUUID ? crypto.randomUUID() : `tp-feedback-${Date.now()}`,
+        rating: this.state.rating,
+        tags: Array.from(this.state.tags),
+        page_url: window.location.href,
+        user_agent: navigator.userAgent,
+        viewport_w: window.innerWidth,
+        viewport_h: window.innerHeight,
+        created_at: new Date().toISOString()
+      };
+
+      try {
+        const response = await fetch(this.config.endpoint, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload),
+          keepalive: true
+        });
+
+        if (!response.ok) {
+          throw new Error(`Request failed with status ${response.status}`);
+        }
+
+        window.dispatchEvent(new CustomEvent('tp:feedback-submitted', { detail: payload }));
+        this.persistState({ submittedAt: payload.created_at });
+        this.showToast();
+        this.close();
+      } catch (error) {
+        console.error('[feedback-widget] submission failed', error);
+        this.elements.error.textContent = 'Sorry, something went wrong. Please try again.';
+        this.elements.error.hidden = false;
+      } finally {
+        this.state.submitting = false;
+        this.updateSubmitState();
+      }
+    }
+
+    showToast() {
+      this.elements.toast.textContent = this.config.successMessage || DEFAULT_CONFIG.successMessage;
+      this.elements.toast.setAttribute('open', '');
+      const delay = Number(this.config.autoCloseDelay) || DEFAULT_CONFIG.autoCloseDelay;
+      setTimeout(() => {
+        this.elements.toast.removeAttribute('open');
+      }, delay);
+    }
+
+    persistState(extra = {}) {
+      try {
+        const data = {
+          rating: this.state.rating,
+          tags: Array.from(this.state.tags),
+          ...extra
+        };
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+      } catch (error) {
+        console.warn('[feedback-widget] unable to persist state', error);
+      }
+    }
+
+    restoreState() {
+      try {
+        const stored = localStorage.getItem(STORAGE_KEY);
+        if (!stored) return;
+        const data = JSON.parse(stored);
+        if (typeof data.rating === 'number') {
+          this.state.rating = data.rating;
+        }
+        if (Array.isArray(data.tags)) {
+          this.state.tags = new Set(data.tags);
+        }
+      } catch (error) {
+        console.warn('[feedback-widget] unable to restore state', error);
+      }
+    }
+
+    applyPersistedStateToUI() {
+      if (typeof this.state?.rating === 'number' && this.state.rating) {
+        const button = this.elements.ratingButtons.find(btn => Number(btn.dataset.value) === this.state.rating);
+        if (button) {
+          this.selectRating(button);
+        }
+      }
+
+      if (this.state?.tags?.size) {
+        this.elements.chips.forEach(chip => {
+          if (this.state.tags.has(chip.dataset.tag)) {
+            chip.setAttribute('aria-pressed', 'true');
+          }
+        });
+      }
+
+      this.updateSubmitState();
+    }
+  }
+
+  if (!customElements.get('feedback-widget')) {
+    customElements.define('feedback-widget', FeedbackWidget);
+  }
+})();

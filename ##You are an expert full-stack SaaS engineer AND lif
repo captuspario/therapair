@@ -1,0 +1,405 @@
+You are an expert full-stack SaaS engineer AND lifecycle/email marketing strategist, helping me build the early infrastructure for Therapair – a privacy-first therapist-matching platform.
+
+You are working in **Cursor** and should write code, file structures, and explanations so I can directly use and iterate on them here.
+
+---
+
+## Fixed tech choices (do not re-ask)
+
+These decisions are already made:
+
+1. **Stack**:  
+   Use **Next.js (App Router) + TypeScript + Prisma + PostgreSQL + Notion SDK + Resend**.
+
+2. **Notion behaviour**:  
+   You must **read from AND write back to Notion** (e.g. flags like `synced`, `data_reuse_preference`, etc.).
+
+3. **Environment variables**:  
+   API keys and DB URLs already exist in my environment.  
+   You should still scaffold a `.env.example`, but **assume the real values are configured**.
+
+4. **Email templates**:  
+   Use **React-based templates** (e.g. `@react-email`) unless there is a strong reason not to.
+
+5. **Crisis disclaimers**:  
+   We **believe** existing emergency / crisis disclaimers are already in place.  
+   You must:
+   - Search the existing codebase/content for them,  
+   - Re-use or centralise them where possible,  
+   - Only create new generic placeholders if none exist,  
+   - Avoid duplicating or contradicting existing wording.
+
+Do not ask me about these again; instead, make safe, documented assumptions and proceed.
+
+---
+
+## Product context
+
+Therapair is a mental health–focused SaaS product. We’re currently in a **research + pre-MVP** phase and need to:
+
+1. Capture and manage **Expressions of Interest (EOI)** from four audiences:
+   - Mental health professionals (therapists, counsellors, psychologists, etc.)
+   - Clinics / organisations
+   - Individuals seeking therapy
+   - Supporters / investors
+
+2. Convert an existing **therapist research cohort (200+ therapists)** into:
+   - A tagged segment in our database
+   - With explicit **consent** to:
+     - Re-use previously collected information for initial profile setup, OR
+     - Ask them to review/update data before anything is visible, OR
+     - Not re-use their data at all
+
+3. Implement **closed loops** so there are no dead ends:
+   - Every EOI and research action leads to:
+     - A confirmation page/state
+     - At least one confirmation email
+     - Clear expectations about “what happens next”
+     - A path into future onboarding (even if that onboarding flow is a placeholder for now)
+
+4. Keep language mostly **nationwide** (Australia-wide), but:
+   - Internally we know the MVP rollout will likely start in Victoria
+   - The VIC cohort is a **subset** of therapists for whom we already hold detailed research data
+
+5. Follow **global best practice** for:
+   - SaaS app architecture (clean, modular, testable, secure)
+   - Database schema & data modelling (with tagging/segmentation)
+   - Email sending & content structure
+   - Privacy-conscious data handling (especially for mental health context)
+   - Lifecycle/marketing communication (onboarding, nurturing, segmentation, minimal but effective sequences)
+
+Use **Australian English**, neutral, clear tone in all copy.
+
+---
+
+## Existing data sources (Notion)
+
+We already have four Notion databases:
+
+1. **Therapist master database**  
+   - Contains detailed information for 200+ therapists (primarily VIC, but not limited to VIC long-term).
+
+2. **Expressions of Interest (EOI) database**  
+   - Stores EOIs from different audiences.
+
+3. **User research survey responses database**  
+   - Stores survey answers from therapists and possibly other participants.
+
+4. **Feedback widget database**  
+   - Stores feedback submitted from the widget that runs across all pages.
+
+These are currently operational sources of truth. We will gradually move towards a more traditional SaaS backend (PostgreSQL), but for now we:
+
+- MUST NOT lose any existing data.
+- SHOULD treat Notion as an **authoritative source** for this early phase.
+- WANT a path to:
+  - **Sync** Notion → SaaS DB, and
+  - Write back minimal fields from SaaS → Notion (e.g. `synced`, `data_reuse_preference`, `status`).
+
+Everything must be done in **code** (Next.js/Node + Notion API + Postgres), **no Make.com / Typebot / no-code**.
+
+---
+
+## High-Level Requirements
+
+### A. Data model & backend architecture
+
+1. **Two-layer architecture**
+
+   Design and implement:
+
+   - **Primary SaaS data layer (Postgres via Prisma)** with schema for:
+     - Contacts / People
+     - Tags / Segments
+     - EOI submissions
+     - Consent & data re-use settings
+     - Email logs
+
+   - **Integration layer with Notion**:
+     - Utilities/services that:
+       - Read from the 4 existing Notion databases via the Notion API.
+       - Map Notion records into the SaaS data model.
+       - Write back minimal status fields to Notion (e.g. `Synced`, `Data reuse preference`, `LastSyncedAt`).
+
+2. **Database schema (Prisma)**
+
+   Implement `schema.prisma` with at least:
+
+   - **Contact**
+     - `id`
+     - `name` (nullable)
+     - `email`
+     - `role_type` (enum: `THERAPIST`, `CLINIC_CONTACT`, `INDIVIDUAL`, `SUPPORTER`, `INVESTOR`)
+     - `state` / `region` (optional)
+     - `created_at`, `updated_at`
+     - `notion_id` (nullable; Notion page ID if applicable)
+
+   - **Tag**
+     - `id`
+     - `key` (e.g. `segment`, `source`, `status`, `data_reuse`)
+     - `value` (e.g. `therapist`, `research-survey`, `interested-onboarding`, `FULL`)
+
+   - **ContactTag** (join table)
+     - `id`
+     - `contact_id`
+     - `tag_id`
+     - Unique constraint to avoid duplicates.
+
+   - **EoiSubmission**
+     - `id`
+     - `contact_id`
+     - `audience_type` (enum: `THERAPIST`, `CLINIC`, `INDIVIDUAL`, `SUPPORTER_INVESTOR`)
+     - `payload_json`
+     - `source` (e.g. `landing-page`, `widget`, `manual`)
+     - `consent_contact` (boolean)
+     - `submitted_at`
+
+   - **EmailLog**
+     - `id`
+     - `contact_id`
+     - `template_key`
+     - `sent_at`
+     - `status` (e.g. `SENT`, `FAILED`)
+     - `provider_message_id` (nullable)
+     - `metadata_json` (nullable)
+
+   - **Enums** for:
+     - `RoleType`
+     - `AudienceType`
+     - `DataReuse` (`FULL`, `REVIEW_FIRST`, `NO`, `UNKNOWN`)
+     - Any other needed enums.
+
+   Add clear comments in `schema.prisma` explaining rationale and future extension points.
+
+3. **Notion integration layer**
+
+   Implement a `lib/notion/` module that:
+
+   - Reads Notion database IDs from environment:
+     - `NOTION_DB_THERAPISTS`
+     - `NOTION_DB_EOI`
+     - `NOTION_DB_SURVEYS`
+     - `NOTION_DB_FEEDBACK`
+
+   - Exposes **typed** functions like:
+     - `fetchTherapistsFromNotion()`
+     - `fetchEoiFromNotion()`
+     - `fetchSurveyResponsesFromNotion()`
+     - `fetchFeedbackFromNotion()`
+
+   - Maps Notion properties → SaaS models with clear mapping comments and TODOs where exact property names will be inserted manually.
+
+   - Implements one or more **sync scripts** (e.g. in `scripts/` or as a protected route) that:
+     - Pull therapists from Notion → upsert into `Contact`/tags.
+     - Optionally mark Notion pages with:
+       - `Synced` checkbox or `LastSyncedAt` date.
+       - `Data reuse preference` property, if available / needed.
+
+### B. Backend and API structure
+
+Using **Next.js App Router + TS + Prisma + Notion SDK + Resend**, implement:
+
+1. **API endpoints or server actions** for:
+
+   - EOI form submissions for each of the 4 audiences:
+     - Mental health professional (therapist)
+     - Clinic / organisation
+     - Individual seeking therapy
+     - Supporter / investor
+
+   - Data re-use consent form submissions for therapists.
+
+   Behaviour:
+
+   - Validate input.
+   - Upsert into `Contact` (respecting `role_type` + `email` uniqueness).
+   - Attach relevant tags (`segment`, `source`, `status`, `data_reuse`).
+   - Create `EoiSubmission` records.
+   - Trigger appropriate confirmation emails.
+   - For therapists with an existing Notion record, update:
+     - `Data reuse preference` property in Notion.
+     - Any relevant status/synced flags.
+
+2. **Privacy & safety**
+
+   - Do **NOT** collect detailed mental health disclosures from individuals at this stage.
+   - Avoid logging sensitive fields in plaintext.
+   - Use environment variables for all keys and secrets.
+   - Where you log, sanitise or redact as needed.
+
+3. **`.env.example`**
+
+   Scaffold an example file including:
+
+   - `DATABASE_URL=`
+   - `NOTION_API_KEY=`
+   - `NOTION_DB_THERAPISTS=`
+   - `NOTION_DB_EOI=`
+   - `NOTION_DB_SURVEYS=`
+   - `NOTION_DB_FEEDBACK=`
+   - `RESEND_API_KEY=`
+
+   Comment that in my real environment these are already set.
+
+### C. Frontend: forms and confirmation states
+
+Implement **accessible React/Next components** for:
+
+1. **Landing page EOI sections (4 audiences)**
+
+   One EOI component per audience, each with:
+
+   - Basic fields:
+     - Name (optional where appropriate)
+     - Email
+     - Role-specific fields:
+       - Therapist: “Have you already taken part in a Therapair / Unison therapist survey?” (Yes / No / Not sure)
+       - Clinic: organisation name, approximate number of clinicians, main interest.
+       - Individual: city/region, high-level interest (no clinical detail).
+       - Supporter/investor: role, organisation, optional LinkedIn URL.
+
+   - A **consent checkbox** (required):
+     > “I agree to be contacted by Therapair about updates, onboarding, and opportunities that match the reason I’m reaching out.”
+
+   - Submission behaviour:
+     - Calls the correct API endpoint.
+     - Shows loading/disabled state.
+     - On success, replaces the form with a **thank-you/confirmation** view that:
+       - Restates what they just did.
+       - Describes what happens next.
+       - Sets rough expectations (e.g. “We’ll email you when onboarding is ready”).
+
+2. **Data re-use consent page (for therapist cohort)**
+
+   Standalone route, e.g. `/therapists/data-consent`, implementing:
+
+   - Identification:
+     - Preferably token-based links (e.g. `/therapists/data-consent?token=...`) – you can scaffold the logic and note where real token generation/validation should go.
+     - As a fallback, allow email + basic verification.
+
+   - Display an explanation (Australian English) of what “data re-use” means:
+     - We already hold information from earlier surveys.
+     - We’d like to use it to pre-fill a profile.
+     - They control how/if we use it.
+
+   - Data re-use options:
+     - “Yes, you can re-use my previous survey information for my initial profile.”
+     - “Yes, but please ask me to review everything before it’s shown to anyone.”
+     - “No, please don’t re-use my previous information – contact me for a fresh onboarding.”
+
+   - On submit:
+     - Update `data_reuse` in Postgres.
+     - Update Notion `Data reuse preference` property if applicable.
+     - Show a clear confirmation state explaining what their choice means.
+
+### D. Email flows & content (React-based templates)
+
+Use Resend + React-email (or similar) and implement at least:
+
+1. **Therapist – EOI confirmation (new therapists)**  
+   - Trigger: therapist EOI submission.
+   - Content:
+     - Short welcome to Therapair.
+     - Plain-language description of Therapair.
+     - Explain they’ll later receive onboarding details.
+     - If “already taken part in survey” = Yes, mention they’ll get a data consent link.
+
+2. **Therapist – Data re-use consent invite (existing cohort)**  
+   - Trigger: manual/controlled send to therapist cohort (from Notion-synced contacts).
+   - Content:
+     - Acknowledge their previous research participation.
+     - Explain we’d like to re-use their earlier info as a starting point.
+     - Link to `/therapists/data-consent` with secure token.
+     - Use clear, non-pushy language.
+
+3. **Therapist – Data re-use confirmation**  
+   - Trigger: consent submission.
+   - Content:
+     - Confirm their choice and restate what it means.
+     - Reassure they can contact us to change preferences later.
+
+4. **Clinic / organisation – EOI confirmation**  
+   - Content:
+     - Thank them.
+     - Summarise potential collaboration modes (pilot, listing, integration).
+     - Invite them to reply or expect a follow-up.
+
+5. **Individuals seeking therapy – EOI confirmation**  
+   - Content:
+     - Thank them and explain what Therapair is doing.
+     - Emphasise:
+       - Therapair is **not an emergency service**.
+       - We cannot provide crisis support.
+     - Insert or re-use existing crisis/emergency disclaimer:
+       - Before writing a new one, SEARCH the codebase/content for existing disclaimers and reuse; only create a generic placeholder if nothing suitable exists (with comments indicating where to insert local Australian crisis resources).
+     - Explain they’ll be notified when matching opens in their area.
+
+6. **Supporters / investors – EOI confirmation**  
+   - Content:
+     - Thank them and summarise:
+       - The vision,
+       - The problem space (finding an aligned therapist, especially for marginalised communities),
+       - How they might be involved (advisory, intros, future funding).
+
+**Email infra:**
+
+- Create a reusable email layout (logo, footer, unsubscribe/manage preferences, privacy link).
+- Log each send in `EmailLog`.
+- Keep content succinct and clear, no marketing fluff.
+
+### E. Marketing & segmentation best practice
+
+- Design everything to be easily filterable by:
+  - `segment` (therapist, clinic, individual, supporter/investor)
+  - `source` (research-survey, sandbox, landing-page-eoi, feedback-widget)
+  - `status` (research-only, interested-onboarding, updates-only, onboarded-later)
+  - `data_reuse`
+  - `notion_id` presence (i.e. Notion-linked or not).
+
+- Write copy in **Australian English**, neutral, grounded, and respectful – especially given the mental health context.
+
+- Avoid promising specific dates unless I explicitly add them later.
+
+---
+
+## Deliverables
+
+1. A **minimal but production-sensible project structure**, including:
+   - `app/` routes for EOIs and data-consent.
+   - `lib/notion/` for Notion integration.
+   - `lib/email/` for email sending and templates.
+   - `prisma/` with `schema.prisma` + migrations.
+   - `scripts/` or similar for Notion → Postgres sync.
+
+2. A fully defined **Prisma schema** with:
+   - `Contact`, `Tag`, `ContactTag`, `EoiSubmission`, `EmailLog`, enums, and `notion_id`.
+
+3. **Notion integration utilities** and at least one **sync/import script** for the therapist cohort.
+
+4. **API handlers/server actions** for:
+   - 4 audience EOI forms.
+   - Data re-use consent flow.
+
+5. **React/Next components** for:
+   - 4 EOI forms + confirmation states.
+   - Data-consent page + confirmation state.
+
+6. **Email utilities and React templates** for the flows above.
+
+7. Inline comments explaining:
+   - Mapping decisions between Notion and Postgres.
+   - Privacy considerations and where to avoid logging.
+   - How to extend segments, tags, email flows, or sync behaviour later.
+   - Where existing crisis disclaimers should be referenced or where new placeholders should be replaced with real content.
+
+---
+
+## How to respond
+
+First:
+
+- Briefly summarise the proposed **stack, file structure, and data model** so I can sanity check.
+
+Then:
+
+- Start implementing the key pieces step by step (schema, Notion utilities, EOI endpoints, forms, email templates), with enough code that I can paste and run in Cursor, iterating from there.

@@ -11,17 +11,17 @@ All feedback has been addressed and the campaign is ready for launch.
 ### **1. Sandbox Demo URL** ✅
 **Status:** FIXED
 
-**Correct URL:** `https://therapair.com.au/sandbox-demo.html`
+**Correct URL:** `https://therapair.com.au/sandbox/sandbox-demo.html`
 
 **Files Updated:**
 - ✅ `email-campaign/therapist-outreach-email.html`
 - ✅ `email-campaign/therapist-outreach-email-plain.txt`
 - ✅ All documentation
 
-**Deployment Options:**
-- Main URL: `therapair.com.au/quiz` (if renamed from sandbox-demo.html)
-- Direct Access: `therapair.com.au/sandbox-demo.html`
-- Both URLs work according to deployment guide
+**Deployment Notes:**
+- Live demo hosted at `therapair.com.au/sandbox/sandbox-demo.html`
+- Set up redirects (e.g., `therapair.com.au/quiz`) only if marketing needs a shorter link
+- Confirm any legacy URLs point to the new `/sandbox/` path
 
 ---
 
@@ -115,7 +115,7 @@ therapair/
 ### **Sandbox Demo**
 - [x] Demo file exists (`sandbox-demo.html`)
 - [x] Deployment guide available
-- [ ] Deployed to therapair.com.au/sandbox-demo.html
+- [ ] Deployed to therapair.com.au/sandbox/sandbox-demo.html
 - [ ] Tested on live domain
 
 ### **Documentation**
@@ -162,7 +162,7 @@ therapair/
 ## 📝 **Next Steps**
 
 ### **Immediate (Before Launch)**
-1. **Deploy sandbox demo** to therapair.com.au/sandbox-demo.html
+1. **Deploy sandbox demo** to therapair.com.au/sandbox/sandbox-demo.html
 2. **Create Mailchimp account** and verify domain
 3. **Create Typebot account** and import survey
 4. **Create Notion database** with schema

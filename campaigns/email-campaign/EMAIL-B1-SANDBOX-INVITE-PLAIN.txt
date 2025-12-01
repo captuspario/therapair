@@ -1,0 +1,33 @@
+Subject: Try the Therapair sandbox demo
+
+Hi {{first_name}},
+
+Thank you again for your interest in the Therapair research initiative.
+
+We'd love to show you what we're building.
+
+We've created a basic sandbox demo with 100 realistic therapist profiles to show how Therapair could help clients find practitioners who truly fit them—by values, lived experience, and communication style.
+
+In the demo, you can:
+• Explore how different matching questions change the results
+• See how values and lived experience could be surfaced more clearly
+• Imagine how this might work for your own practice
+
+TRY THE SANDBOX DEMO
+https://therapair.com.au/sandbox/sandbox-demo.html?utm_source=email&utm_medium=research&utm_campaign=therapist_research&utm_content=sandbox_demo&utm_email=B1
+
+LEARN MORE ABOUT THERAPAIR
+https://therapair.com.au/documentation.html?utm_source=email&utm_medium=research&utm_campaign=therapist_research&utm_content=learn_more&utm_email=B1
+
+There's no obligation—this is just a chance to see the concept in action and reflect on what would make it genuinely useful for you and your clients.
+
+Best regards,
+The Therapair Team
+Unison Mental Health
+
+---
+You received this email from Therapair, a not-for-profit research initiative under Unison Mental Health.
+If you would like to unsubscribe, click here: {{unsubscribe}}
+
+Privacy Policy: https://therapair.com.au/legal/privacy-policy.html
+Contact Us: contact@therapair.com.au

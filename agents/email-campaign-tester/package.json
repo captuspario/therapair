@@ -1,0 +1,22 @@
+{
+  "name": "email-campaign-tester",
+  "version": "1.0.0",
+  "description": "Email campaign user testing agent for Therapair",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "test": "node index.js --help",
+    "create-persona": "node index.js create-persona",
+    "start-journey": "node index.js start-journey",
+    "verify-tracking": "node index.js verify-tracking",
+    "test-links": "node index.js test-links",
+    "generate-report": "node index.js generate-report"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "resend": "^3.5.0"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.57.0"
+  }
+}

@@ -152,7 +152,7 @@ therapair/
 ## 🔗 Key Links
 
 ### **Sandbox Demo**
-- **URL:** https://therapair.com.au/quiz
+- **URL:** https://therapair.com.au/sandbox/sandbox-demo.html
 - **UTM:** `?utm_source=email&utm_medium=outreach&utm_campaign=therapist_research&utm_content=sandbox_demo`
 
 ### **Research Survey**

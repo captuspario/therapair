@@ -1,0 +1,13 @@
+{
+    "name": "therapair-agents",
+    "version": "1.0.0",
+    "description": "Autonomous agents for Therapair",
+    "main": "orchestrator/index.js",
+    "type": "module",
+    "scripts": {
+        "orchestrator": "node orchestrator/index.js"
+    },
+    "dependencies": {
+        "dotenv": "^16.4.5"
+    }
+}

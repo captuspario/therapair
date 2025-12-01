@@ -18,7 +18,7 @@ Before setting up the campaign, ensure you have:
 - [ ] contact@therapair.com.au email configured
 - [ ] List of ~200 therapist contacts (name, email, specialization)
 - [ ] Typebot survey URL ready
-- [ ] Sandbox demo deployed to therapair.com.au/quiz
+- [ ] Sandbox demo deployed to therapair.com.au/sandbox/sandbox-demo.html
 
 ---
 
@@ -137,7 +137,7 @@ john@example.com,John,Doe,LGBTQ+ Affirming,Sydney
 ## 🔗 Step 5: Update Email Links
 
 ### 5.1 Sandbox Demo Link
-✅ Already configured: `https://therapair.com.au/quiz?utm_source=email&utm_medium=outreach&utm_campaign=therapist_research&utm_content=sandbox_demo`
+✅ Already configured: `https://therapair.com.au/sandbox/sandbox-demo.html?utm_source=email&utm_medium=outreach&utm_campaign=therapist_research&utm_content=sandbox_demo`
 
 ### 5.2 Typebot Survey Link
 Replace `https://typebot.io/therapair-research` with your actual Typebot URL:

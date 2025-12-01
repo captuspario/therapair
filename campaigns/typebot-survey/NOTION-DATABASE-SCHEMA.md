@@ -1,5 +1,11 @@
 # 📊 Notion Database Schema for Therapist Research Survey
 
+**Last Updated:** 2025-01-27  
+**Status:** ✅ Updated to match working survey  
+**Reference:** See `NOTION-DATABASE-UPDATE.md` for changes summary
+
+---
+
 ## 🎯 Database Setup
 
 ### Create New Database in Notion
@@ -37,9 +43,16 @@ Create the following properties (columns) in your Notion database:
   - Psychologist
   - Counsellor
   - Social Worker
+  - Psychiatrist
   - Psychotherapist
+  - Art Therapist
   - Other
 - **Purpose:** Professional background
+
+### **4b. Profession Other** (Text)
+- **Type:** Text
+- **Purpose:** Custom profession if "Other" selected
+- **Required:** No
 
 ### **5. Years in Practice** (Select)
 - **Type:** Select
@@ -62,10 +75,31 @@ Create the following properties (columns) in your Notion database:
   - Other
 - **Purpose:** Types of clients they work with
 
-### **7. Modalities** (Text)
+### **6b. Client Types Other** (Text)
 - **Type:** Text
+- **Purpose:** Custom client types if "Other" selected
+- **Required:** No
+
+### **7. Modalities** (Multi-select)
+- **Type:** Multi-select
+- **Options:**
+  - CBT
+  - DBT
+  - ACT
+  - EMDR
+  - Person-Centred
+  - Somatic
+  - Gestalt
+  - Psychodynamic
+  - Relationship Therapy
+  - Art Therapy
+  - Other
 - **Purpose:** Therapy approaches used
-- **Format:** Long text (multi-line)
+
+### **7b. Modalities Other** (Text)
+- **Type:** Text
+- **Purpose:** Custom modalities if "Other" selected
+- **Required:** No
 
 ### **8. How Clients Find You** (Multi-select)
 - **Type:** Multi-select
@@ -74,23 +108,45 @@ Create the following properties (columns) in your Notion database:
   - Directories
   - Word of mouth
   - Online search
+  - Social media
   - Other
 - **Purpose:** Current client acquisition channels
 
-### **9. Great Match Definition** (Text)
+### **8b. How Clients Find You Other** (Text)
 - **Type:** Text
-- **Purpose:** What makes a great match (qualitative)
-- **Format:** Long text
+- **Purpose:** Custom acquisition method if "Other" selected
+- **Required:** No
+
+### **9. Great Match Factors** (Multi-select)
+- **Type:** Multi-select
+- **Options:**
+  - Shared core values
+  - Similar communication style
+  - Trust
+  - Life goal alignment
+  - Lived experience
+  - Shared religious beliefs/background
+  - Shared cultural background
+  - Shared experience of a diagnosis (ADHD, Autism, OCD, Addiction, etc)
+  - Other
+- **Purpose:** What makes a great match
+
+### **9b. Great Match Other** (Text)
+- **Type:** Text
+- **Purpose:** Custom match factors if "Other" selected
+- **Required:** No
 
 ### **10. Biggest Gap** (Text)
 - **Type:** Text
 - **Purpose:** Frustrations with current systems
 - **Format:** Long text
 
-### **11. Screens Clients** (Checkbox)
-- **Type:** Checkbox
-- **Purpose:** Do they currently screen for fit
-- **Yes/No:** Yes = true, No = false
+### **11. Screening Clients** (Select)
+- **Type:** Select
+- **Options:**
+  - Yes
+  - No
+- **Purpose:** Do they currently screen clients for fit
 
 ### **12. Open to Sharing** (Select)
 - **Type:** Select
@@ -98,73 +154,108 @@ Create the following properties (columns) in your Notion database:
   - Yes
   - Maybe
   - No
-- **Purpose:** Willingness to share personal traits
+- **Purpose:** Willingness to share personality traits, values, lived experiences
 
 ### **13. Which Questions Matter** (Multi-select)
 - **Type:** Multi-select
 - **Options:**
   - Communication style
-  - Therapeutic relationship style
+  - Relationship style
   - Personality traits
   - Lived experience
   - Values and beliefs
-  - Work style and boundaries
+  - Therapeutic work style and boundaries
   - All of the above
-  - None - keep it simple
+  - None
+  - Other
 - **Purpose:** Which questions create deepest personalisation
 
-### **14. Too Personal** (Multi-select)
+### **13b. Which Questions Matter Other** (Text)
+- **Type:** Text
+- **Purpose:** Custom attributes if "Other" selected
+- **Required:** No
+
+### **14. Personality Test** (Select)
+- **Type:** Select
+- **Options:**
+  - Yes
+  - No
+  - Maybe
+- **Purpose:** Willingness to take personality test (Big Five, HEXACO)
+
+### **15. Too Personal** (Multi-select)
 - **Type:** Multi-select
 - **Options:**
-  - Personal trauma history
-  - Religious beliefs
+  - Trauma history
+  - Religious beliefs/background
   - Political views
   - Personal relationships
   - Financial situation
-  - None of these
+  - Cultural background
+  - None
+  - Other
 - **Purpose:** What they consider too personal to share
 
-### **15. Profile Detail Level** (Number)
-- **Type:** Number
-- **Format:** Integer (1-5)
-- **Purpose:** How detailed should profiles be (1=simple, 5=detailed)
+### **15b. Too Personal Other** (Text)
+- **Type:** Text
+- **Purpose:** Custom "too personal" items if "Other" selected
+- **Required:** No
 
-### **16. Onboarding Time** (Select)
+### **16. Profile Detail Level** (Select)
 - **Type:** Select
 - **Options:**
-  - 2-3 minutes
-  - 5 minutes
-  - 10 minutes
-  - 15+ minutes
+  - 1 - Simple (a few basic details)
+  - 2
+  - 3
+  - 4
+  - 5
+  - 6
+  - 7
+  - 8
+  - 9
+  - 10 - Very detailed (a full understanding of you as a therapist and as a person)
+- **Purpose:** How detailed should profiles be (1-10 scale)
+
+### **17. Onboarding Time** (Select)
+- **Type:** Select
+- **Options:**
+  - 2-3 min
+  - 5 min
+  - 10 min
+  - 15 min+
+  - As long as it takes to get the best matches with clients
 - **Purpose:** Acceptable onboarding duration
 
-### **17. Trust AI Matching** (Select)
+### **18. Trust AI Matching** (Select)
 - **Type:** Select
 - **Options:**
   - Yes
   - Maybe
   - No
+  - I'm unsure about AI
 - **Purpose:** Comfort with AI-powered matching
 
-### **18. Free Listing Interest** (Select)
+### **19. Free Listing Interest** (Select)
 - **Type:** Select
 - **Options:**
-  - Yes, include me
+  - Yes
   - Maybe later
-  - No thanks
+  - No
 - **Purpose:** Interest in one-year free listing
 
-### **19. Future Contact** (Checkbox)
-- **Type:** Checkbox
+### **20. Future Contact** (Select)
+- **Type:** Select
+- **Options:**
+  - Yes
+  - No
 - **Purpose:** Can we contact for future research
-- **Yes/No:** Yes = true, No = false
 
-### **20. Comments** (Text)
+### **21. Comments** (Text)
 - **Type:** Text
 - **Purpose:** Additional feedback
 - **Format:** Long text
 
-### **21. Consent Status** (Select)
+### **22. Consent Status** (Select)
 - **Type:** Select
 - **Options:**
   - Pending
@@ -172,7 +263,7 @@ Create the following properties (columns) in your Notion database:
   - Withdrawn
 - **Purpose:** GDPR compliance tracking
 
-### **22. Processing Status** (Select)
+### **23. Processing Status** (Select)
 - **Type:** Select
 - **Options:**
   - New
@@ -181,7 +272,7 @@ Create the following properties (columns) in your Notion database:
   - Follow-up Needed
 - **Purpose:** Internal workflow tracking
 
-### **23. Notes** (Text)
+### **24. Notes** (Text)
 - **Type:** Text
 - **Purpose:** Internal notes and observations
 - **Format:** Long text

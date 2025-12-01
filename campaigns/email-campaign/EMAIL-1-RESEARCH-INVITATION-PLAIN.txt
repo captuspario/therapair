@@ -1,0 +1,35 @@
+Subject: Help shape a better therapist-matching system in Victoria
+
+Hi {{first_name}},
+
+We found your details in the publicly available VIC therapists register and thought you might be interested in shaping a new approach to therapist–client matching.
+
+Therapair is a small, not-for-profit initiative from Unison Mental Health. We’re exploring a better way for clients to find therapists who truly fit them—by values, lived experience, and communication style, not just modality or postcode.
+
+We’ve built a basic sandbox demo with placeholder therapist profiles to show the idea, but the current questions are only a first draft. To make this genuinely useful, we need your perspective as a practitioner.
+
+If you have 5–7 minutes, we’d love your help:
+• Share your insights in a short research survey about which questions matter most and how many you’d realistically answer
+• Optionally opt in for a one-year free listing when we launch (using your existing public profile)
+
+This research will help us understand which questions create the most meaningful personalisation, how much people are willing to complete, and what actually resonates with both therapists and clients.
+
+JOIN THE RESEARCH SURVEY (5–7 minutes)
+https://therapair.com.au/research/survey/index.html?token={{token}}&utm_source=email&utm_medium=research&utm_campaign=therapist_research&utm_content=survey&utm_email=1
+
+LEARN MORE ABOUT THERAPAIR
+https://therapair.com.au/documentation.html?utm_source=email&utm_medium=research&utm_campaign=therapist_research&utm_content=learn_more&utm_email=1
+
+Participation is optional and non-commercial. Your responses are used only for improving therapist–client matching research.
+
+Warm regards,
+The Therapair Team
+Unison Mental Health
+
+---
+You received this email from Therapair, a not-for-profit research initiative under Unison Mental Health.
+If you would like to unsubscribe, click here: {{unsubscribe}}
+
+Privacy Policy: https://therapair.com.au/legal/privacy-policy.html
+Consent & Removal: https://therapair.com.au/legal/consent-removal.html
+Contact Us: contact@therapair.com.au

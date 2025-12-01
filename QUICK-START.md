@@ -80,7 +80,7 @@
 
 | What | Where | URL |
 |------|-------|-----|
-| **Sandbox Demo** | therapair.com.au | https://therapair.com.au/quiz |
+| **Sandbox Demo** | therapair.com.au | https://therapair.com.au/sandbox/sandbox-demo.html |
 | **Documentation** | therapair.com.au | https://therapair.com.au/documentation.html |
 | **Survey** | Typebot | https://typebot.io/your-survey-id |
 | **Database** | Notion | Your workspace → "Therapist Research Survey Responses" |

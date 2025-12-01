@@ -1,0 +1,32 @@
+Subject: Quick reminder: Share your insights on therapist matching
+
+Hi {{first_name}},
+
+I wanted to follow up on my email about our Therapair research initiative. I know you're busy, but I thought you might be interested in this opportunity to shape the future of therapist-client matching.
+
+If you missed it, we're inviting Victorian therapists to share their insights in a short 5-7 minute research survey. Your perspective as a {{profession}} in {{region}} is exactly what we need to build a better matching system.
+
+We're asking:
+• What questions matter most for therapist-client matching?
+• How many questions would therapists and clients be willing to answer?
+• What creates the deepest personalisation?
+
+JOIN THE RESEARCH SURVEY (5-7 minutes)
+https://therapair.com.au/research/survey/index.html?token={{token}}&utm_source=email&utm_medium=research&utm_campaign=therapist_research&utm_content=survey&utm_email=2
+
+If you're not interested, just let me know and I'll remove you from future research invitations.
+
+LEARN MORE ABOUT THERAPAIR
+https://therapair.com.au/documentation.html?utm_source=email&utm_medium=research&utm_campaign=therapist_research&utm_content=learn_more&utm_email=2
+
+Thanks for your time.
+
+Best regards,
+The Therapair Team
+Unison Mental Health
+
+---
+You received this email from Therapair, a not-for-profit research initiative under Unison Mental Health.
+If you would like to unsubscribe, click here: {{unsubscribe}}
+
+Privacy Policy: https://therapair.com.au/legal/privacy-policy.html

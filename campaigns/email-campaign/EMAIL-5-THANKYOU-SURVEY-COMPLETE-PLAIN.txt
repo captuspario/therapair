@@ -1,0 +1,38 @@
+Subject: Thank you for helping shape Therapair + next steps
+
+Hi {{first_name}},
+
+Thank you so much for completing our research survey! Your insights are invaluable and will directly shape how we build the Therapair platform.
+
+Here's what we're doing with your input:
+• Refining the questions that create the deepest personalisation
+• Understanding how many questions people will actually answer
+• Building a platform that resonates with both therapists and clients
+
+NEXT STEPS:
+
+1. EXPLORE THE SANDBOX DEMO
+If you haven't already, check out our sandbox demo with 100 realistic therapist profiles:
+https://therapair.com.au/sandbox/sandbox-demo.html?utm_source=email&utm_medium=research&utm_campaign=therapist_research&utm_content=sandbox_demo&utm_email=5
+
+2. ONE-YEAR FREE LISTING
+If you opted in for the free listing when we launch, we'll contact you closer to launch date with profile creation instructions. This will use your existing public profile from the VIC therapists register.
+
+3. STAY UPDATED
+We'll keep you updated on our progress and share insights from the research as we build the platform.
+
+4. FUTURE RESEARCH
+If you're interested in participating in future research or beta testing, we'd love to have you involved.
+
+Thanks again for contributing to a more inclusive future of care. Your perspective as a practitioner is exactly what we need to build something that truly serves both therapists and clients.
+
+Warm regards,
+The Therapair Team
+Unison Mental Health
+
+---
+You received this email from Therapair, a not-for-profit research initiative under Unison Mental Health.
+If you would like to unsubscribe, click here: {{unsubscribe}}
+
+Privacy Policy: https://therapair.com.au/legal/privacy-policy.html
+Contact Us: contact@therapair.com.au
